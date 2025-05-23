@@ -4,8 +4,12 @@ import health from "./categories/health.png";
 import business from "./categories/business.png";
 import academic from "./categories/academic.png";
 import religious from "./categories/religious.png";
-
-
+import fiction from "../assets/categories/fiction.png";
+import children from "../assets/categories/children.png";
+import health from "../assets/categories/health.png";
+import business from "../assets/categories/business.png";
+import academic from "../assets/categories/academic.png";
+import religious from "../assets/categories/religious.png";
 import book_1 from './book_1.png'
 import book_2 from './book_2.png'
 import book_3 from './book_3.png'

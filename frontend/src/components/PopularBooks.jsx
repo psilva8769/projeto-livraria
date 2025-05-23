@@ -14,16 +14,10 @@ const PopularBooks = () => {
   }, [books])
 
   return (
-    <section data-testid="popular-books-section" className='max-padd-container py-16 bg-white'>
-      <div data-testid="popular-books-title" className="pb-10">
-        <Title 
-          title1={'Popular'} 
-          title2={'Books'} 
-          paraStyles={'!block'}
-          para={'From timeless classics to modern masterpieces'}
-        />
-      </div>
-      <div data-testid="popular-books-grid" className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
+    <section className='max-padd-container py-16 bg-white'>
+      <Title title1={'Popular'} title2={'Books'} titleStyles={'pb-10'} paraStyles={'!block'}/>
+      {/* container */}
+      <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10'>
         {popularBooks.map(book=>(
           <div key={book._id}>
             <Item book={book}/>

@@ -3,37 +3,22 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { toast } from "react-toastify"
 
+
 export const ShopContext = createContext()
 
-// Determine if we're in a test environment
-const isTestEnvironment = process.env.NODE_ENV === 'test'
-
-// Set a default backend URL for tests
-const DEFAULT_BACKEND_URL = 'http://localhost:4000'
-
-// Helper function to safely get environment variables
-const getEnvVar = (key, defaultValue) => {
-    try {
-        return isTestEnvironment ? defaultValue : import.meta.env[key] || defaultValue
-    } catch (error) {
-        return defaultValue
-    }
-}
-
 const ShopContextProvider = (props) => {
+
     const currency = '$'
     const delivery_charges = 5
-    const backendUrl = getEnvVar('VITE_BACKEND_URL', DEFAULT_BACKEND_URL)
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
     const navigate = useNavigate()
     const [books, setBooks] = useState([])
     const [token, setToken] = useState("")
     const [cartItems, setCartItems] = useState({})
-    const [filterCategory, setFilterCategory] = useState("")
-    const [sortOrder, setSortOrder] = useState("relevant")
 
     // Adding items to cart
     const addToCart = async (itemId) => {
-        const cartData = { ...cartItems }
+        const cartData = { ...cartItems } // Use shallow copy
 
         if (cartData[itemId]) {
             cartData[itemId] += 1
@@ -45,12 +30,14 @@ const ShopContextProvider = (props) => {
         if (token) {
             try {
                 await axios.post(backendUrl + '/api/cart/add', { itemId }, { headers: { token } })
+
             } catch (error) {
                 console.log(error)
                 toast.error(error.message)
             }
         }
     }
+
 
     // Getting total cart items
     const getCartCount = () => {
@@ -67,6 +54,7 @@ const ShopContextProvider = (props) => {
         return totalCount;
     }
 
+
     // Getting total cart amount
     const getCartAmount = () => {
         let totalAmount = 0
@@ -80,6 +68,7 @@ const ShopContextProvider = (props) => {
         }
         return totalAmount
     }
+
 
     // Updating the Quantity
     const updateQuantity = async (itemId, quantity) => {
@@ -97,19 +86,19 @@ const ShopContextProvider = (props) => {
         }
     }
 
+
     // Getting all products data
     const getProductsData = async () => {
         try {
             const response = await axios.get(backendUrl + '/api/product/list')
-            if (response?.data?.success) {
+            if (response.data.success) {
                 setBooks(response.data.products)
             } else {
-                console.log('Invalid response:', response)
-                toast.error(response?.data?.message || 'Failed to fetch products')
+                toast.error(response.data.message)
             }
         } catch (error) {
-            console.log('Error fetching products:', error)
-            toast.error(error?.message || 'An error occurred while fetching products')
+            console.log(error)
+            toast.error(error.message)
         }
     }
 
@@ -126,34 +115,18 @@ const ShopContextProvider = (props) => {
         }
     }
 
+
     useEffect(() => {
         if (!token && localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'))
+            setToken(localStorage.getItem('token'))  // prevent logout upon reload the page if logged in
             getUserCart(localStorage.getItem('token'))
+
         }
         getProductsData()
     }, [])
 
-    const contextValue = {
-        books,
-        currency,
-        navigate,
-        token,
-        setToken,
-        cartItems,
-        setCartItems,
-        addToCart,
-        getCartCount,
-        getCartAmount,
-        updateQuantity,
-        delivery_charges,
-        backendUrl,
-        filterCategory,
-        setFilterCategory,
-        sortOrder,
-        setSortOrder,
-        getCartItemCount: getCartCount // Alias for test compatibility
-    }
+
+    const contextValue = { books, currency, navigate, token, setToken, cartItems, setCartItems, addToCart, getCartCount, getCartAmount, updateQuantity, delivery_charges, backendUrl }
 
     return (
         <ShopContext.Provider value={contextValue}>

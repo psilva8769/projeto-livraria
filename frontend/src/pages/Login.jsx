@@ -5,169 +5,92 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const Login = () => {
-  const { token, setToken, setUser, navigate, backendUrl } = useContext(ShopContext)
+
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext)
   const [currState, setCurrState] = useState('Login')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const validateForm = () => {
-    let isValid = true
-    setEmailError('')
-    setPasswordError('')
 
-    // Email validation
-    if (email) {
-      if (!/\S+@\S+\.\S+/.test(email)) {
-        setEmailError('Please enter a valid email')
-        isValid = false
-      }
-    } else {
-      setEmailError('Email is required')
-      isValid = false
-    }
-
-    // Password validation
-    if (!password) {
-      setPasswordError('Password is required')
-      isValid = false
-    } else if (password.length < 6) {
-      setPasswordError('Password must be at least 6 characters')
-      isValid = false
-    }
-
-    return isValid
-  }
-
-  const handleSubmit = async (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault()
-    
-    if (!validateForm()) {
-      return
-    }
-
     try {
-      const endpoint = currState === 'Login' ? '/api/user/login' : '/api/user/register'
-      const payload = currState === 'Login' ? { email, password } : { name, email, password }
-        
-      const response = await axios.post(backendUrl + endpoint, payload)
+      if (currState === "Sign Up") {
+        const response = await axios.post(backendUrl + '/api/user/register', { name, email, password })
         if (response.data.success) {
-        setToken(response.data.token)
-        setUser(response.data.user)
-        toast.success(`${currState} successful!`)
-        navigate('/')
-      } else {
-        setError(response.data.message)
-        toast.error(response.data.message)
+          setToken(response.data.token)
+          localStorage.setItem('token', response.data.token)
+        } else {
+          toast.error(response.data.message)
+        }
+      }
+      else {
+        const response = await axios.post(backendUrl + '/api/user/login', { email, password })
+        if (response.data.success) {
+          setToken(response.data.token)
+          localStorage.setItem('token', response.data.token)
+        } else {
+          toast.error(response.data.message)
+        }
       }
     } catch (error) {
-      const errorMessage = error.response?.data?.message || `${currState} failed`
-      setError(errorMessage)
-      toast.error(errorMessage)
+      console.log(error)
+      toast.error(error.message)
     }
   }
 
-  useEffect(() => {
-    if(token) {
+  useEffect(()=>{
+    if(token){
       navigate('/')
     }
-  }, [token, navigate])
+  },[token])
+
 
   return (
-<section data-testid="login-page" className="flex gap-8 items-center justify-center min-h-screen bg-white">
-      <div className="hidden lg:block flex-1">
-        <img
-          src={loginImg}
-          alt="Login"
-          className="w-full h-auto object-cover"
-          data-testid="login-image"
-        />
-      </div>
-
-      <div className="w-full max-w-md p-8">
-        <h2 data-testid="login-title" className="text-4xl font-bold mb-6">
-          {currState}
-        </h2>
-
-        <form data-testid="login-form" onSubmit={handleSubmit} className="space-y-4">
-          {currState === 'Sign Up' && (
-            <div>
-              <label htmlFor="name" className="block text-gray-700 mb-2">Name</label>
-              <input
-                type="text"
-                id="name"
-                data-testid="name-input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-secondary"
-              />
+    <section className='absolute top-0 left-0 h-full w-full z-50 bg-white'>
+      {/* Container */}
+      <div className='flex h-full w-full'>
+        {/* Image Side */}
+        <div className='w-1/2 hidden sm:block'>
+          <img src={loginImg} alt="" className='object-cover aspect-square h-full w-full' />
+        </div>
+        {/* Form Side */}
+        <div className='flexCenter w-full sm:w-1/2'>
+          <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-md m-auto gap-y-5 text-gray-800'>
+            <div className='w-full mb-4'>
+              <h3 className='bold-36'>{currState}</h3>
             </div>
-          )}
-
-          <div>
-            <label htmlFor="email" className="block text-gray-700 mb-2">Email</label>
-            <input
-              type="email"
-              id="email"
-              data-testid="email-input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-secondary"
-            />
-            {emailError && <p data-testid="email-error" className="text-red-500 mt-1">{emailError}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-gray-700 mb-2">Password</label>
-            <input
-              type="password"
-              id="password"
-              data-testid="password-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-secondary"
-            />
-            {passwordError && <p data-testid="password-error" className="text-red-500 mt-1">{passwordError}</p>}
-          </div>
-
-          {error && <p data-testid="login-error" className="text-red-500 text-center">{error}</p>}
-
-          <button
-            type="submit"
-            data-testid="login-button"
-            className="w-full bg-secondary text-white py-2 px-4 rounded-lg hover:opacity-90"
-          >
-            {currState}
-          </button>
-
-          <p className="text-center mt-4">
-            {currState === 'Login' ? (
-              <>
-                Don't have an account?{' '}
-                <span
-                  onClick={() => setCurrState('Sign Up')}
-                  data-testid="signup-link"
-                  className="text-secondary cursor-pointer"
-                >
-                  Sign Up
-                </span>
-              </>
-            ) : (
-              <>
-                Already have an account?{' '}
-                <span
-                  onClick={() => setCurrState('Login')}
-                  data-testid="login-link"
-                  className="text-secondary cursor-pointer"
-                >
-                  Login
-                </span>
-              </>
+            {currState === "Sign Up" && (
+              <div className='w-full'>
+                <label htmlFor="name" className='medium-14'>
+                  Name
+                </label>
+                <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder='Name' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
+              </div>
             )}
-          </p>
-        </form>
+            <div className='w-full'>
+              <label htmlFor="email" className='medium-14'>
+                Email
+              </label>
+              <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder='Email' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
+            </div>
+            <div className='w-full'>
+              <label htmlFor="password" className='medium-14'>
+                Password
+              </label>
+              <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder='Password' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
+            </div>
+            <button type='submit' className='btn-dark w-full mt-5 !py-[7px] !rounded'>{currState === "Sign Up" ? 'Sign Up' : 'Login'}</button>
+            <div className='w-full flex flex-col gap-y-3 medium-14'>
+              <div className='underline'>Forgot your password?</div>
+              {currState === 'Login' ? (
+                <div className='underline'>Don't have an account? <span onClick={() => setCurrState('Sign Up')} className='cursor-pointer hover:text-secondaryOne'>Create account</span></div>
+              ) : (
+                <div className='underline'>Already have an account? <span onClick={() => setCurrState('Login')} className='cursor-pointer hover:text-secondaryOne'>Login</span></div>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   )

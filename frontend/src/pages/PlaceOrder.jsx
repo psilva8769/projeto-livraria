@@ -84,10 +84,11 @@ const PlaceOrder = () => {
     }
   }
 
+
   return (
-<section data-testid="placeorder-page" className='max-padd-container'>
+    <section className='max-padd-container'>
       {/* Container */}
-      <form data-testid="order-form" onSubmit={onSubmitHandler} className='pt-28'>
+      <form onSubmit={onSubmitHandler} className='pt-28'>
         <div className='flex flex-col xl:flex-row gap-20 xl:gap-28'>
           {/* Left Side */}
           <div className='flex flex-1 flex-col gap-3 text-[95%]'>

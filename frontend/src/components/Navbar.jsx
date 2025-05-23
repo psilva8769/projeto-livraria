@@ -1,55 +1,47 @@
-import React, { useContext } from 'react'
-import { TbX } from 'react-icons/tb'
-import { Link } from 'react-router-dom'
-import { NAV_LINKS } from '../assets/data'
-import { ShopContext } from '../context/ShopContext'
+import React from 'react'
+import { TbHomeFilled } from 'react-icons/tb'
+import { IoLibrary, IoMailOpen } from "react-icons/io5"
+import { FaRegWindowClose } from "react-icons/fa"
+import { Link, NavLink } from 'react-router-dom'
 
-const Navbar = ({ 
-    toggleMenu, 
-    menuOpened, 
-    links = NAV_LINKS, 
-    activeLink = '',
-    containerStyles = ''
-}) => {
-    const { getCartCount } = useContext(ShopContext);
-    
-    const navClasses = `${containerStyles} ${
-        menuOpened ? 'translate-x-0' : 'translate-x-[100%]'
-    }`;
+
+const Navbar = ({ containerStyles, toggleMenu, menuOpened }) => {
+    const navItems = [
+        { to: '/', label: 'Home', icon: <TbHomeFilled /> },
+        { to: '/shop', label: 'Shop', icon: <IoLibrary /> },
+        { to: 'mailto:info@bacala.com', label: 'Contact', icon: <IoMailOpen /> },
+    ]
 
     return (
-<nav data-testid="navbar-container" className={navClasses}>
-            <div data-testid="nav-links" className='flex flex-col lg:flex-row gap-4 px-4'>
-                {links.map(link => (
-                    <Link
-                        key={link.id}
-                        to={link.path}
-                        data-testid={`nav-link-${link.name.toLowerCase()}`}
-                        className={`nav-link ${activeLink === link.name ? 'active' : ''}`}
-                        onClick={menuOpened ? toggleMenu : undefined}
-                    >
-                        {link.name}
-                        {link.path === '/cart' && (
-                            <span 
-                                data-testid="cart-count"
-                                className="ml-2 bg-secondary text-white rounded-full px-2 py-1 text-xs"
-                            >
-                                {getCartCount()}
-                            </span>
-                        )}
+        <nav className={containerStyles}>
+            {/* close button inside navbar */}
+            {menuOpened && (
+                <>
+                    <FaRegWindowClose onClick={toggleMenu} className='text-xl self-end cursor-pointer relative left-8' />
+                    {/* logo */}
+                    <Link to={'/'} className='bold-24 mb-10'>
+                        <h4 className='text-secondary'>Bacala</h4>
                     </Link>
-                ))}
-            </div>
+                </>
+            )}
+            {navItems.map(({ to, label, icon }) => (
+                <div key={label} className='inline-flex relative top-1'>
+                    {/* For "Contact" item use <a> tag instead of NavLink to ensure it works properly */}
+                    {to.startsWith('mailto') ? (
+                        <a onClick={menuOpened ? toggleMenu : undefined} href={to} className='flexCenter gap-x-2'>
+                            <span className='text-xl'>{icon}</span>
+                            <span className='medium-16'>{label}</span>
+                        </a>
+                    ) : (
+                        <NavLink to={to} className={({ isActive }) => isActive ? "active-link flexCenter gap-x-2" : "flexCenter gap-x-2"}>
+                            <span className='text-xl'>{icon}</span>
+                            <span className='medium-16'>{label}</span>
+                        </NavLink>)
+                    }
+                </div>
+            ))}
         </nav>
     )
-}
-
-Navbar.defaultProps = {
-    links: NAV_LINKS,
-    activeLink: '',
-    containerStyles: '',
-    menuOpened: false,
-    toggleMenu: () => {}
 }
 
 export default Navbar

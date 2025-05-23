@@ -39,7 +39,7 @@ const Orders = () => {
   }, [token])
 
   return (
-<section data-testid="orders-page" className='max-padd-container'>
+    <section className='max-padd-container'>
       <div className='pt-28 pb-10'>
         {/* Title */}
         <Title title1={'Order'} title2={'List'} title1Styles={'h3'} />
