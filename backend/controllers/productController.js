@@ -1,4 +1,3 @@
-import { v2 as cloudinary } from "cloudinary"
 import productModel from "../models/productModel.js";
 
 
@@ -7,13 +6,7 @@ const createProduct = async (req, res) => {
     try {
         const { name, description, category, price, popular } = req.body
 
-        let imageUrl = "https://via.placeholder.com/150" // Default image URL
-
-        // Only upload the image if one is provided
-        if (req.file) {
-            console.log("Uploaded File:", req.file);
-            imageUrl = await cloudinary.uploader.upload(req.file.path, { resource_type: "image" }).then(res => res.secure_url)
-        }
+        const imageUrl = "https://via.placeholder.com/150" // Default image URL
 
         const productData = {
             name,
@@ -29,7 +22,6 @@ const createProduct = async (req, res) => {
 
         const product = new productModel(productData)
         await product.save()
-
         res.json({ success: true, message: "Product Created" })
     } catch (error) {
         console.log(error)
