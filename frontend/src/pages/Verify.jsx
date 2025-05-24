@@ -12,7 +12,7 @@ const Verify = () => {
   const success = searchParams.get('success')
   const orderId = searchParams.get('orderId')
 
-  // verify payment  (Only for test purpose Not a secure method secure method is using webhook but a long process cant cover in a single tutorial)
+  // verificar pagamento (Apenas para fins de teste. O método seguro é usando webhook, mas é um processo longo e não pode ser coberto em um único tutorial)
   const verifyPayment = async () => {
     try {
       if (!token) {
@@ -36,7 +36,7 @@ const Verify = () => {
   }, [token])
 
   return (
-    <div>Verify</div>
+    <div>Verificar</div>
   )
 }
 

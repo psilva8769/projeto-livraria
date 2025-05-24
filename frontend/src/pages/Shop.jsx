@@ -7,7 +7,6 @@ import { ShopContext } from '../context/ShopContext'
 import Item from '../components/Item'
 import Footer from '../components/Footer'
 
-
 const Shop = () => {
 
   const { books } = useContext(ShopContext)
@@ -69,14 +68,14 @@ const Shop = () => {
         <div className='w-full max-w-2xl flexCenter'>
           <div className='inline-flex items-center justify-center bg-primary overflow-hidden w-full rounded-full p-4 px-5'>
             <div className='text-lg cursor-pointer'><RiSearch2Line /></div>
-            <input onChange={(e) => setSearch(e.target.value)} value={search} type="text" placeholder='Search here...' className='border-none outline-none w-full text-sm pl-4 bg-primary' />
+            <input onChange={(e) => setSearch(e.target.value)} value={search} type="text" placeholder='Pesquise aqui...' className='border-none outline-none w-full text-sm pl-4 bg-primary' />
             <div className='flexCenter cursor-pointer text-lg border-l pl-2'><LuSettings2 /></div>
           </div>
         </div>
 
         {/* Categories filter */}
         <div className='mt-12 mb-16'>
-          <h4 className='h4 mb-4 hidden sm:flex'>Categories:</h4>
+          <h4 className='h4 mb-4 hidden sm:flex'>Categorias:</h4>
           <div className='flexCenter sm:flexStart flex-wrap gap-x-12 gap-y-4'>
             {categories.map((cat) => (
               <label key={cat.name}>
@@ -95,13 +94,13 @@ const Shop = () => {
         <div className='mt-8'>
           {/* title and sort */}
           <div className='flexBetween !items-start gap-7 flex-wrap pb-16 max-sm:flexCenter text-center'>
-            <Title title1={'Our'} title2={'Book List'} titleStyles={'pb-0 text-start'} paraStyles={'!block'} />
+            <Title title1={'Nossa'} title2={'Lista de Livros'} titleStyles={'pb-0 text-start'} paraStyles={'!block'} />
             <div className='flexCenter gap-x-2'>
-              <span className='hidden sm:flex medium-16'>Sort by:</span>
+              <span className='hidden sm:flex medium-16'>Ordenar por:</span>
               <select onChange={(e) => setSortType(e.target.value)} className='text-sm p-2.5 outline-none bg-primary text-gray-30 rounded'>
-                <option value="relevant">Relevant</option>
-                <option value="low">Low</option>
-                <option value="high">High</option>
+                <option value="relevant">Relevância</option>
+                <option value="low">Menor preço</option>
+                <option value="high">Maior preço</option>
               </select>
             </div>
           </div>
@@ -112,7 +111,7 @@ const Shop = () => {
                 <Item book={book} key={book._id} />
               ))
             ) : (
-              <p>No Books found for selected filters</p>
+              <p>Nenhum livro encontrado para os filtros selecionados</p>
             )}
           </div>
         </div>
@@ -122,7 +121,7 @@ const Shop = () => {
           {/* Previous button */}
           <button disabled={currentPage === 1} 
           onClick={() => setCurrentPage((prev) => prev - 1)} 
-          className={`btn-secondary !py-1 !px-3 ${currentPage === 1 && "opacity-50 cursor-not-allowed"}`}>Previous</button>
+          className={`btn-secondary !py-1 !px-3 ${currentPage === 1 && "opacity-50 cursor-not-allowed"}`}>Anterior</button>
           {/* Page numbers */}
           {Array.from({ length: totalPages }, (_, index) => (
             <button key={index + 1} onClick={()=>setCurrentPage(index + 1)} className={`btn-light !py-1 !px-3 ${currentPage === index + 1 && "!bg-secondaryOne"}`}>
@@ -132,7 +131,7 @@ const Shop = () => {
           {/* Next button */}
           <button disabled={currentPage === totalPages} 
           onClick={() => setCurrentPage((prev) => prev + 1)} 
-          className={`btn-secondary !py-1 !px-3 ${currentPage === totalPages && "opacity-50 cursor-not-allowed"}`}>Next</button>
+          className={`btn-secondary !py-1 !px-3 ${currentPage === totalPages && "opacity-50 cursor-not-allowed"}`}>Próxima</button>
         </div>
       </div>
       

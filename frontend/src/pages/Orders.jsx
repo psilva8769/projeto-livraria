@@ -15,7 +15,6 @@ const Orders = () => {
         return null
       }
       const response = await axios.post(backendUrl + '/api/order/userorders', {}, { headers: { token } })
-      // console.log(response.data)
       if (response.data.success) {
         let allOrdersItem = []
         response.data.orders.map((order) => {
@@ -42,7 +41,7 @@ const Orders = () => {
     <section className='max-padd-container'>
       <div className='pt-28 pb-10'>
         {/* Title */}
-        <Title title1={'Order'} title2={'List'} title1Styles={'h3'} />
+        <Title title1={'Lista de'} title2={'Pedidos'} title1Styles={'h3'} />
         {/* Container */}
         {orderData.map((item, i) => (
           <div key={i} className='bg-white p-2 mt-3 rounded-lg'>
@@ -59,24 +58,24 @@ const Orders = () => {
                     <div>
                       <div className='flex items-center gap-x-1 sm:gap-x-3'>
                         <div className='flexCenter gap-x-1'>
-                          <h5 className='medium-14'>Price:</h5>
+                          <h5 className='medium-14'>Preço:</h5>
                           <p>{currency}{item.price}</p>
                         </div>
                         <div className='flexCenter gap-x-1'>
-                          <h5 className='medium-14'>Quantity:</h5>
+                          <h5 className='medium-14'>Quantidade:</h5>
                           <p>{item.quantity}</p>
                         </div>
                         <div className='sm:flexCenter gap-x-1 hidden'>
-                          <h5 className='medium-14'>Payment:</h5>
+                          <h5 className='medium-14'>Pagamento:</h5>
                           <p className='text-gray-400'>{item.paymentMethod}</p>
                         </div>
                       </div>
                       <div className='flex items-center gap-x-1'>
-                        <h5 className='medium-14'>Date:</h5>
+                        <h5 className='medium-14'>Data:</h5>
                         <p className='text-gray-400'>{new Date(item.date).toDateString()}</p>
                       </div>
                       <div className='flex items-center gap-x-1 sm:hidden'>
-                        <h5 className='medium-14'>Payment:</h5>
+                        <h5 className='medium-14'>Pagamento:</h5>
                         <p className='text-gray-400'>{item.paymentMethod}</p>
                       </div>
                     </div>
@@ -86,7 +85,7 @@ const Orders = () => {
                         <p className='min-w-2 h-2 rounded-full bg-secondary'></p>
                         <p>{item.status}</p>
                       </div>
-                      <button onClick={loadOrderData} className='btn-secondaryOne !px-1.5 !py-1 !text-xs'>Track Order</button>
+                      <button onClick={loadOrderData} className='btn-secondaryOne !px-1.5 !py-1 !text-xs'>Rastrear Pedido</button>
                     </div>
                   </div>
                 </div>

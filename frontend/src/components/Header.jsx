@@ -68,13 +68,13 @@ const Header = () => {
                             {token ? (
                                 <div><TbUserCircle className='text-[29px] cursor-pointer' /></div>
                             ) : (
-                                <button onClick={()=> navigate('/login')} className='btn-outline flexCenter gap-x-2'>Login<RiUserLine /></button>
+                                <button onClick={()=> navigate('/login')} className='btn-outline flexCenter gap-x-2'>Entrar<RiUserLine /></button>
                             )}
                         </div>
                         {token && <>
                             <ul className='bg-white p-1 w-32 ring-1 ring-slate-900/5 rounded absolute right-0 top-7 hidden group-hover:flex flex-col regular-14 shadow-md'>
-                                <li onClick={()=> navigate('/orders')} className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer'>Orders</li>
-                                <li onClick={logout} className='p-2 text-tertiary rounded-md hover:bg-primary cursor-pointer'>Logout</li>
+                                <li onClick={()=> navigate('/orders')} className='p-2 text-terciaria rounded-md hover:bg-primary cursor-pointer'>Pedidos</li>
+                                <li onClick={logout} className='p-2 text-terciaria rounded-md hover:bg-primary cursor-pointer'>Sair</li>
                             </ul>
                         </>}
                     </div>

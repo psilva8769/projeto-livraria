@@ -11,34 +11,34 @@ const Features = () => {
         <div className='flexCenter flex-col gap-3'>
           <img src={filter} alt="featureIcon" height={44} width={44} />
           <div className='flexCenter flex-col'>
-            <h5 className='h5'>Advanced Search and Filters</h5>
+            <h5 className='h5'>Busca Avançada e Filtros</h5>
             <hr className='w-8 bg-secondary h-1 rounded-full border-none'/>
           </div>
-          <p className='text-center'>Effortlessly search books by title, author, genre, or price range.</p>
+          <p className='text-center'>Encontre livros facilmente por título, autor, gênero ou faixa de preço.</p>
         </div>
         <div className='flexCenter flex-col gap-3'>
           <img src={rating} alt="featureIcon" height={44} width={44} />
           <div className='flexCenter flex-col'>
-            <h5 className='h5'>User Reviews and Ratings</h5>
+            <h5 className='h5'>Avaliações e Comentários</h5>
             <hr className='w-8 bg-secondary h-1 rounded-full border-none'/>
           </div>
-          <p className='text-center'>Customers can share reviews, rate books, and guide future readers.</p>
+          <p className='text-center'>Clientes podem compartilhar opiniões, avaliar livros e ajudar outros leitores.</p>
         </div>
         <div className='flexCenter flex-col gap-3'>
           <img src={wishlist} alt="featureIcon" height={44} width={44} />
           <div className='flexCenter flex-col'>
-            <h5 className='h5'>Wishlist and Favorites</h5>
+            <h5 className='h5'>Lista de Desejos e Favoritos</h5>
             <hr className='w-8 bg-secondary h-1 rounded-full border-none'/>
           </div>
-          <p className='text-center'>Save books to wishlist for future purchases or easy access.</p>
+          <p className='text-center'>Salve livros na lista de desejos para comprar depois ou acessar facilmente.</p>
         </div>
         <div className='flexCenter flex-col gap-3'>
           <img src={secure} alt="featureIcon" height={44} width={44} />
           <div className='flexCenter flex-col'>
-            <h5 className='h5'>Secure Online Payments</h5>
+            <h5 className='h5'>Pagamentos Online Seguros</h5>
             <hr className='w-8 bg-secondary h-1 rounded-full border-none'/>
           </div>
-          <p className='text-center'>Enjoy seamless checkout with multiple secure payment options.</p>
+          <p className='text-center'>Finalize sua compra com diversas opções de pagamento seguras.</p>
         </div>
       </div>
     </section>
