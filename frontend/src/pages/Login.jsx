@@ -58,35 +58,43 @@ const Login = () => {
         <div className='flexCenter w-full sm:w-1/2'>
           <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-md m-auto gap-y-5 text-gray-800'>
             <div className='w-full mb-4'>
-              <h3 className='bold-36'>{currState}</h3>
+              <h3 className='bold-36'>
+                {currState === "Sign Up" ? "Cadastro" : "Entrar"}
+              </h3>
             </div>
             {currState === "Sign Up" && (
               <div className='w-full'>
                 <label htmlFor="name" className='medium-14'>
-                  Name
+                  Nome
                 </label>
-                <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder='Name' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
+                <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder='Nome' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
               </div>
             )}
             <div className='w-full'>
               <label htmlFor="email" className='medium-14'>
-                Email
+                E-mail
               </label>
-              <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder='Email' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
+              <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder='E-mail' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
             </div>
             <div className='w-full'>
               <label htmlFor="password" className='medium-14'>
-                Password
+                Senha
               </label>
-              <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder='Password' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
+              <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder='Senha' className='w-full px-3 py-1 ring-1 ring-slate-900/10 rounded bg-primary mt-1' />
             </div>
-            <button type='submit' className='btn-dark w-full mt-5 !py-[7px] !rounded'>{currState === "Sign Up" ? 'Sign Up' : 'Login'}</button>
+            <button type='submit' className='btn-dark w-full mt-5 !py-[7px] !rounded'>
+              {currState === "Sign Up" ? 'Cadastrar' : 'Entrar'}
+            </button>
             <div className='w-full flex flex-col gap-y-3 medium-14'>
-              <div className='underline'>Forgot your password?</div>
+              <div className='underline'>Esqueceu sua senha?</div>
               {currState === 'Login' ? (
-                <div className='underline'>Don't have an account? <span onClick={() => setCurrState('Sign Up')} className='cursor-pointer hover:text-secondaryOne'>Create account</span></div>
+                <div className='underline'>
+                  Não tem uma conta? <span onClick={() => setCurrState('Sign Up')} className='cursor-pointer hover:text-secondaryOne'>Criar conta</span>
+                </div>
               ) : (
-                <div className='underline'>Already have an account? <span onClick={() => setCurrState('Login')} className='cursor-pointer hover:text-secondaryOne'>Login</span></div>
+                <div className='underline'>
+                  Já tem uma conta? <span onClick={() => setCurrState('Login')} className='cursor-pointer hover:text-secondaryOne'>Entrar</span>
+                </div>
               )}
             </div>
           </form>

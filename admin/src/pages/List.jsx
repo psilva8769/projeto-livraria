@@ -26,14 +26,14 @@ const removeProduct = async (id)=>{
   try {
     const response = await axios.post(backend_url + '/api/product/delete', {id}, {headers:{token}})
     if(response.data.success){
-      toast.success(response.data.message)
+      toast.success('Produto removido com sucesso!')
       await fetchlist()
     }else{
-      toast.error(response.data.message)
+      toast.error('Erro ao remover produto.')
     }
   } catch (error) {
     console.log(error)
-    toast.error(error.message)
+    toast.error('Erro ao remover produto.')
   }
 }
 
@@ -45,13 +45,13 @@ useEffect(()=>{
     <div className='px-2 sm:px-8 mt-4 sm:mt-14'>
       <div className='flex flex-col gap-2'>
         <div className='grid grid-cols-[1fr_1fr_1fr_1fr_1fr] md:grid-cols-[1fr_3.5fr_1.5fr_1fr_1fr] items-center py-1 px-2 bg-white bold-14 sm:bold-15 mb-1 rounded'>
-          <h5>Image</h5>
-          <h5>Name</h5>
-          <h5>Category</h5>
-          <h5>Price</h5>
-          <h5>Remove</h5>
+          <h5>Imagem</h5>
+          <h5>Nome</h5>
+          <h5>Categoria</h5>
+          <h5>Preço</h5>
+          <h5>Remover</h5>
         </div>
-        {/* Product List */}
+        {/* Lista de Produtos */}
         {list.map((item)=> (
           <div key={item._id} className='grid grid-cols-[1fr_1fr_1fr_1fr_1fr] md:grid-cols-[1fr_3.5fr_1.5fr_1fr_1fr] items-center gap-2 p-1 bg-white rounded-xl'>
             <img src={item.image} alt="" className='w-12 rounded-lg'/>

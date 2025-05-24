@@ -14,7 +14,7 @@ const Cart = () => {
         <section className='max-padd-container'>
             <div className='pt-28'>
                 {/* Title */}
-                <Title title1={'Cart'} title2={'List'} title1Styles={'h3'} />
+                <Title title1={'Carrinho'} title2={'Lista'} title1Styles={'h3'} />
                 {/* Cart Items */}
                 <div className='mt-6'>
                     {books.map((item) => {
@@ -37,7 +37,7 @@ const Cart = () => {
                                                     </div>
                                                 </div>
                                                 <h4 className='h4'>{currency}{item.price}</h4>
-                                                <TbTrash onClick={() => updateQuantity(item._id, 0)} className='cursor-pointer text-xl text-secondary' />
+                                                <TbTrash onClick={() => updateQuantity(item._id, 0)} className='cursor-pointer text-xl text-secondary' title="Remover" />
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@ const Cart = () => {
                     <div className='w-full sm:w-[450px]'>
                         <CartTotal />
                         <button onClick={() => navigate('/place-order')} className='btn-secondaryOne mt-7'>
-                            Proceed to Checkout
+                            Finalizar Compra
                         </button>
                     </div>
                 </div>

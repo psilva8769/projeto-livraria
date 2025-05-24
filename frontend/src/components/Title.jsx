@@ -6,8 +6,8 @@ const Title = ({title1, title2, titleStyles, title1Styles, paraStyles}) => {
         <h2 className={`${title1Styles} h2`}>{title1}
             <span className='text-secondary !font-light'> {title2}</span>
         </h2>
-        <p className={`${paraStyles} hidden`}>From timeless classics to modern masterpieces, find the <br />
-        perfect read for every moment</p>
+        <p className={`${paraStyles} hidden`}>Dos clássicos atemporais às obras-primas modernas, encontre a <br />
+        leitura perfeita para cada momento</p>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import upload_icon from "../assets/upload_icon.png"
+import upload_icon from "../../assets/upload_icon.png"
 import { TbTrash } from "react-icons/tb"
 import { FaPlus } from "react-icons/fa6"
 import axios from "axios"
@@ -53,24 +53,24 @@ const Add = ({ token }) => {
     <div className='px-2 sm:px-8 sm:mt-14 pb-16'>
       <form onSubmit={onSubmitHandler} className='flex flex-col gap-y-3 medium-14 lg:w-[777px]'>
         <div className='w-full'>
-          <h5 className='h5'>Product Name</h5>
-          <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder='Write here..' className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white mt-1 w-full max-w-lg' />
+          <h5 className='h5'>Nome do Produto</h5>
+          <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder='Escreva aqui...' className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white mt-1 w-full max-w-lg' />
         </div>
         <div className='w-full'>
-          <h5 className='h5'>Product description</h5>
-          <textarea onChange={(e) => setDescription(e.target.value)} value={description} type="text" rows={5} placeholder='Write here..' className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white mt-1 w-full max-w-lg' />
+          <h5 className='h5'>Descrição do Produto</h5>
+          <textarea onChange={(e) => setDescription(e.target.value)} value={description} type="text" rows={5} placeholder='Escreva aqui...' className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white mt-1 w-full max-w-lg' />
         </div>
         <div className='flex items-end gap-x-6'>
           {/* categories */}
           <div>
-            <h5 className='h5'>Category</h5>
+            <h5 className='h5'>Categoria</h5>
             <select onChange={(e) => setCategory(e.target.value)} value={category} className='px-3 py-2 ring-1 ring-slate-900/10 rounded bg-white mt-1 sm:w-full text-gray-30'>
-              <option value="Fiction">Fiction</option>
-              <option value="Children">Children</option>
-              <option value="Health">Health</option>
-              <option value="Academic">Academic</option>
-              <option value="Business">Business</option>
-              <option value="Religious">Religious</option>
+              <option value="Fiction">Ficção</option>
+              <option value="Children">Infantil</option>
+              <option value="Health">Saúde</option>
+              <option value="Academic">Acadêmico</option>
+              <option value="Business">Negócios</option>
+              <option value="Religious">Religioso</option>
             </select>
           </div>
           <div className='flex gap-x-2 pt-2'>
@@ -81,14 +81,14 @@ const Add = ({ token }) => {
           </div>
         </div>
         <div>
-          <h5 className='h5'>Price</h5>
-          <input onChange={(e) => setPrice(e.target.value)} value={price} type="number" placeholder='Price' min={0} className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white w-20' />
+          <h5 className='h5'>Preço</h5>
+          <input onChange={(e) => setPrice(e.target.value)} value={price} type="number" placeholder='Preço' min={0} className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white w-20' />
         </div>
         <div className='flexStart gap-2 my-2'>
           <input onChange={(e) => setPopular((prev) => !prev)} type="checkbox" checked={popular} id='popular' />
-          <label htmlFor="popular" className='cursor-pointer'>Add to popular</label>
+          <label htmlFor="popular" className='cursor-pointer'>Adicionar aos populares</label>
         </div>
-        <button type='submit' className='btn-dark mt-3 max-w-44 sm:w-full'>Add Product</button>
+        <button type='submit' className='btn-dark mt-3 max-w-44 sm:w-full'>Adicionar Produto</button>
       </form>
     </div>
   )

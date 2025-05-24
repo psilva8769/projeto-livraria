@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className='mb-4'>
       <div className='rounded-tr-3xl rounded-tl-3xl pt-12 xl:pt-20 pb-8'>
-        <h3 className='h3'>Discover books that ignite your imagination</h3>
+        <h3 className='h3'>Descubra livros que despertam sua imaginação</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, ducimus iste?</p>
         <hr className='my-8 bg-slate-900/30 h-[2px]' />
         {/* container */}
@@ -21,8 +21,8 @@ const Footer = () => {
             </Link>
             <p className='py-4'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla recusandae voluptatibus excepturi nostrum cum delectus repellat?</p>
             <div className='flexBetween pl-3 h-[3rem] bg-primary w-full max-w-[333px] rounded-full ring-1 ring-slate-500/5 mb-4'>
-              <input type="email" placeholder='Enter your email' className='bg-transparent border-none outline-none' />
-              <button className='btn-secondaryOne relative right-[24px]'>Subscribe</button>
+              <input type="email" placeholder='Digite seu e-mail' className='bg-transparent border-none outline-none' />
+              <button className='btn-secondaryOne relative right-[24px]'>Inscrever-se</button>
             </div>
           </div>
           <div className='flex justify-between flex-wrap gap-8'>
@@ -56,14 +56,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {/* copyrights */}
-      <p className='text-white bg-tertiary medium-14 py-2 px-8 rounded flexBetween '><span>2025 Bacala</span><span>All rights reserved</span></p>
     </footer>
   )
 }
 
 export default Footer
-
 
 const FooterColumn = ({ title, children }) => {
   return (

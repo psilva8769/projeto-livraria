@@ -5,7 +5,6 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { TfiPackage } from "react-icons/tfi"
 
-
 const Orders = ({ token }) => {
 
   const [orders, setOrders] = useState([])
@@ -54,41 +53,35 @@ const Orders = ({ token }) => {
             </div>
             <div>
               <div className='flex items-start gap-1'>
-                <div className='medium-14'>Items:</div>
+                <div className='medium-14'>Itens:</div>
                 <div className='flex flex-col relative top-0.5'>
-                  {order.items.map((item, index) => {
-                    if (index === order.items.length - 1) {
-                      return <p key={index}>
-                        {item.name} x {item.quantity}
-                      </p>
-                    } else {
-                      return <p key={index}>
-                        {item.name} x {item.quantity}
-                      </p>
-                    }
-                  })}
+                  {order.items.map((item, index) => (
+                    <p key={index}>
+                      {item.name} x {item.quantity}
+                    </p>
+                  ))}
                 </div>
               </div>
-              <p><span className='text-tertiary medium-14'>Name:</span>{order.address.firstName + " " + order.address.lastName}</p>
-              <p><span className='text-tertiary medium-14'>Address: </span>
+              <p><span className='text-tertiary medium-14'>Nome:</span> {order.address.firstName + " " + order.address.lastName}</p>
+              <p><span className='text-tertiary medium-14'>Endereço: </span>
                 <span>{order.address.street + ", "}</span>
                 <span>{order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.zipcode}</span>
               </p>
               <p>{order.address.phone}</p>
             </div>
             <div>
-              <p><span className='text-tertiary medium-14'>Total: </span>{order.items.length}</p>
-              <p><span className='text-tertiary medium-14'>Method: </span>{order.paymentMethod}</p>
-              <p><span className='text-tertiary medium-14'>Payment: </span>{order.payment ? "Done" : "Pending"}</p>
-              <p><span className='text-tertiary medium-14'>Date: </span>{new Date(order.date).toLocaleDateString()}</p>
+              <p><span className='text-tertiary medium-14'>Total de itens: </span>{order.items.length}</p>
+              <p><span className='text-tertiary medium-14'>Método de pagamento: </span>{order.paymentMethod}</p>
+              <p><span className='text-tertiary medium-14'>Pagamento: </span>{order.payment ? "Concluído" : "Pendente"}</p>
+              <p><span className='text-tertiary medium-14'>Data: </span>{new Date(order.date).toLocaleDateString()}</p>
             </div>
-            <p><span className='text-tertiary medium-14'>Price: </span>{currency}{order.amount}</p>
+            <p><span className='text-tertiary medium-14'>Preço: </span>{currency}{order.amount}</p>
             <select onChange={(event) => statusHandler(event, order._id)} value={order.status} className='p-1 ring-1 ring-slate-900/5 rounded max-w-36 bg-primary text-xs font-semibold'>
-              <option value="Order Placed">Order Placed</option>
-              <option value="Packing">Packing</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Out for delivery">Out for delivery</option>
-              <option value="Delivered">Delivered</option>
+              <option value="Order Placed">Pedido realizado</option>
+              <option value="Packing">Embalando</option>
+              <option value="Shipped">Enviado</option>
+              <option value="Out for delivery">Saiu para entrega</option>
+              <option value="Delivered">Entregue</option>
             </select>
           </div>
         ))}

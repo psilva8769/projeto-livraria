@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import loginImg from "../assets/login.png"
+import loginImg from "../../assets/login.png"
 import { backend_url } from '../App'
 import axios from 'axios'
 import { toast } from 'react-toastify'

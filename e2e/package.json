@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:headed": "cypress run --headed",
+    "test:e2e": "cypress run",
+    "test:e2e:dev": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^14.4.0"
+  }
+}

@@ -9,14 +9,14 @@ const CartTotal = () => {
     return (
         <div className='w-full'>
             {/* Title */}
-            <Title title1={'Cart'} title2={'Total'} title1Styles={'h3'} />
+            <Title title1={'Carrinho'} title2={'Total'} title1Styles={'h3'} />
             <div className='flexBetween pt-3'>
-                <h5 className='h5'>SubTotal:</h5>
+                <h5 className='h5'>Subtotal:</h5>
                 <p className='h5'>{currency}{getCartAmount()}.00</p>
             </div>
             <hr className='mx-auto h-[1px] w-full bg-gray-900/10 my-1' />
             <div className='flexBetween pt-3'>
-                <h5 className='h5'>Shipping Fee:</h5>
+                <h5 className='h5'>Frete:</h5>
                 <p className='h5'>{getCartAmount() === 0 ? "0.00" : `${currency}${delivery_charges}.00`}</p>
             </div>
             <hr className='mx-auto h-[1px] w-full bg-gray-900/10 my-1' />
