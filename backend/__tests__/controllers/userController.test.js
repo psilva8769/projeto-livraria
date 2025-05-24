@@ -207,6 +207,7 @@ describe('Controlador de Usuário', () => {
             });
         });
 
+        // Teste para verificar se o token é gerado corretamente
         it('deve retornar erro para admin incorreto', async () => {
             req.body = { email: 'wrong@email.com', password: 'wrongpass' };
 
