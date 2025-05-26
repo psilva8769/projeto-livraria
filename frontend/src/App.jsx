@@ -14,8 +14,20 @@ import Verify from './pages/Verify'
 
 const App = () => {
   return (
-    <main className='overflow-hidden bg-primary'>
-      <ToastContainer />
+    <main className='overflow-hidden bg-gradient-to-br from-primary via-muted to-cream min-h-screen'>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        className="mt-16"
+      />
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />

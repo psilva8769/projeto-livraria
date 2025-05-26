@@ -1,11 +1,14 @@
-{
-  "scripts": {
+{  "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:headed": "cypress run --headed",
     "test:e2e": "cypress run",
-    "test:e2e:dev": "cypress open"
+    "test:e2e:dev": "cypress open",
+    "test:user": "set \"CYPRESS_BASE_URL=http://localhost:5173\" && cypress run --spec \"cypress/e2e/user-flow.cy.js,cypress/e2e/cart-flow.cy.js,cypress/e2e/auth-flow.cy.js\"",
+    "test:admin": "set \"CYPRESS_BASE_URL=http://localhost:5174\" && cypress run --spec \"cypress/e2e/admin-flow.cy.js\"",
+    "test:user:open": "set \"CYPRESS_BASE_URL=http://localhost:5173\" && cypress open",
+    "test:admin:open": "set \"CYPRESS_BASE_URL=http://localhost:5174\" && cypress open"
   },
   "devDependencies": {
     "cypress": "^14.4.0"

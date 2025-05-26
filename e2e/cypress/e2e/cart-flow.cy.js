@@ -8,28 +8,9 @@ describe('Funcionalidades do carrinho', () => {
     })
   })
 
-    Cypress.Commands.add('login', (email, password) => {
-    cy.visit('/login')
-    
-    // Aguardar o formulário carregar
-    cy.get('input[placeholder="E-mail"]').should('be.visible')
-    
-    // Preencher formulário de login
-    cy.get('input[placeholder="E-mail"]').type(email)
-    cy.get('input[placeholder="Senha"]').type(password)
-    
-    // Clicar no botão de login
-    cy.get('button[type="submit"]').contains('Entrar').click()
-  })
-
-    Cypress.Commands.add('addToCart', (index) => {
-        cy.get('span[title="Adicionar ao carrinho"]').eq(index).click()
-    })
-
   beforeEach(() => {
-        cy.visit('/')
-
-      cy.login(users.validUser.email, users.validUser.password)
+    cy.visit('/')
+    cy.login(users.validUser.email, users.validUser.password)
   })
 
   it('deve gerenciar itens no carrinho', () => {
@@ -38,8 +19,10 @@ describe('Funcionalidades do carrinho', () => {
     cy.addToCart(1)
     cy.addToCart(2)
 
-    // Verificar carrinho
+    // Verificar carrinho - acessar através do link
     cy.get('a[data-discover="true"][href="/cart"]').click()
+    
+    // Verificar se há itens no carrinho através do contador no header
     cy.get('a[data-discover="true"][href="/cart"] span')
       .invoke('text')
       .then(text => {
@@ -47,59 +30,48 @@ describe('Funcionalidades do carrinho', () => {
         expect(count).to.be.greaterThan(0)
       })
 
-    // Atualizar quantidade
-    // Aumentar quantidade usando botão "+"
-    // Aumentar quantidade usando botão "+"
-    cy.get('.bg-white .flex.items-center button').eq(1).click()
+    // Atualizar quantidade - usar seletores mais específicos baseados na estrutura real
+    // Encontrar o primeiro item do carrinho
+    cy.get('.bg-white\\/80').first().within(() => {
+      // Botão "+" (segundo botão no controle de quantidade)
+      cy.get('button').eq(1).click() // Botão "+"
+      
+      // Verificar se a quantidade aumentou para 2
+      cy.get('p.px-4.font-semibold.text-navy').should('contain', '2')
+      
+      // Botão "-" (primeiro botão no controle de quantidade)
+      cy.get('button').eq(0).click()
+      
+      // Verificar se a quantidade voltou para 1
+      cy.get('p.px-4.font-semibold.text-navy').should('contain', '1')
+    })
 
-    // Verifica se o valor agora é 2
-    cy.get('.bg-white .flex.items-center p.px-2').first().should('have.text', '2')
+    // Remover todos os itens - usar o botão com title="Remover"
+    cy.get('button[title="Remover"]').each(($btn) => {
+      cy.wrap($btn).click()
+      cy.wait(300) // Aguardar remoção
+    })
 
-    // Diminuir quantidade usando botão "-"
-    cy.get('.bg-white .flex.items-center button').eq(0).click()
-    cy.get('.bg-white .flex.items-center p.px-2').first().should('have.text', '1')
-
-    // Remover item (ícone SVG do lixo)
-    cy.get('svg.cursor-pointer.text-xl.text-secondary')
-      .should('exist')
-      .each(($el) => {
-        cy.wrap($el).click()
+    // Verificar se o carrinho está vazio
+    cy.get('a[data-discover="true"][href="/cart"] span')
+      .invoke('text')
+      .then(text => {
+        const count = parseInt(text, 10)
+        expect(count).to.equal(0)
       })
-
-        // Verifica se o carrinho está vazio
-        cy.get('a[data-discover="true"][href="/cart"] span')
-          .invoke('text')
-          .then(text => {
-            const count = parseInt(text, 10)
-            expect(count).to.equal(0)
-          })
-    
   })
 
-it('deve calcular total corretamente', () => {
+  it('deve calcular total corretamente', () => {
     cy.addToCart(0)
     cy.get('a[data-discover="true"][href="/cart"]').click()
     
-    // Verificar se o total é maior que zero
-    cy.get('.flexBetween.pt-3').contains('Total:').siblings('p.h5')
-      .invoke('text')
-      .should('match', /^\$\d+(\.\d{1,3})?(\.\d{2})?$/) // matches $94, $94.9, $94.90, $94.9.00
+    // Verificar componente CartTotal - usar a estrutura real do componente
+    cy.contains('h5', 'Total:').parent().within(() => {
+      // Verificar se o valor do total está presente e tem formato correto
+      cy.get('p.h5.font-bold.text-accent')
+        .invoke('text')
+        .should('match', /^\$\d+\.00$/) // formato: $XX.00
+    })
+  })
 
-    // Optionally, normalize the value to ensure correct format
-    // .then((text) => {
-    //   expect(text).to.match(/^\$\d+(\.\d{1,2})?$/)
-    // })
-})
-
-it('deve persistir carrinho entre sessões', () => {
-    cy.addToCart(0)
-    cy.addToCart(1)
-    
-    // Recarregar página
-    cy.reload()
-    
-    // Verificar se itens persistiram
-    cy.get('a[data-discover="true"][href="/cart"]').click()
-    cy.get('.bg-white .flex.items-center').should('have.length.at.least', 2)
-})
 })

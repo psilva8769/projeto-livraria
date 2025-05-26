@@ -11,11 +11,10 @@ describe('Painel Administrativo - Bacala Bookstore', () => {
     // Limpar localStorage e sessionStorage antes de cada teste
     cy.clearLocalStorage()
     cy.clearCookies()
-  })
-
-  // Comando customizado para login do admin
+  })  // Comando customizado para login do admin
   Cypress.Commands.add('adminLogin', (email, password) => {
-    cy.visit('/')
+    // Usar o comando visitAdmin ao invés de URL hardcoded
+    cy.visitAdmin('/')
     
     // Aguardar o formulário carregar
     cy.get('input[placeholder="Email"]').should('be.visible')
