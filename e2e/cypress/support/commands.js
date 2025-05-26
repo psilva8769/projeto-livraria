@@ -22,7 +22,44 @@ Cypress.Commands.add('adminLoginWithSession', () => {
   })
 })
 
+// Comando de login simples para testes do carrinho
+Cypress.Commands.add('login', (email, password) => {
+  cy.visitFrontend('/login')
+  
+  // Aguardar o formulário carregar
+  cy.get('input[placeholder="E-mail"]').should('be.visible')
+  
+  // Preencher formulário de login
+  cy.get('input[placeholder="E-mail"]').type(email)
+  cy.get('input[placeholder="Senha"]').type(password)
+  
+  // Clicar no botão de login
+  cy.get('button[type="submit"]').contains('Entrar').click()
+})
+
+// Comando para adicionar ao carrinho
+Cypress.Commands.add('addToCart', (index) => {
+  // Primeiro fazer scroll até o elemento e hover no item para mostrar o botão
+  cy.get('.bg-white\\/80.backdrop-blur-sm.rounded-2xl').eq(index).scrollIntoView()
+  cy.get('.bg-white\\/80.backdrop-blur-sm.rounded-2xl').eq(index).trigger('mouseover')
+  cy.wait(200) // Aguardar animação do hover
+  // Depois clicar no botão que aparece com force para contornar problemas de visibilidade
+  cy.get('.bg-white\\/80.backdrop-blur-sm.rounded-2xl').eq(index).find('span[title="Adicionar ao carrinho"]').click({ force: true })
+  cy.wait(500) // Aguardar atualização do estado
+})
+
 // Comando para limpar todas as sessões
 Cypress.Commands.add('clearAllSessions', () => {
   Cypress.session.clearAllSavedSessions()
+})
+
+// Comandos para diferentes URLs
+Cypress.Commands.add('visitFrontend', (path = '/') => {
+  const frontendUrl = Cypress.env('frontendUrl') || 'http://localhost:5173'
+  cy.visit(`${frontendUrl}${path}`)
+})
+
+Cypress.Commands.add('visitAdmin', (path = '/') => {
+  const adminUrl = Cypress.env('adminUrl') || 'http://localhost:5174'
+  cy.visit(`${adminUrl}${path}`)
 })

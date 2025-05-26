@@ -12,6 +12,31 @@ const defaultContextValues = {
   currency: '$',
   navigate: jest.fn(),
   token: 'test-token',
+import React from 'react';
+
+// Mock do ShopContext
+const mockShopContext = {
+  books: [
+    {
+      _id: '1',
+      name: 'Livro Teste 1',
+      price: 29.99,
+      image: 'test-image.jpg',
+      category: 'Fiction',
+      description: 'Descrição do livro teste'
+    },
+    {
+      _id: '2',
+      name: 'Livro Teste 2',
+      price: 39.99,
+      image: 'test-image2.jpg',
+      category: 'Science',
+      description: 'Descrição do livro teste 2'
+    }
+  ],
+  currency: '$',
+  navigate: jest.fn(),
+  token: '',
   setToken: jest.fn(),
   cartItems: { '1': 2, '2': 1 },
   setCartItems: jest.fn(),
