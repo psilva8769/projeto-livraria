@@ -97,9 +97,6 @@ const Footer = () => {
         {/* Bottom section */}
         <div className='mt-12 pt-8 border-t border-gray-20/20'>
           <div className='flexBetween flex-wrap gap-4'>
-            <p className='text-gray-50 text-sm'>
-              © 2024 Bacala. Todos os direitos reservados. Feito com ❤️ para os amantes de livros.
-            </p>
             <div className='flex gap-6 text-sm text-gray-50'>
               <Link to='/' className='hover:text-secondary transition-colors'>Privacidade</Link>
               <Link to='/' className='hover:text-secondary transition-colors'>Termos</Link>
