@@ -4,6 +4,37 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.27.1",
-    "babel-jest": "^30.0.0-beta.3"
-  }
+    "babel-jest": "^30.0.0-beta.3",
+    "concurrently": "^8.2.2"
+  },
+  "name": "projeto-livraria",
+  "version": "1.0.0",
+  "description": "Sistema completo de livraria com frontend, admin e backend",
+  "scripts": {
+    "install-all": "cd backend && npm install && cd ../frontend && npm install && cd ../admin && npm install && cd ../e2e && npm install",
+    "dev:backend": "cd backend && npm run server",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:admin": "cd admin && npm run dev",
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:admin\"",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run build && npm run preview",
+    "start:admin": "cd admin && npm run build && npm run preview",
+    "build:all": "cd frontend && npm run build && cd ../admin && npm run build",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "test:all": "npm run test:backend && npm run test:frontend",
+    "test:e2e": "cd e2e && npm run cypress:open",
+    "clean": "cd backend && Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue; cd ../frontend && Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue; cd ../admin && Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue; cd ../e2e && Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue",
+    "lint:all": "cd frontend && npm run lint && cd ../admin && npm run lint"
+  },
+  "keywords": [
+    "livraria",
+    "bookstore",
+    "react",
+    "nodejs",
+    "mongodb",
+    "express"
+  ],
+  "author": "",
+  "license": "MIT"
 }
