@@ -3,9 +3,15 @@ module.exports = {
   extensionsToTreatAsEsm: ['.jsx'],
   setupFilesAfterEnv: [
     '@testing-library/jest-dom',
-    '<rootDir>/jest.setup.js', // Se você já tiver o arquivo jest.setup.js
+    '<rootDir>/jest.setup.js',
+    '<rootDir>/__tests__/jest.messages.js'
   ],
-  setupFiles: ['<rootDir>/jest.setup.js'], // Se precisar adicionar arquivos de setup
+  setupFiles: [
+    '<rootDir>/jest.polyfills.js'
+  ],
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',

@@ -32,12 +32,12 @@ describe('Controlador de Carrinho', () => {
     });
 
     // Após todos os testes, remove o usuário de teste e fecha a conexão
-    afterAll(async () => {
-        if (usuarioTeste) {
-            await userModel.deleteOne({ _id: usuarioTeste._id });
-        }
-        await mongoose.connection.close();
-    });
+    // afterAll(async () => {
+    //     if (usuarioTeste) {
+    //         await userModel.deleteOne({ _id: usuarioTeste._id });
+    //     }
+    //     await mongoose.connection.close();
+    // });
 
     // Teste para adicionar item ao carrinho
     describe('Adicionar ao Carrinho', () => {
