@@ -56,8 +56,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {/* copyrights */}
-      <p className='text-white bg-tertiary medium-14 py-2 px-8 rounded flexBetween '><span>2025 Bacala</span><span>All rights reserved</span></p>
     </footer>
   )
 }

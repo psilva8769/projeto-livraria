@@ -1,0 +1,9 @@
+{
+  "newProduct": {
+    "name": "O Hobbit",
+    "price": "35.90",
+    "category": "fantasy",
+    "description": "Uma aventura épica"
+  },
+  "searchTerm": "senhor dos anéis"
+}

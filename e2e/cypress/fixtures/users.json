@@ -1,0 +1,15 @@
+{
+  "validUser": {
+    "name": "Test User Bacala",
+    "email": "testuser@bacala.com",
+    "password": "TestPassword123@"
+  },
+  "invalidUser": {
+    "email": "invalid@email.com",
+    "password": "wrongpassword"
+  },
+  "adminUser": {
+    "email": "admin@bacala.com",
+    "password": "admin123"
+  }
+}

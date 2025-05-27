@@ -3,7 +3,7 @@ import { FaSquarePlus } from "react-icons/fa6"
 import { FaListAlt } from "react-icons/fa"
 import { MdFactCheck } from "react-icons/md"
 import { BiLogOut } from "react-icons/bi"
-import logo from "../assets/logo.png"
+import logo from "../../assets/logo.png"
 import { Link, NavLink } from 'react-router-dom'
 
 const Sidebar = ({setToken}) => {

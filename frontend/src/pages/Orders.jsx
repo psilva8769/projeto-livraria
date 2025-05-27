@@ -15,7 +15,6 @@ const Orders = () => {
         return null
       }
       const response = await axios.post(backendUrl + '/api/order/userorders', {}, { headers: { token } })
-      // console.log(response.data)
       if (response.data.success) {
         let allOrdersItem = []
         response.data.orders.map((order) => {
@@ -37,63 +36,91 @@ const Orders = () => {
   useEffect(() => {
     loadOrderData()
   }, [token])
-
   return (
-    <section className='max-padd-container'>
-      <div className='pt-28 pb-10'>
+    <section className='min-h-screen bg-gradient-to-br from-cream/20 via-white to-primary/10'>
+      <div className='max-padd-container pt-32 pb-20'>
         {/* Title */}
-        <Title title1={'Order'} title2={'List'} title1Styles={'h3'} />
+        <Title title1={'Lista de'} title2={'Pedidos'} title1Styles={'h3'} />
+        
         {/* Container */}
-        {orderData.map((item, i) => (
-          <div key={i} className='bg-white p-2 mt-3 rounded-lg'>
-            <div className='text-gray-700 flex flex-col gap-4'>
-              <div className='flex gap-x-3 w-full'>
-                {/* Image */}
-                <div className='flex gap-6'>
-                  <img src={item.image} alt="orderItemImg" width={55} className='object-cover aspect-square rounded' />
-                </div>
-                {/* order info */}
-                <div className='block w-full'>
-                  <h5 className='h5 capitalize line-clamp-1'>{item.name}</h5>
-                  <div className='flexBetween'>
-                    <div>
-                      <div className='flex items-center gap-x-1 sm:gap-x-3'>
-                        <div className='flexCenter gap-x-1'>
-                          <h5 className='medium-14'>Price:</h5>
-                          <p>{currency}{item.price}</p>
-                        </div>
-                        <div className='flexCenter gap-x-1'>
-                          <h5 className='medium-14'>Quantity:</h5>
-                          <p>{item.quantity}</p>
-                        </div>
-                        <div className='sm:flexCenter gap-x-1 hidden'>
-                          <h5 className='medium-14'>Payment:</h5>
-                          <p className='text-gray-400'>{item.paymentMethod}</p>
-                        </div>
-                      </div>
-                      <div className='flex items-center gap-x-1'>
-                        <h5 className='medium-14'>Date:</h5>
-                        <p className='text-gray-400'>{new Date(item.date).toDateString()}</p>
-                      </div>
-                      <div className='flex items-center gap-x-1 sm:hidden'>
-                        <h5 className='medium-14'>Payment:</h5>
-                        <p className='text-gray-400'>{item.paymentMethod}</p>
-                      </div>
+        <div className='mt-12 space-y-6'>
+          {orderData.length > 0 ? (
+            orderData.map((item, i) => (
+              <div key={i} className='bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-2xl group'>
+                <div className='flex gap-x-6'>
+                  {/* Image */}
+                  <div className='flex-shrink-0'>
+                    <div className='relative overflow-hidden rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300'>
+                      <img src={item.image} alt="orderItemImg" width={80} height={100} className='object-cover aspect-[4/5] rounded-xl group-hover:scale-105 transition-transform duration-300' />
+                      <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
                     </div>
-                    {/* Status & button */}
-                    <div className='flex flex-col xl:flex-row gap-3'>
+                  </div>
+                  
+                  {/* Order info */}
+                  <div className='flex-1 min-w-0'>
+                    <h5 className='h5 capitalize line-clamp-1 text-navy group-hover:text-secondary transition-colors duration-300 mb-4'>{item.name}</h5>
+                    
+                    <div className='space-y-4'>
+                      {/* Price and Quantity Info */}
+                      <div className='flex flex-wrap gap-4'>
+                        <div className='bg-gradient-to-r from-primary/10 to-secondary/10 px-4 py-2 rounded-xl border border-gray-200/50'>
+                          <span className='text-sm font-medium text-tertiary'>Preço: </span>
+                          <span className='font-semibold text-navy'>{currency}{item.price}</span>
+                        </div>
+                        <div className='bg-gradient-to-r from-secondary/10 to-tertiary/10 px-4 py-2 rounded-xl border border-gray-200/50'>
+                          <span className='text-sm font-medium text-tertiary'>Quantidade: </span>
+                          <span className='font-semibold text-navy'>{item.quantity}</span>
+                        </div>
+                        <div className='bg-gradient-to-r from-tertiary/10 to-accent/10 px-4 py-2 rounded-xl border border-gray-200/50'>
+                          <span className='text-sm font-medium text-tertiary'>Pagamento: </span>
+                          <span className='font-semibold text-navy'>{item.paymentMethod}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Date */}
                       <div className='flex items-center gap-2'>
-                        <p className='min-w-2 h-2 rounded-full bg-secondary'></p>
-                        <p>{item.status}</p>
+                        <span className='text-sm font-medium text-tertiary'>Data do Pedido: </span>
+                        <span className='text-tertiary'>{new Date(item.date).toLocaleDateString('pt-BR')}</span>
                       </div>
-                      <button onClick={loadOrderData} className='btn-secondaryOne !px-1.5 !py-1 !text-xs'>Track Order</button>
                     </div>
+                  </div>
+                  
+                  {/* Status & button */}
+                  <div className='flex flex-col gap-4 items-end'>
+                    <div className='flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-3 rounded-xl border border-gray-200/50 shadow-sm'>
+                      <div className={`w-3 h-3 rounded-full ${
+                        item.status === 'Pendente' ? 'bg-yellow-400' :
+                        item.status === 'Processando' ? 'bg-blue-400' :
+                        item.status === 'Enviado' ? 'bg-orange-400' :
+                        item.status === 'Entregue' ? 'bg-green-400' : 'bg-secondary'
+                      } animate-pulse`}></div>
+                      <p className='font-medium text-navy'>{item.status}</p>
+                    </div>
+                    <button 
+                      onClick={loadOrderData} 
+                      className='bg-gradient-to-r from-secondary to-tertiary hover:from-tertiary hover:to-accent text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-medium text-sm'
+                    >
+                      Rastrear Pedido
+                    </button>
                   </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className='flexCenter flex-col gap-6 py-20'>
+              <div className='w-32 h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flexCenter'>
+                <div className='text-4xl text-gray-400'>📦</div>
+              </div>
+              <div className='text-center'>
+                <h3 className='h3 text-navy mb-2'>Nenhum pedido encontrado</h3>
+                <p className='text-tertiary mb-6'>Você ainda não fez nenhum pedido. Explore nossa loja e encontre livros incríveis!</p>
+                <button onClick={() => window.location.href = '/shop'} className='btn-outline'>
+                  Ir às Compras
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          )}
+        </div>
       </div>
 
       <Footer />

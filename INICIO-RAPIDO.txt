@@ -1,0 +1,42 @@
+📚 SISTEMA DE LIVRARIA - GUIA RÁPIDO
+==========================================
+
+🚀 PARA EXECUTAR O SISTEMA:
+--------------------------
+1. Certifique-se que o MongoDB está rodando
+2. Execute: start-all.bat
+3. Acesse: 
+   - Cliente: http://localhost:5173
+   - Admin:   http://localhost:5174
+   - API:     http://localhost:4000
+
+📋 CONFIGURAÇÃO INICIAL:
+-----------------------
+1. Backend: copie backend\.env.example para backend\.env
+2. Configure suas chaves do Cloudinary e Stripe no .env
+3. Execute o sistema usando start-all.bat
+
+🛠️ COMANDOS ÚTEIS:
+-----------------
+- start-all.bat        → Executa todas as aplicações
+- start-all.ps1        → Script PowerShell alternativo  
+- npm run install-all  → Instala dependências de tudo
+- npm test             → Executa testes (em cada pasta)
+
+📁 ESTRUTURA:
+------------
+- frontend/  → Interface do cliente (React)
+- admin/     → Painel administrativo (React)  
+- backend/   → API REST (Node.js + MongoDB)
+- e2e/       → Testes end-to-end (Cypress)
+
+❓ PROBLEMAS COMUNS:
+------------------
+- MongoDB não conecta: inicie o serviço MongoDB
+- Porta em uso: mude as portas nos arquivos de config
+- Erro de CORS: verifique configuração do backend
+- Token expirado: faça login novamente
+
+📖 MAIS INFORMAÇÕES:
+-------------------
+Consulte o README.md principal para documentação completa.
