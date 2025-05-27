@@ -1,4 +1,5 @@
 // Setup global para import.meta
+import '@testing-library/jest-dom';
 globalThis.import = {
   meta: {
     env: {
@@ -29,3 +30,15 @@ global.IntersectionObserver = class IntersectionObserver {
   observe() {}
   unobserve() {}
 };
+
+// Mock localStorage
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
+global.localStorage = localStorageMock;
+
+// Mock window.scrollTo
+global.scrollTo = jest.fn();
