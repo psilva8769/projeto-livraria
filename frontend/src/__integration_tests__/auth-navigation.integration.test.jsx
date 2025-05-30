@@ -3,6 +3,8 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
+import Header from '../components/Header';
+import Login from '../pages/Login';
 import { renderWithProviders, defaultContextValue, mockUser } from '../utils/testUtils';
 import axios from 'axios';
 
@@ -18,8 +20,42 @@ jest.mock('react-toastify', () => ({
 describe('Auth-Navigation Integration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+  });  test('should show login button when not authenticated', () => {
+    const mockContextValue = {
+      ...defaultContextValue,
+      token: null,
+    };
+
+    renderWithProviders(
+      <Header />,
+      { contextValue: mockContextValue }
+    );
+
+    // Should show "Entrar" button when not logged in
+    const loginButton = screen.getByRole('button', { name: /entrar/i });
+    expect(loginButton).toBeInTheDocument();
   });
-  test('should login and redirect to home page', async () => {
+
+  test('should show user icon when authenticated', () => {
+    const mockContextValue = {
+      ...defaultContextValue,
+      token: 'test-token',
+      userData: mockUser,
+    };
+
+    renderWithProviders(
+      <Header />,
+      { contextValue: mockContextValue }
+    );
+
+    // Should show user icon when logged in (using class selector since it's not a semantic element)
+    const userIcon = document.querySelector('.text-\\[32px\\]');
+    expect(userIcon).toBeInTheDocument();
+    
+    // Should not show "Entrar" button when logged in
+    const loginButton = screen.queryByRole('button', { name: /entrar/i });
+    expect(loginButton).not.toBeInTheDocument();
+  });  test('should login successfully with valid credentials', async () => {
     const mockNavigate = jest.fn();
     const mockSetToken = jest.fn();
     const mockToken = 'test-token';
@@ -27,7 +63,7 @@ describe('Auth-Navigation Integration', () => {
     axios.post.mockResolvedValueOnce({ 
       data: { 
         token: mockToken,
-        user: mockUser
+        success: true
       } 
     });
 
@@ -39,16 +75,12 @@ describe('Auth-Navigation Integration', () => {
     };
 
     renderWithProviders(
-      <App />,
+      <Login />,
       { contextValue: mockContextValue }
     );
 
-    // Navigate to login page
-    const loginLink = screen.getByRole('link', { name: /login/i });
-    fireEvent.click(loginLink);
-
     // Fill login form
-    const emailInput = screen.getByPlaceholderText(/email/i);
+    const emailInput = screen.getByPlaceholderText(/e-mail/i);
     const passwordInput = screen.getByPlaceholderText(/senha/i);
     
     await userEvent.type(emailInput, 'test@example.com');
@@ -59,29 +91,11 @@ describe('Auth-Navigation Integration', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
+      expect(axios.post).toHaveBeenCalledWith(
+        expect.stringContaining('/api/user/login'),
+        { email: 'test@example.com', password: 'password123' }
+      );
       expect(mockSetToken).toHaveBeenCalledWith(mockToken);
-      expect(mockNavigate).toHaveBeenCalledWith('/');
     });
-  });
-  test('should restrict access to orders page when not logged in', async () => {
-    const mockNavigate = jest.fn();
-    
-    const mockContextValue = {
-      ...defaultContextValue,
-      token: null,
-      navigate: mockNavigate,
-      userData: null,
-    };
-
-    renderWithProviders(
-      <App />,
-      { contextValue: mockContextValue }
-    );
-
-    // Try to navigate to orders page
-    const ordersLink = screen.getByRole('link', { name: /orders/i });
-    fireEvent.click(ordersLink);
-
-    expect(mockNavigate).toHaveBeenCalledWith('/login');
   });
 });

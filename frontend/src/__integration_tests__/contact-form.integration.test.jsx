@@ -3,28 +3,9 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders, defaultContextValue } from '../utils/testUtils';
-
-// Mock React components to avoid React is not defined errors
-jest.mock('../App', () => {
-  // Mock implementation of App
-  return function MockApp() {
-    return <div data-testid="mock-app">
-      <a href="/contact">contato</a>
-      <div>
-        <form>
-          <input placeholder="Seu nome completo" name="name" required />
-          <input placeholder="seu@email.com" type="email" name="email" required />
-          <input placeholder="Assunto da mensagem" name="subject" required />
-          <textarea placeholder="Escreva sua mensagem aqui..." name="message" required></textarea>
-          <button>Enviar Mensagem</button>
-        </form>
-      </div>
-    </div>;
-  };
-});
-
-// Import App after mocking
-const App = require('../App').default;
+import Contact from '../pages/Contact';
+import { MemoryRouter } from 'react-router-dom';
+import App from '../App';
 
 // Mock window.scrollTo to avoid errors
 window.scrollTo = jest.fn();
@@ -36,8 +17,7 @@ describe('Contact Form Integration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  
-  test('should navigate to contact page and submit the form successfully', async () => {
+    test('should navigate to contact page and submit the form successfully', async () => {
     const mockNavigate = jest.fn();
     const mockContextValue = {
       ...defaultContextValue,
@@ -46,14 +26,11 @@ describe('Contact Form Integration', () => {
 
     renderWithProviders(
       <App />,
-      { contextValue: mockContextValue }
+      { 
+        contextValue: mockContextValue,
+        initialEntries: ['/contact']
+      }
     );
-
-    // Find and navigate to contact page
-    // We need to use a workaround since the Contact link is an external mailto link
-    // So we'll manually navigate to the Contact route
-    const contactRoute = screen.getByText(/contato/i);
-    fireEvent.click(contactRoute);
 
     // Fill out the form
     const nameInput = await screen.findByPlaceholderText('Seu nome completo');
@@ -88,13 +65,10 @@ describe('Contact Form Integration', () => {
       expect(messageInput).toHaveValue('');
     });
   });
-
   test('should validate required fields in the contact form', async () => {
-    renderWithProviders(<App />);
-    
-    // Navigate to contact page
-    const contactRoute = screen.getByText(/contato/i);
-    fireEvent.click(contactRoute);
+    renderWithProviders(<App />, {
+      initialEntries: ['/contact']
+    });
 
     // Try to submit the form without filling the fields
     const submitButton = await screen.findByRole('button', { name: /enviar mensagem/i });

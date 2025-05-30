@@ -3,43 +3,7 @@ import { screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { renderWithProviders, defaultContextValue, mockBooks } from '../utils/testUtils';
-
-// Mock React components to avoid React is not defined errors
-jest.mock('../App', () => {
-  // Mock implementation of App
-  return function MockApp() {
-    return <div data-testid="mock-app">
-      <a href="/shop">loja</a>
-      <div>
-        <div>
-          <h2>Nossa</h2>
-          <h2>Lista de Livros</h2>
-        </div>
-        <div>
-          <input placeholder="Pesquise por título, autor ou categoria..." />
-        </div>
-        <div>
-          <span>Ficção</span>
-        </div>
-        <div>
-          <select>
-            <option value="relevant">Relevância</option>
-            <option value="low">Menor preço</option>
-            <option value="high">Maior preço</option>
-          </select>
-        </div>
-        <div>
-          <div>Dom Casmurro</div>
-          <div>Book with Low Price</div>
-          <div>Book with High Price</div>
-        </div>
-      </div>
-    </div>;
-  };
-});
-
-// Import App after mocking
-const App = require('../App').default;
+import App from '../App';
 
 // Mock window.scrollTo
 window.scrollTo = jest.fn();
@@ -48,8 +12,7 @@ describe('Shop Page Filtering and Sorting Integration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  
-  test('should navigate to shop page and filter books by category', async () => {
+    test('should navigate to shop page and filter books by category', async () => {
     const mockContextValue = {
       ...defaultContextValue,
       books: mockBooks,
@@ -57,29 +20,32 @@ describe('Shop Page Filtering and Sorting Integration', () => {
 
     renderWithProviders(
       <App />,
-      { contextValue: mockContextValue }
+      { 
+        contextValue: mockContextValue,
+        initialEntries: ['/shop']
+      }
     );
 
-    // Navigate to shop page
-    const shopLink = await screen.findByText(/loja/i);
-    fireEvent.click(shopLink);
-    
     // Check if the shop page is loaded
     await waitFor(() => {
       expect(screen.getByText('Nossa')).toBeInTheDocument();
       expect(screen.getByText('Lista de Livros')).toBeInTheDocument();
-    });
-
-    // All books from mockBooks should be visible initially
+    });    // All books from mockBooks should be visible initially
     expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();
     
-    // Select a category
-    const literaturaCategory = await screen.findByText('Ficção');
-    fireEvent.click(literaturaCategory);
+    // Select a category - target the category filter specifically, not the book category badges
+    const categoryFilters = screen.getAllByText('Ficção');
+    // The first one should be the category filter checkbox, others are book category badges
+    const categoryFilterLabel = categoryFilters.find(element => 
+      element.classList.contains('medium-14') && 
+      element.closest('label')?.querySelector('input[type="checkbox"]')
+    );
+    expect(categoryFilterLabel).toBeTruthy();
+    fireEvent.click(categoryFilterLabel);
     
     // Check if the category filter is applied - we should only see books in that category
     await waitFor(() => {
-      const categoryCheckbox = screen.getByText('Ficção').closest('label').querySelector('input');
+      const categoryCheckbox = categoryFilterLabel.closest('label').querySelector('input');
       expect(categoryCheckbox).toBeChecked();
     });
   });
@@ -87,11 +53,10 @@ describe('Shop Page Filtering and Sorting Integration', () => {
   test('should search and sort books', async () => {
     // Adding additional mock books with varying prices for sorting test
     const extendedMockBooks = [
-      ...mockBooks,
-      {
+      ...mockBooks,      {
         _id: '4',
         name: 'Book with Low Price',
-        category: 'ficção',
+        category: 'Ficção',
         price: 10,
         description: 'This is a low price book.',
         image: '/images/book4.jpg'
@@ -99,7 +64,7 @@ describe('Shop Page Filtering and Sorting Integration', () => {
       {
         _id: '5',
         name: 'Book with High Price',
-        category: 'ficção',
+        category: 'Ficção',
         price: 50,
         description: 'This is a high price book.',
         image: '/images/book5.jpg'
@@ -109,16 +74,13 @@ describe('Shop Page Filtering and Sorting Integration', () => {
     const mockContextValue = {
       ...defaultContextValue,
       books: extendedMockBooks,
-    };
-
-    renderWithProviders(
+    };    renderWithProviders(
       <App />,
-      { contextValue: mockContextValue }
+      { 
+        contextValue: mockContextValue,
+        initialEntries: ['/shop']
+      }
     );
-
-    // Navigate to shop page
-    const shopLink = await screen.findByText(/loja/i);
-    fireEvent.click(shopLink);
 
     // Search for a specific book
     const searchInput = await screen.findByPlaceholderText(/pesquise por título/i);

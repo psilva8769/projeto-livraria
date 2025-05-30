@@ -49,7 +49,7 @@ const Header = () => {
                 {/* logo */}
                 <Link to={'/'} className='flex-1 flex items-center justify-start group'>
                     <img src={logo} alt="" height={36} width={36} className='hidden sm:flex mr-3 transition-transform group-hover:scale-110 duration-300' />
-                    <h4 className='bold-24 bg-gradient-to-r from-secondary to-navy bg-clip-text text-transparent'>Bacala</h4>
+                    <h4 className='bold-24 bg-gradient-to-r from-secondary to-navy bg-clip-text text-transparent'>Look the Book</h4>
                 </Link>
                 
                 {/* Navbar */}

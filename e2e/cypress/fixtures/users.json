@@ -1,7 +1,7 @@
 {
   "validUser": {
-    "name": "Test User Bacala",
-    "email": "testuser@bacala.com",
+    "name": "Test User Look the Book",
+    "email": "testuser@Look.the.Book.com",
     "password": "TestPassword123@"
   },
   "invalidUser": {
@@ -9,7 +9,7 @@
     "password": "wrongpassword"
   },
   "adminUser": {
-    "email": "admin@bacala.com",
+    "email": "admin@Look.the.Book.com",
     "password": "admin123"
   }
 }

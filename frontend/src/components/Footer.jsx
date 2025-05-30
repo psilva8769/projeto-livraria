@@ -27,7 +27,7 @@ const Footer = () => {
             {/* logo */}
             <Link to={'/'} className='flex-1 flex items-center justify-start mb-6 group'>
               <img src={logo} alt="" height={40} width={40} className='hidden sm:flex mr-3 group-hover:scale-110 transition-transform duration-300' />
-              <h4 className='bold-24 bg-gradient-to-r from-secondary to-navy bg-clip-text text-transparent'>Bacala</h4>
+              <h4 className='bold-24 bg-gradient-to-r from-secondary to-navy bg-clip-text text-transparent'>Look the Book</h4>
             </Link>
             
             <p className='py-4 text-gray-50 leading-relaxed'>

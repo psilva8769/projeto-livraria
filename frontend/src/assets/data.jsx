@@ -1,3 +1,4 @@
+import React from 'react';
 import fiction from "./categories/fiction.png";
 import children from "./categories/children.png";
 import health from "./categories/health.png";
@@ -470,7 +471,7 @@ export const FOOTER_CONTACT_INFO = {
     title: "Fale Conosco",
     links: [
       { label: "Telefone", value: "123-456-7890" },
-      { label: "E-mail", value: "info@bacala.com" },
+      { label: "E-mail", value: "info@Look.the.Book.com" },
     ],
 };
 

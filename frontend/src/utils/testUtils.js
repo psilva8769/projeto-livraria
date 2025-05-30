@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 
 // Sample data for testing
@@ -8,7 +8,7 @@ export const mockBooks = [
   {
     _id: '1',
     name: 'Dom Casmurro',
-    category: 'literatura',
+    category: 'Ficção',
     price: 25,
     description: 'Uma das mais importantes obras da literatura brasileira.',
     image: '/images/book1.jpg'
@@ -16,7 +16,7 @@ export const mockBooks = [
   {
     _id: '2',
     name: 'O Cortiço',
-    category: 'literatura',
+    category: 'Ficção',
     price: 30,
     description: 'Romance naturalista brasileiro.',
     image: '/images/book2.jpg'
@@ -24,7 +24,7 @@ export const mockBooks = [
   {
     _id: '3',
     name: 'Romance Moderno',
-    category: 'romance',
+    category: 'Ficção',
     price: 20,
     description: 'Uma história de amor contemporânea.',
     image: '/images/book3.jpg'
@@ -45,6 +45,8 @@ export const defaultContextValue = {
   addToCart: jest.fn(),
   updateQuantity: jest.fn(),
   getCartAmount: jest.fn(() => 0),
+  getCartCount: jest.fn(() => 0),
+  setCartItems: jest.fn(),
   delivery_charges: 15,
   navigate: jest.fn(),
   token: null,
@@ -59,15 +61,16 @@ export const renderWithProviders = (
   component,
   {
     contextValue = defaultContextValue,
+    initialEntries = ['/'],
     ...renderOptions
   } = {}
 ) => {
   const Wrapper = ({ children }) => (
-    <BrowserRouter>
+    <MemoryRouter initialEntries={initialEntries}>
       <ShopContext.Provider value={contextValue}>
         {children}
       </ShopContext.Provider>
-    </BrowserRouter>
+    </MemoryRouter>
   );
 
   return render(component, { wrapper: Wrapper, ...renderOptions });

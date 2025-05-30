@@ -9,9 +9,8 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'mjs'],
   transform: {
     '^.+\\.(js|jsx|mjs)$': 'babel-jest',
-  },
-  transformIgnorePatterns: [
-    '/node_modules/(?!(swiper|ssr-window|dom7)/)'
+  },  transformIgnorePatterns: [
+    '/node_modules/(?!(swiper|ssr-window|dom7|react-router|react-router-dom)/)'
   ],
   testMatch: [
     '**/__tests__/**/*.[jt]s?(x)',

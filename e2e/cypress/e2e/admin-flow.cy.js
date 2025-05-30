@@ -1,4 +1,4 @@
-describe('Painel Administrativo - Bacala Bookstore', () => {
+describe('Painel Administrativo - Look the Book Bookstore', () => {
   let users
 
   before(() => {
@@ -33,7 +33,7 @@ describe('Painel Administrativo - Bacala Bookstore', () => {
       
       // Verificar se foi redirecionado para o painel admin
       cy.get('.bg-primary').should('be.visible')
-      cy.contains('Bacala').should('be.visible')
+      cy.contains('Look the Book').should('be.visible')
       
       // Verificar se o sidebar está presente
       cy.contains('Add Item').should('be.visible')
@@ -218,7 +218,7 @@ describe('Painel Administrativo - Bacala Bookstore', () => {
 
     it('deve mostrar logo corretamente', () => {
       cy.get('img[alt="logoImg"]').should('be.visible')
-      cy.contains('Bacala').should('be.visible')
+      cy.contains('Look the Book').should('be.visible')
     })
 
     it('deve ter formulários funcionais', () => {

@@ -55,7 +55,7 @@ const Login = () => {
           <img src={loginImg} alt="" className='object-cover aspect-square h-full w-full' />
           <div className='absolute inset-0 flexCenter'>
             <div className='text-center text-white p-8'>
-              <h2 className='h2 mb-4'>Bem-vindo à Bacala</h2>
+              <h2 className='h2 mb-4'>Bem-vindo à Look the Book</h2>
               <p className='text-lg opacity-90'>Sua biblioteca digital moderna</p>
             </div>
           </div>

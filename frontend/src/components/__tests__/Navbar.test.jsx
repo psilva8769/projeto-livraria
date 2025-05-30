@@ -50,7 +50,7 @@ describe('Navbar Component', () => {
     
     expect(inicioLink).toHaveAttribute('href', '/');
     expect(lojaLink).toHaveAttribute('href', '/shop');
-    expect(contatoLink).toHaveAttribute('href', 'mailto:info@bacala.com');
+    expect(contatoLink).toHaveAttribute('href', 'mailto:info@Look.the.Book.com');
   });
 
   test('renders icons for each navigation item', () => {
@@ -71,7 +71,7 @@ describe('Navbar Component', () => {
     expect(closeButton).toBeInTheDocument();
     
     // Check for logo
-    expect(screen.getByText('Bacala')).toBeInTheDocument();
+    expect(screen.getByText('Look the Book')).toBeInTheDocument();
   });
 
   test('does not show close button and logo when menu is closed', () => {
@@ -82,7 +82,7 @@ describe('Navbar Component', () => {
     expect(closeButton).not.toBeInTheDocument();
     
     // Logo should not be visible
-    expect(screen.queryByText('Bacala')).not.toBeInTheDocument();
+    expect(screen.queryByText('Look the Book')).not.toBeInTheDocument();
   });
 
   test('calls toggleMenu when close button is clicked', () => {
@@ -137,7 +137,7 @@ describe('Navbar Component', () => {
     renderWithRouter(<Navbar {...defaultProps} />);
     
     const contatoLink = screen.getByText('Contato').closest('a');
-    expect(contatoLink).toHaveAttribute('href', 'mailto:info@bacala.com');
+    expect(contatoLink).toHaveAttribute('href', 'mailto:info@Look.the.Book.com');
   });
 
   test('logo has gradient text styling when menu is opened', () => {
@@ -148,7 +148,7 @@ describe('Navbar Component', () => {
     
     renderWithRouter(<Navbar {...openedMenuProps} />);
     
-    const logo = screen.getByText('Bacala');
+    const logo = screen.getByText('Look the Book');
     expect(logo).toHaveClass('bg-gradient-to-r', 'from-secondary', 'to-navy', 'bg-clip-text', 'text-transparent');
   });
 

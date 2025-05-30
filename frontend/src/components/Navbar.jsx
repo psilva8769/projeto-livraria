@@ -8,7 +8,7 @@ const Navbar = ({ containerStyles, toggleMenu, menuOpened }) => {
     const navItems = [
         { to: '/', label: 'Início', icon: <TbHomeFilled /> },
         { to: '/shop', label: 'Loja', icon: <IoLibrary /> },
-        { to: 'mailto:info@bacala.com', label: 'Contato', icon: <IoMailOpen /> },
+        { to: 'mailto:info@Look.the.Book.com', label: 'Contato', icon: <IoMailOpen /> },
     ]
 
     return (
@@ -19,7 +19,7 @@ const Navbar = ({ containerStyles, toggleMenu, menuOpened }) => {
                     <FaRegWindowClose onClick={toggleMenu} className='text-xl self-end cursor-pointer relative left-8 text-secondary hover:text-accent transition-colors' />
                     {/* logo */}
                     <Link to={'/'} className='bold-24 mb-10'>
-                        <h4 className='bg-gradient-to-r from-secondary to-navy bg-clip-text text-transparent'>Bacala</h4>
+                        <h4 className='bg-gradient-to-r from-secondary to-navy bg-clip-text text-transparent'>Look the Book</h4>
                     </Link>
                 </>
             )}

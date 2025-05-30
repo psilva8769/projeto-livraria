@@ -205,7 +205,7 @@ describe('Login Page', () => {
   test('renders welcome message and branding', () => {
     renderWithContext();
     
-    expect(screen.getByText('Bem-vindo à Bacala')).toBeInTheDocument();
+    expect(screen.getByText('Bem-vindo à Look the Book')).toBeInTheDocument();
     expect(screen.getByText('Sua biblioteca digital moderna')).toBeInTheDocument();
   });
 

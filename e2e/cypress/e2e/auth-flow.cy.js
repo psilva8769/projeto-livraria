@@ -1,4 +1,4 @@
-describe('Fluxo de autenticação - Bacala Bookstore', () => {
+describe('Fluxo de autenticação - Look the Book Bookstore', () => {
   let users
 
   before(() => {
