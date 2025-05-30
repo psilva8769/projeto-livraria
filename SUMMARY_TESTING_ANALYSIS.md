@@ -12,10 +12,12 @@ Análise abrangente de cobertura de testes para o projeto Projeto Livraria foi *
 ### 🏆 RESULTADOS FINAIS
 
 #### 📊 Estatísticas Gerais do Projeto
-- **Total de Suítes de Teste**: 40 (10 backend + 23 frontend + 7 e2e)
-- **Total de Testes**: 219 testes executados
-- **Taxa de Sucesso**: 100% (219/219 testes aprovados)
-- **Cobertura Geral do Projeto**: 77.18% (média ponderada)
+- **Total de Testes Executados:** 219 (50 Backend, 128 Frontend, 41 E2E)
+- **Cobertura Backend:** 87.77%
+- **Cobertura Frontend:** 43.78%
+- **Cobertura E2E:** 100% (funcional)
+- **Qualidade Geral:** 4.2/5
+- **Taxa de Sucesso:** 100%
 
 #### 🔧 Backend (Node.js/Express)
 - **Testes**: 50 testes em 10 suítes

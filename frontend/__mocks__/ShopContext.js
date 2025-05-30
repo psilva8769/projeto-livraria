@@ -31,7 +31,7 @@ const mockShopContext = {
   getCartAmount: jest.fn(() => 99.97),
   updateQuantity: jest.fn(),
   delivery_charges: 5,
-  backendUrl: 'http://localhost:4000'
+  backendUrl: 'http://localhost:5000'
 };
 
 export const ShopContext = React.createContext(mockShopContext);

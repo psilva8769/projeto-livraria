@@ -3,13 +3,14 @@ module.exports = {
   extensionsToTreatAsEsm: ['.jsx'],
   setupFilesAfterEnv: [
     '@testing-library/jest-dom',
-    '<rootDir>/jest.setup.js', // Se você já tiver o arquivo jest.setup.js
+    // Only include one setup file reference to avoid duplicate execution
+    '<rootDir>/jest.setup.js'
   ],
-  setupFiles: ['<rootDir>/jest.setup.js'], // Se precisar adicionar arquivos de setup
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'mjs'],
   transform: {
     '^.+\\.(js|jsx|mjs)$': 'babel-jest',
-  },  transformIgnorePatterns: [
+  },  
+  transformIgnorePatterns: [
     '/node_modules/(?!(swiper|ssr-window|dom7|react-router|react-router-dom)/)'
   ],
   testMatch: [
@@ -23,6 +24,14 @@ module.exports = {
     '^swiper/react$': '<rootDir>/__mocks__/swiperMock.js',
     '^swiper/css$': '<rootDir>/__mocks__/swiperMock.js',
     '^swiper/css/pagination$': '<rootDir>/__mocks__/swiperMock.js'
+  },
+  // Define globals for Jest to handle import.meta
+  globals: {
+    'import.meta': {
+      env: {
+        VITE_BACKEND_URL: 'http://localhost:5000'
+      }
+    }
   },
   collectCoverage: true,
   collectCoverageFrom: [

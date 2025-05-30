@@ -3,14 +3,29 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { toast } from "react-toastify"
 
-
 export const ShopContext = createContext()
+
+// This function safely gets the backend URL whether we're in a browser or a test environment
+function getBackendUrl() {
+    // In a Jest environment, this will safely return the default URL
+    if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
+        return 'http://localhost:5000';
+    }
+    
+    // In a browser environment with Vite, this will use the environment variable
+    try {
+        return import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+    } catch (e) {
+        // Fallback for any environment where import.meta is not available
+        return 'http://localhost:5000';
+    }
+};
 
 const ShopContextProvider = (props) => {
 
     const currency = '$'
     const delivery_charges = 5
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = getBackendUrl()
     const navigate = useNavigate()
     const [books, setBooks] = useState([])
     const [token, setToken] = useState("")

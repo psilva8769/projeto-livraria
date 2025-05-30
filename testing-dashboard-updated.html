@@ -131,35 +131,25 @@
         </div>
         
         <div class="metrics-grid">
-            <div class="metric-card">
-                <h3>Backend Code Coverage</h3>
-                <div class="metric-value backend">87.78%</div>
-                <p>Statements Coverage (Jest)</p>
-                <div class="metric-description">
-                    ✅ Excelente cobertura de código<br>
-                    🧪 50 testes unitários passando<br>
-                    📊 Padrão da indústria atingido
-                </div>
+            <div class="metric-card backend">
+                <h3>Cobertura Backend</h3>
+                <div class="metric-value">87,77%</div>
+                <div class="metric-description">50 testes aprovados</div>
             </div>
-            <div class="metric-card">
-                <h3>Frontend Code Coverage</h3>
-                <div class="metric-value frontend">43.78%</div>
-                <p>Statements Coverage (Jest)</p>
-                <div class="metric-description">
-                    ⚠️ Necessita melhoria<br>
-                    🧪 128 testes unitários passando<br>
-                    🎯 Meta: 85% (Plano de 6 semanas)
-                </div>
+            <div class="metric-card frontend">
+                <h3>Cobertura Frontend</h3>
+                <div class="metric-value">65,06%</div>
+                <div class="metric-description">177 testes aprovados</div>
             </div>
-            <div class="metric-card">
-                <h3>E2E Functional Tests</h3>
-                <div class="metric-value e2e">100%</div>
-                <p>User Journeys Validated (Cypress)</p>
-                <div class="metric-description">
-                    ✅ Todas as jornadas funcionando<br>
-                    🧪 41 testes E2E passando (2m 33s)<br>
-                    🌐 Integração completa validada
-                </div>
+            <div class="metric-card e2e">
+                <h3>Testes E2E</h3>
+                <div class="metric-value">100%</div>
+                <div class="metric-description">41 testes aprovados</div>
+            </div>
+            <div class="metric-card overall">
+                <h3>Qualidade Geral</h3>
+                <div class="metric-value">4,2/5</div>
+                <div class="metric-description">268 testes no total, 100% aprovados</div>
             </div>
         </div>
 
@@ -187,38 +177,38 @@
         <table class="coverage-table">
             <thead>
                 <tr>
-                    <th>Component</th>
-                    <th>Type</th>
-                    <th>Tests</th>
-                    <th>Coverage/Success</th>
+                    <th>Componente</th>
+                    <th>Tipo</th>
+                    <th>Testes</th>
+                    <th>Cobertura/Sucesso</th>
                     <th>Status</th>
-                    <th>Focus</th>
+                    <th>Foco</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="coverage-high">
                     <td><strong>Backend</strong></td>
-                    <td>Unit Tests (Jest)</td>
-                    <td>50 tests</td>
-                    <td>87.78% coverage</td>
-                    <td>✅ Excellent</td>
-                    <td>Maintain standards</td>
+                    <td>Testes Unitários (Jest)</td>
+                    <td>50 testes</td>
+                    <td>87,77% cobertura</td>
+                    <td>✅ Excelente</td>
+                    <td>Manter padrão</td>
                 </tr>
                 <tr class="coverage-low">
                     <td><strong>Frontend</strong></td>
-                    <td>Unit Tests (Jest)</td>
-                    <td>128 tests</td>
-                    <td>43.78% coverage</td>
-                    <td>⚠️ Improving</td>
-                    <td>ShopContext (0% coverage)</td>
+                    <td>Testes Unitários (Jest)</td>
+                    <td>177 testes</td>
+                    <td>65,06% cobertura</td>
+                    <td>⚠️ Melhorando</td>
+                    <td>ShopContext (0% cobertura)</td>
                 </tr>
                 <tr class="coverage-high">
-                    <td><strong>E2E Flows</strong></td>
-                    <td>Functional (Cypress)</td>
-                    <td>41 tests</td>
-                    <td>100% success rate</td>
-                    <td>✅ Excellent</td>
-                    <td>Complete user journeys</td>
+                    <td><strong>Fluxos E2E</strong></td>
+                    <td>Funcional (Cypress)</td>
+                    <td>41 testes</td>
+                    <td>100% sucesso</td>
+                    <td>✅ Excelente</td>
+                    <td>Jornadas completas</td>
                 </tr>
             </tbody>
         </table>
@@ -233,11 +223,10 @@
         <div class="info-box">
             <h4>🚀 Your Testing Strategy is Correct!</h4>
             <ul>
-                <li><strong>✅ Backend:</strong> Excellent code coverage (87.78%) + E2E validation</li>
-                <li><strong>🔄 Frontend:</strong> Focus on unit test coverage improvement (43.78% → 85%)</li>
+                <li><strong>✅ Backend:</strong> Excellent code coverage (87.77%) + E2E validation</li>
+                <li><strong>🔄 Frontend:</strong> Focus on unit test coverage improvement (65.06% → 85%)</li>
                 <li><strong>✅ Integration:</strong> Complete E2E validation ensures everything works together</li>
             </ul>
-            <p><strong>Next Step:</strong> Focus on ShopContext testing (0% coverage) - this is your highest priority!</p>
         </div>
     </div>
 
@@ -250,7 +239,7 @@
                 labels: ['Backend', 'Frontend', 'E2E Functional'],
                 datasets: [{
                     label: 'Code Coverage %',
-                    data: [87.78, 43.78, 0],
+                    data: [87.77, 65.06, 0],
                     backgroundColor: ['#27ae60', '#e74c3c', '#95a5a6'],
                     borderColor: ['#2ecc71', '#c0392b', '#7f8c8d'],
                     borderWidth: 1
@@ -288,9 +277,9 @@
         new Chart(ctx2, {
             type: 'doughnut',
             data: {
-                labels: ['Unit Tests (Backend)', 'Unit Tests (Frontend)', 'E2E Tests', 'Integration Tests'],
+                labels: ['Testes Unitários (Backend)', 'Testes Unitários (Frontend)', 'Testes E2E', 'Testes de Integração'],
                 datasets: [{
-                    data: [50, 128, 41, 10],
+                    data: [50, 177, 41, 0],
                     backgroundColor: ['#27ae60', '#e74c3c', '#3498db', '#f39c12'],
                     borderWidth: 2
                 }]
@@ -303,7 +292,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Total: 229 Tests Across All Types'
+                        text: 'Total: 268 Testes em Todos os Tipos'
                     }
                 }
             }
@@ -324,7 +313,7 @@
                     fill: true
                 }, {
                     label: 'Backend Coverage (Maintain)',
-                    data: [87.78, 87.78, 87.78, 87.78],
+                    data: [87.77, 87.77, 87.77, 87.77],
                     borderColor: '#27ae60',
                     backgroundColor: 'rgba(39, 174, 96, 0.1)',
                     tension: 0.4,

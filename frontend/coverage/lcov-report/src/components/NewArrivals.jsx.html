@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -154,20 +154,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -206,7 +204,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -234,18 +234,18 @@ import { Autoplay, Pagination } from "swiper/modules"
 import Item from './Item';
 import { ShopContext } from '../context/ShopContext';
 &nbsp;
-const NewArrivals = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+const NewArrivals = () =&gt; {
 &nbsp;
-    const {books} = <span class="cstat-no" title="statement not covered" >useContext(ShopContext)</span>
-    const [newArrivals, setNewArrivals] = <span class="cstat-no" title="statement not covered" >useState([])</span>
+    const {books} = useContext(ShopContext)
+    const [newArrivals, setNewArrivals] = useState([])
 &nbsp;
     // Extrai os primeiros livros novos como novidades
-<span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span>=&gt;{</span>
-        const data = <span class="cstat-no" title="statement not covered" >books.slice(0, 7);</span>
-<span class="cstat-no" title="statement not covered" >        setNewArrivals(data.reverse())</span>
+    useEffect(()=&gt;{
+        const data = books.slice(0, 7);
+        setNewArrivals(data.reverse())
     }, [books])
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
         &lt;section className='max-padd-container py-20 relative'&gt;
             &lt;div className='absolute inset-0 bg-gradient-to-tr from-secondary/5 via-transparent to-tertiary/10 rounded-3xl'&gt;&lt;/div&gt;
             
@@ -285,8 +285,8 @@ const NewArrivals = <span class="fstat-no" title="function not covered" >()</spa
                         modules={[Pagination, Autoplay]}
                         className='h-[455px] sm:h-[488px] xl:h-[499px] mt-8 pb-12'
                     &gt;
-                        {newArrivals.map(<span class="fstat-no" title="function not covered" >(b</span>ook, index)=&gt;(
-<span class="cstat-no" title="statement not covered" >                            &lt;SwiperSlide key={book._id}&gt;</span>
+                        {newArrivals.map((book, index)=&gt;(
+                            &lt;SwiperSlide key={book._id}&gt;
                                 &lt;div className={`animate-slideInRight opacity-0 [animation-fill-mode:forwards]`} style={{animationDelay: `${index * 0.1}s`}}&gt;
                                     &lt;Item book={book}/&gt;
                                 &lt;/div&gt;
@@ -310,7 +310,7 @@ export default NewArrivals</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-30T00:50:17.754Z
+                at 2025-05-30T12:45:49.618Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
