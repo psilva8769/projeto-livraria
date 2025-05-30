@@ -24,4 +24,16 @@ module.exports = {
     '^swiper/css$': '<rootDir>/__mocks__/swiperMock.js',
     '^swiper/css/pagination$': '<rootDir>/__mocks__/swiperMock.js'
   },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx}',
+    '!src/main.jsx',
+    '!src/**/*.test.{js,jsx}',
+    '!src/**/__tests__/**',
+    '!src/**/__mocks__/**',
+    '!**/node_modules/**',
+    '!**/coverage/**'
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html', 'json']
 };

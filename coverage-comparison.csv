@@ -1,0 +1,21 @@
+Component,Test Type,Test Files,Test Count,Statements %,Branches %,Functions %,Lines %,Quality Level,Priority
+Backend Controllers,Unit,4 files,15 tests,84.09%,88.88%,100%,84.09%,Excellent,Maintain
+Backend Middleware,Unit,3 files,8 tests,95.83%,85.71%,100%,95.83%,Excellent,Maintain
+Backend Models,Unit,3 files,6 tests,100%,100%,N/A,100%,Excellent,Maintain
+Backend Routes,Unit,4 files,4 tests,100%,N/A,N/A,100%,Excellent,Maintain
+Backend Overall,Unit,10 suites,50 tests,87.77%,93.33%,94.44%,87.77%,Excellent,Maintain
+Frontend App,Unit,1 file,4 tests,100%,N/A,100%,100%,Excellent,Maintain
+Frontend Assets,Unit,1 file,8 tests,100%,N/A,N/A,100%,Excellent,Maintain
+Frontend Components,Unit,14 files,80 tests,45.2%,42.1%,52.3%,46.8%,Needs Improvement,High
+Frontend Pages,Unit,6 files,20 tests,25.6%,18.4%,30.2%,26.1%,Requires Attention,Critical
+Frontend Context,Unit,1 file,0 tests,0%,0%,0%,0%,Critical,Critical
+Frontend Utils,Unit,1 file,16 tests,62.5%,45.8%,68.2%,64.1%,Good,Medium
+Frontend Overall,Unit,23 suites,128 tests,43.78%,36.48%,49.15%,44.31%,Needs Improvement,High
+E2E User Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E Admin Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E Auth Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E Cart Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E Contact Form,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E Product Search,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E General,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
+E2E Overall,Integration,7 suites,Multiple,Complete Flows,Complete Flows,Complete Flows,Complete Flows,Very Good,Medium

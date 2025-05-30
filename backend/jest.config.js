@@ -9,7 +9,18 @@ const config = {
   transformIgnorePatterns: ['node_modules/(?!(module-that-needs-transform)/)'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
-  }
+  },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'controllers/**/*.js',
+    'middleware/**/*.js',
+    'routes/**/*.js',
+    'models/**/*.js',
+    '!**/node_modules/**',
+    '!**/coverage/**'
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html', 'json']
 };
 
 export default config;
