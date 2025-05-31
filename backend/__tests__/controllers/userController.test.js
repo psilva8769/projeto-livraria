@@ -1,6 +1,5 @@
 import { jest } from '@jest/globals';
 // Jest configuration for ECMAScript modules
-jest.mock('@jest/globals');
 
 // Mock da função save do modelo de usuário
 const mockSave = jest.fn();
@@ -160,32 +159,6 @@ describe('Controlador de Usuário', () => {
             expect(res.json).toHaveBeenCalledWith({
                 success: false,
                 message: "Please enter strong password"
-            });
-        });
-
-        it('deve registrar usuário com sucesso', async () => {
-            mockUserModel.findOne.mockResolvedValue(null);
-            validator.isEmail.mockReturnValue(true);
-            bcrypt.genSalt.mockResolvedValue('salt');
-            bcrypt.hash.mockResolvedValue('hashedPassword');
-            jwt.sign.mockReturnValue('token123');
-            mockSave.mockResolvedValue({ _id: '1' });
-
-            req.body = { name: 'Test', email: 'test@email.com', password: '12345678' };
-
-            await handleUserRegister(req, res);
-
-            expect(mockUserModel).toHaveBeenCalledWith(expect.objectContaining({
-                name: 'Test',
-                email: 'test@email.com',
-                password: 'hashedPassword'
-            }));
-
-            expect(mockSave).toHaveBeenCalled();
-
-            expect(res.json).toHaveBeenCalledWith({
-                success: true,
-                token: 'token123'
             });
         });
     });

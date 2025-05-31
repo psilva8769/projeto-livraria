@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import userModel from '../../models/userModel.js';
 import express from 'express';
 import userRouter from '../../routes/userRoute.js';
+import { jest } from '@jest/globals';
 
 // Criação do app Express para testes
 const app = express();

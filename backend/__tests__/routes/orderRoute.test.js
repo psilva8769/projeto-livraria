@@ -5,6 +5,7 @@ import orderModel from '../../models/orderModel.js';
 import userModel from '../../models/userModel.js';
 import orderRouter from '../../routes/orderRoute.js';
 import authRouter from '../../routes/userRoute.js';
+import { jest } from '@jest/globals';
 
 // Cria a aplicação Express para testes
 const app = express();
@@ -150,7 +151,7 @@ describe('Controlador de Pedidos', () => {
                 .post('/api/order/status')
                 .set('token', `${tokenAdmin}`)
                 .send({ orderId: pedidoTeste._id, status: 'shipped' });
-
+            
             expect(resposta.status).toBe(200);
             expect(resposta.body.success).toBe(true);
             expect(resposta.body.message).toBe('Status Updated');

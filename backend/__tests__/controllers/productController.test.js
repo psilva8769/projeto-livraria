@@ -1,6 +1,5 @@
 import { jest } from '@jest/globals';
 // Jest configuration for ECMAScript modules
-jest.mock('@jest/globals');
 
 // Mock do productModel como função construtora
 const mockSave = jest.fn();
@@ -77,7 +76,7 @@ describe('Controlador de Produto', () => {
             expect(mockSave).toHaveBeenCalled();
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: "Produto Criado"
+                message: "Product Created"
             });
         });
     });
@@ -127,7 +126,7 @@ describe('Controlador de Produto', () => {
             expect(mockProductModel.findByIdAndDelete).toHaveBeenCalledWith('123');
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: "Produto Deletado"
+                message: "Product Deleted"
             });
         });
     });

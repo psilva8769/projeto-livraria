@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 // Jest configuration for ECMAScript modules
-jest.mock('supertest');
+import { jest } from '@jest/globals';
 
 import mongoose from 'mongoose';
 import userModel from '../../models/userModel.js';
@@ -58,7 +58,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(resposta.status).toBe(200);
             expect(resposta.body.success).toBe(true);
-            expect(resposta.body.message).toBe('Adicionado ao Carrinho');
+            expect(resposta.body.message).toBe('Added to Cart');
 
             // Verifica se o item foi adicionado ao carrinho do usuário
             const usuarioAtualizado = await userModel.findById(usuarioTeste._id);
@@ -80,7 +80,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(resposta.status).toBe(200);
             expect(resposta.body.success).toBe(true);
-            expect(resposta.body.message).toBe('Seu Carrinho Atualizado');
+            expect(resposta.body.message).toBe('Your Cart Updated');
 
             // Verifica se a quantidade do item foi atualizada
             const usuarioAtualizado = await userModel.findById(usuarioTeste._id);

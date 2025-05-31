@@ -5,6 +5,7 @@ import productModel from '../../models/productModel.js';
 import productRouter from '../../routes/productRoute.js';
 import userModel from '../../models/userModel.js'; 
 import authRouter from '../../routes/userRoute.js'; 
+import { jest } from '@jest/globals';
 
 const app = express();
 app.use(express.json());

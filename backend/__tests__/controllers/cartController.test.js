@@ -1,6 +1,5 @@
 import { jest } from '@jest/globals';
 // Jest configuration for ECMAScript modules
-jest.mock('@jest/globals');
 
 // Mock do userModel
 jest.unstable_mockModule('../../models/userModel.js', () => ({
@@ -50,7 +49,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: 'Adicionado ao Carrinho'
+                message: 'Added to Cart'
             });
             expect(userModel.findByIdAndUpdate).toHaveBeenCalledWith(
                 '1',
@@ -72,7 +71,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: 'Seu Carrinho Atualizado'
+                message: 'Your Cart Updated'
             });
             expect(userModel.findByIdAndUpdate).toHaveBeenCalledWith(
                 '1',
