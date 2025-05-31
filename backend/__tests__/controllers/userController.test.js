@@ -1,4 +1,6 @@
 import { jest } from '@jest/globals';
+// Jest configuration for ECMAScript modules
+jest.mock('@jest/globals');
 
 // Mock da função save do modelo de usuário
 const mockSave = jest.fn();
@@ -12,8 +14,12 @@ mockUserModel.findOne = jest.fn();
 
 // Mock do módulo userModel
 jest.unstable_mockModule('../../models/userModel.js', () => ({
-    __esModule: true,
-    default: mockUserModel
+  __esModule: true,
+  default: {
+    findOne: jest.fn(),
+    save: jest.fn(),
+    mockReset: jest.fn()
+  }
 }));
 
 // Mock do bcrypt

@@ -1,4 +1,6 @@
-import { jest } from '@jest/globals'
+import { jest } from '@jest/globals';
+// Jest configuration for ECMAScript modules
+jest.mock('@jest/globals');
 
 // Mock do jsonwebtoken como objeto
 const mockVerify = jest.fn()

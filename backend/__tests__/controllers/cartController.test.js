@@ -1,12 +1,15 @@
 import { jest } from '@jest/globals';
+// Jest configuration for ECMAScript modules
+jest.mock('@jest/globals');
 
 // Mock do userModel
 jest.unstable_mockModule('../../models/userModel.js', () => ({
-    __esModule: true,
-    default: {
-        findById: jest.fn(),
-        findByIdAndUpdate: jest.fn()
-    }
+  __esModule: true,
+  default: {
+    findById: jest.fn(),
+    findByIdAndUpdate: jest.fn(),
+    mockReset: jest.fn()
+  }
 }));
 
 let adicionarAoCarrinho, atualizarCarrinho, obterCarrinhoUsuario, userModel;
@@ -47,7 +50,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: 'Added to Cart'
+                message: 'Adicionado ao Carrinho'
             });
             expect(userModel.findByIdAndUpdate).toHaveBeenCalledWith(
                 '1',
@@ -69,7 +72,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: 'Your Cart Updated'
+                message: 'Seu Carrinho Atualizado'
             });
             expect(userModel.findByIdAndUpdate).toHaveBeenCalledWith(
                 '1',

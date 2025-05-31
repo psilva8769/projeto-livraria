@@ -4,25 +4,25 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import Contact from '../pages/Contact';
 
-// Mock console.log
+// Mock do console.log
 console.log = jest.fn();
 
-// Mock window.scrollTo
+// Mock do window.scrollTo
 window.scrollTo = jest.fn();
 
-describe('Contact Component', () => {
+describe('Componente de Contato', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test('should render contact form and submit successfully', async () => {
+  test('deve renderizar o formulário de contato e enviar com sucesso', async () => {
     render(<Contact />);
     
-    // Check if key elements are rendered
+    // Verifica se os elementos principais são renderizados
     expect(screen.getByText('Entre em')).toBeInTheDocument();
     expect(screen.getByText('Contato')).toBeInTheDocument();
     
-    // Fill out the form
+    // Preenche o formulário
     const nameInput = screen.getByPlaceholderText('Seu nome completo');
     const emailInput = screen.getByPlaceholderText('seu@email.com');
     const subjectInput = screen.getByPlaceholderText('Assunto da mensagem');
@@ -33,13 +33,13 @@ describe('Contact Component', () => {
     await userEvent.type(subjectInput, 'Test Subject');
     await userEvent.type(messageInput, 'This is a test message.');
 
-    // Submit the form
+    // Envia o formulário
     const submitButton = screen.getByRole('button', { name: /enviar mensagem/i });
     fireEvent.click(submitButton);
 
-    // Check if form submission was successful (console.log was called with form data)
+    // Verifica se o envio do formulário foi bem-sucedido (console.log foi chamado com os dados do formulário)
     await waitFor(() => {
-      expect(console.log).toHaveBeenCalledWith('Form submitted:', {
+      expect(console.log).toHaveBeenCalledWith('Formulário enviado:', {
         name: 'Test User',
         email: 'test@example.com',
         subject: 'Test Subject',
@@ -47,7 +47,7 @@ describe('Contact Component', () => {
       });
     });
 
-    // Verify form is cleared after submission
+    // Verifica se o formulário foi limpo após o envio
     await waitFor(() => {
       expect(nameInput).toHaveValue('');
       expect(emailInput).toHaveValue('');
@@ -56,20 +56,20 @@ describe('Contact Component', () => {
     });
   });
 
-  test('should validate required fields', async () => {
+  test('deve validar campos obrigatórios', async () => {
     render(<Contact />);
 
-    // Try to submit the form without filling the fields
+    // Tenta enviar o formulário sem preencher os campos
     const submitButton = screen.getByRole('button', { name: /enviar mensagem/i });
     fireEvent.click(submitButton);
 
-    // Check if form submission was NOT successful
+    // Verifica se o envio do formulário NÃO foi bem-sucedido
     expect(console.log).not.toHaveBeenCalledWith(
-      expect.stringContaining('Form submitted:'),
+      expect.stringContaining('Formulário enviado:'),
       expect.any(Object)
     );
     
-    // Verify HTML5 validation is triggered
+    // Verifica se a validação HTML5 foi acionada
     const nameInput = screen.getByPlaceholderText('Seu nome completo');
     expect(nameInput).toBeRequired();
     

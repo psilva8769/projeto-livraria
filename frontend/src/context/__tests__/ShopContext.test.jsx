@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';
 import ShopContextProvider, { ShopContext } from '../ShopContext';
 
-// Mock axios
+// Mock do axios
 jest.mock('axios');
 
-// Mock localStorage
+// Mock do localStorage
 const mockLocalStorage = (function() {
   let store = {};
   return {
@@ -29,7 +29,7 @@ Object.defineProperty(window, 'localStorage', {
   value: mockLocalStorage
 });
 
-// Mock react-toastify
+// Mock do react-toastify
 jest.mock('react-toastify', () => ({
   toast: {
     success: jest.fn(),
@@ -37,21 +37,21 @@ jest.mock('react-toastify', () => ({
   }
 }));
 
-// Mock book data
+// Mock dos dados de livros
 const mockBooks = [
-  { _id: '1', name: 'Book 1', price: 10.99 },
-  { _id: '2', name: 'Book 2', price: 15.99 }
+  { _id: '1', name: 'Livro 1', price: 10.99 },
+  { _id: '2', name: 'Livro 2', price: 15.99 }
 ];
 
 describe('ShopContext', () => {
-  // Setup backendUrl for tests
+  // Configura backendUrl para os testes
   const backendUrl = 'http://localhost:5000';
-  
+
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.clear();
 
-    // Mock successful API responses
+    // Mock de respostas bem-sucedidas da API
     axios.get.mockResolvedValue({
       data: {
         success: true,
@@ -65,14 +65,14 @@ describe('ShopContext', () => {
         cartData: { '1': 2, '2': 1 }
       }
     });
-    
-    // Ensure the backendUrl is properly mocked for each test
-    // This is the critical fix for the failing tests
+
+    // Garante que o backendUrl seja corretamente mockado para cada teste
+    // Esta é a correção crítica para os testes que falham
     global.import = global.import || {};
     global.import.meta = global.import.meta || {};
     global.import.meta.env = global.import.meta.env || {};
-    
-    // Use Object.defineProperty to ensure the value is correctly set
+
+    // Usa Object.defineProperty para garantir que o valor seja corretamente definido
     Object.defineProperty(global.import.meta.env, 'VITE_BACKEND_URL', {
       value: backendUrl,
       writable: true,
@@ -80,18 +80,18 @@ describe('ShopContext', () => {
     });
   });
 
-  test('is defined', () => {
+  test('está definido', () => {
     expect(ShopContext).toBeDefined();
   });
 
-  test('is a valid context object', () => {
+  test('é um objeto de contexto válido', () => {
     expect(ShopContext.Provider).toBeDefined();
     expect(ShopContext.Consumer).toBeDefined();
   });
 
-  test('initializes with default values', async () => {
+  test('inicializa com valores padrão', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -117,7 +117,7 @@ describe('ShopContext', () => {
     expect(typeof contextValue.updateQuantity).toBe('function');
   });
 
-  test('fetches books on mount', async () => {
+  test('busca livros ao montar', async () => {
     await act(async () => {
       render(
         <BrowserRouter>
@@ -133,7 +133,7 @@ describe('ShopContext', () => {
     expect(axios.get).toHaveBeenCalledWith('http://localhost:5000/api/product/list');
   });
 
-  test('retrieves token from localStorage on mount', async () => {
+  test('recupera token do localStorage ao montar', async () => {
     localStorage.setItem('token', 'test-token');
 
     await act(async () => {
@@ -155,9 +155,9 @@ describe('ShopContext', () => {
     );
   });
 
-  test('addToCart updates cart items and calls API with token', async () => {
+  test('addToCart atualiza itens do carrinho e chama API com token', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -173,20 +173,20 @@ describe('ShopContext', () => {
       );
     });
 
-    // Set token
+    // Define token
     await act(async () => {
       contextValue.setToken('test-token');
     });
 
-    // Add item to cart
+    // Adiciona item ao carrinho
     await act(async () => {
       await contextValue.addToCart('1');
     });
 
-    // Check if cart items were updated
+    // Verifica se os itens do carrinho foram atualizados
     expect(contextValue.cartItems['1']).toBe(1);
 
-    // Should call API with token
+    // Deve chamar API com token
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:5000/api/cart/add',
       { itemId: '1' },
@@ -194,9 +194,9 @@ describe('ShopContext', () => {
     );
   });
 
-  test('addToCart increments existing items', async () => {
+  test('addToCart incrementa itens existentes', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -212,23 +212,23 @@ describe('ShopContext', () => {
       );
     });
 
-    // Set initial cart items
+    // Define itens iniciais do carrinho
     await act(async () => {
       contextValue.setCartItems({ '1': 1 });
     });
 
-    // Add the same item again
+    // Adiciona o mesmo item novamente
     await act(async () => {
       await contextValue.addToCart('1');
     });
 
-    // Should increment the count
+    // Deve incrementar a quantidade
     expect(contextValue.cartItems['1']).toBe(2);
   });
 
-  test('getCartCount returns correct total count', async () => {
+  test('getCartCount retorna contagem total correta', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -244,18 +244,18 @@ describe('ShopContext', () => {
       );
     });
 
-    // Set some items in the cart
+    // Define alguns itens no carrinho
     await act(async () => {
       contextValue.setCartItems({ '1': 2, '2': 3, '3': 0 });
     });
 
-    // Should sum only positive quantities
+    // Deve somar apenas quantidades positivas
     expect(contextValue.getCartCount()).toBe(5);
   });
 
-  test('getCartAmount returns correct total amount', async () => {
+  test('getCartAmount retorna valor total correto', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -271,25 +271,25 @@ describe('ShopContext', () => {
       );
     });
 
-    // Wait for books to be loaded
+    // Aguarda os livros serem carregados
     await act(async () => {
       contextValue.books = mockBooks;
     });
 
-    // Set some items in the cart
+    // Define alguns itens no carrinho
     await act(async () => {
       contextValue.setCartItems({ '1': 2, '2': 1 });
     });
 
-    // Book 1: $10.99 * 2 = $21.98
-    // Book 2: $15.99 * 1 = $15.99
+    // Livro 1: $10.99 * 2 = $21.98
+    // Livro 2: $15.99 * 1 = $15.99
     // Total: $37.97
     expect(contextValue.getCartAmount()).toBeCloseTo(37.97, 2);
   });
 
-  test('getCartAmount handles missing book info gracefully', async () => {
+  test('getCartAmount lida com informações de livros ausentes de forma adequada', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -305,31 +305,31 @@ describe('ShopContext', () => {
       );
     });
 
-    // Save original books
+    // Salva os livros originais
     const originalBooks = [...contextValue.books];
-    
-    // Set books to an empty array (no matching books)
+
+    // Define livros como um array vazio (sem livros correspondentes)
     await act(async () => {
       contextValue.books = [];
     });
 
-    // Set cart items with IDs that won't have matching books
+    // Define itens do carrinho com IDs que não terão livros correspondentes
     await act(async () => {
-      contextValue.setCartItems({ '999': 2 }); // Use an ID that does not exist in books
+      contextValue.setCartItems({ '999': 2 }); // Usa um ID que não existe nos livros
     });
 
-    // Should return 0 if book info not found
+    // Deve retornar 0 se as informações do livro não forem encontradas
     expect(contextValue.getCartAmount()).toBe(0);
-    
-    // Restore books for other tests
+
+    // Restaura os livros para outros testes
     await act(async () => {
       contextValue.books = originalBooks;
     });
   });
 
-  test('updateQuantity updates cart items and calls API with token', async () => {
+  test('updateQuantity atualiza itens do carrinho e chama API com token', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -345,20 +345,20 @@ describe('ShopContext', () => {
       );
     });
 
-    // Set token
+    // Define token
     await act(async () => {
       contextValue.setToken('test-token');
     });
 
-    // Update quantity
+    // Atualiza quantidade
     await act(async () => {
       await contextValue.updateQuantity('1', 5);
     });
 
-    // Check if cart items were updated
+    // Verifica se os itens do carrinho foram atualizados
     expect(contextValue.cartItems['1']).toBe(5);
 
-    // Should call API with token
+    // Deve chamar API com token
     expect(axios.post).toHaveBeenCalledWith(
       'http://localhost:5000/api/cart/update',
       { itemId: '1', quantity: 5 },
@@ -366,9 +366,9 @@ describe('ShopContext', () => {
     );
   });
 
-  test('handles API errors gracefully in getProductsData', async () => {
-    // Mock API error
-    axios.get.mockRejectedValueOnce(new Error('Network error'));
+  test('lida com erros de API de forma adequada em getProductsData', async () => {
+    // Mock de erro de API
+    axios.get.mockRejectedValueOnce(new Error('Erro de rede'));
 
     await act(async () => {
       render(
@@ -382,13 +382,13 @@ describe('ShopContext', () => {
       );
     });
 
-    // Should show error toast
-    expect(toast.error).toHaveBeenCalledWith('Network error');
+    // Deve exibir toast de erro
+    expect(toast.error).toHaveBeenCalledWith('Erro de rede');
   });
 
-  test('handles API errors gracefully in updateQuantity', async () => {
+  test('lida com erros de API de forma adequada em updateQuantity', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -404,29 +404,29 @@ describe('ShopContext', () => {
       );
     });
 
-    // Set token
+    // Define token
     await act(async () => {
       contextValue.setToken('test-token');
     });
 
-    // Mock API error for this specific call
-    axios.post.mockRejectedValueOnce(new Error('Update failed'));
+    // Mock de erro de API para esta chamada específica
+    axios.post.mockRejectedValueOnce(new Error('Falha na atualização'));
 
-    // Update quantity
+    // Atualiza quantidade
     await act(async () => {
       await contextValue.updateQuantity('1', 5);
     });
 
-    // Should still update local cart
+    // Deve ainda atualizar o carrinho local
     expect(contextValue.cartItems['1']).toBe(5);
 
-    // Should show error toast
-    expect(toast.error).toHaveBeenCalledWith('Update failed');
+    // Deve exibir toast de erro
+    expect(toast.error).toHaveBeenCalledWith('Falha na atualização');
   });
 
-  test('handles API errors gracefully in addToCart', async () => {
+  test('lida com erros de API de forma adequada em addToCart', async () => {
     let contextValue;
-    
+
     await act(async () => {
       render(
         <BrowserRouter>
@@ -442,32 +442,32 @@ describe('ShopContext', () => {
       );
     });
 
-    // Set token
+    // Define token
     await act(async () => {
       contextValue.setToken('test-token');
     });
 
-    // Mock API error for this specific call
-    axios.post.mockRejectedValueOnce(new Error('Add to cart failed'));
+    // Mock de erro de API para esta chamada específica
+    axios.post.mockRejectedValueOnce(new Error('Falha ao adicionar ao carrinho'));
 
-    // Add to cart
+    // Adiciona ao carrinho
     await act(async () => {
       await contextValue.addToCart('1');
     });
 
-    // Should still update local cart
+    // Deve ainda atualizar o carrinho local
     expect(contextValue.cartItems['1']).toBe(1);
 
-    // Should show error toast
-    expect(toast.error).toHaveBeenCalledWith('Add to cart failed');
+    // Deve exibir toast de erro
+    expect(toast.error).toHaveBeenCalledWith('Falha ao adicionar ao carrinho');
   });
 
-  test('handles failed product response', async () => {
-    // Mock unsuccessful API response
+  test('lida com resposta de produtos falhada', async () => {
+    // Mock de resposta de API sem sucesso
     axios.get.mockResolvedValueOnce({
       data: {
         success: false,
-        message: 'Failed to fetch products'
+        message: 'Falha ao buscar produtos'
       }
     });
 
@@ -483,7 +483,7 @@ describe('ShopContext', () => {
       );
     });
 
-    // Should show error toast with the message from API
-    expect(toast.error).toHaveBeenCalledWith('Failed to fetch products');
+    // Deve exibir toast de erro com a mensagem da API
+    expect(toast.error).toHaveBeenCalledWith('Falha ao buscar produtos');
   });
 });

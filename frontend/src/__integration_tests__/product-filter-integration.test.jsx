@@ -5,10 +5,10 @@ import Shop from '../pages/Shop';
 import { ShopContext } from '../context/ShopContext';
 import userEvent from '@testing-library/user-event';
 
-// Mock window.scrollTo to avoid test errors
+// Mock do window.scrollTo para evitar erros nos testes
 window.scrollTo = jest.fn();
 
-// Mock books data
+// Mock dos dados de livros
 const mockBooks = [
   {
     _id: '1',
@@ -36,9 +36,9 @@ const mockBooks = [
   }
 ];
 
-describe('Product Filtering Integration', () => {
-  test('filters products by search input', async () => {
-    // Arrange - render the component with mock context
+describe('Integração de Filtro de Produtos', () => {
+  test('filtra produtos pelo campo de busca', async () => {
+    // Arrange - renderiza o componente com contexto mockado
     render(
       <BrowserRouter>
         <ShopContext.Provider value={{
@@ -50,18 +50,18 @@ describe('Product Filtering Integration', () => {
       </BrowserRouter>
     );
     
-    // Act - type in the search field
+    // Act - digita no campo de busca
     const searchInput = screen.getByPlaceholderText(/pesquise por título/i);
     await userEvent.type(searchInput, 'Dom');
     
-    // Assert - check if only matching books are displayed
+    // Assert - verifica se apenas os livros correspondentes são exibidos
     expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();
     expect(screen.queryByText('O Cortiço')).not.toBeInTheDocument();
     expect(screen.queryByText('Medicina Básica')).not.toBeInTheDocument();
   });
 
-  test('sorts products by price correctly', async () => {
-    // Arrange - render the component
+  test('ordena produtos pelo preço corretamente', async () => {
+    // Arrange - renderiza o componente
     render(
       <BrowserRouter>
         <ShopContext.Provider value={{
@@ -73,14 +73,14 @@ describe('Product Filtering Integration', () => {
       </BrowserRouter>
     );
     
-    // Act - select sorting by lowest price
+    // Act - seleciona ordenação pelo menor preço
     const sortSelect = screen.getByRole('combobox');
     fireEvent.change(sortSelect, { target: { value: 'low' } });
     
-    // Assert - check if books are ordered correctly
+    // Assert - verifica se os livros estão ordenados corretamente
     const bookElements = screen.getAllByText(/[A-Za-z]/);
     
-    // Products should be ordered by price: Dom Casmurro (25), O Cortiço (30), Medicina Básica (45)
+    // Os produtos devem estar ordenados por preço: Dom Casmurro (25), O Cortiço (30), Medicina Básica (45)
     expect(bookElements.some(element => element.textContent === 'Dom Casmurro')).toBeTruthy();
   });
 });

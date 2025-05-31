@@ -1,17 +1,15 @@
 import { jest } from '@jest/globals'
+import mongoose from 'mongoose'
 
 // Mock dos models
-jest.unstable_mockModule('../../models/orderModel.js', () => {
-    function OrderModelMock() {}
-    OrderModelMock.find = jest.fn();
-    OrderModelMock.findByIdAndUpdate = jest.fn();
-    // Mock do método save no prototype
-    OrderModelMock.prototype.save = jest.fn().mockResolvedValue({});
-    return {
-        __esModule: true,
-        default: OrderModelMock
-    };
-});
+jest.unstable_mockModule('../../models/orderModel.js', () => ({
+  __esModule: true,
+  default: {
+    find: jest.fn(),
+    findByIdAndUpdate: jest.fn(),
+    mockReset: jest.fn()
+  }
+}));
 
 jest.unstable_mockModule('../../models/userModel.js', () => ({
     __esModule: true,
@@ -24,6 +22,9 @@ let criarPedido, listarTodosPedidos, listarPedidosUsuario, atualizarStatus, orde
 
 // Carrega os controllers e models antes de todos os testes
 beforeAll(async () => {
+    mongoose.set('bufferCommands', false); // Disable buffering
+    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
     const orderController = await import('../../controllers/orderController.js')
     criarPedido = orderController.placeOrder
     listarTodosPedidos = orderController.allOrders
@@ -32,6 +33,10 @@ beforeAll(async () => {
     orderModel = (await import('../../models/orderModel.js')).default
     userModel = (await import('../../models/userModel.js')).default
 })
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
 describe('Controlador de Pedidos', () => {
     let req, res

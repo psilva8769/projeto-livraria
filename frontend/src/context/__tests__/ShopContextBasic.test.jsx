@@ -1,28 +1,28 @@
 /**
- * Basic ShopContext test that uses manual mocking to avoid import.meta issues
+ * Teste básico do ShopContext que usa mocks manuais para evitar problemas com import.meta
  */
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-// Instead of importing from the actual file, we'll create a simplified mock
+// Em vez de importar do arquivo real, criaremos um mock simplificado
 const ShopContext = React.createContext();
 
-// Mock implementation
+// Implementação de mock
 const ShopContextProvider = ({ children }) => {
   const [books] = React.useState([
-    { _id: '1', name: 'Book 1', price: 10.99 },
-    { _id: '2', name: 'Book 2', price: 15.99 }
+    { _id: '1', name: 'Livro 1', price: 10.99 },
+    { _id: '2', name: 'Livro 2', price: 15.99 }
   ]);
-  
+
   const [cartItems, setCartItems] = React.useState({});
   const [token, setToken] = React.useState('');
-  
-  // Fixed backend URL for tests
+
+  // URL fixa do backend para os testes
   const backendUrl = 'http://localhost:5000';
-  
-  // Cart functions
+
+  // Funções do carrinho
   const addToCart = (itemId) => {
     setCartItems(prev => {
       const updated = { ...prev };
@@ -34,7 +34,7 @@ const ShopContextProvider = ({ children }) => {
       return updated;
     });
   };
-  
+
   const getCartCount = () => {
     let count = 0;
     for (const item in cartItems) {
@@ -44,7 +44,7 @@ const ShopContextProvider = ({ children }) => {
     }
     return count;
   };
-  
+
   const getCartAmount = () => {
     let amount = 0;
     for (const item in cartItems) {
@@ -57,15 +57,15 @@ const ShopContextProvider = ({ children }) => {
     }
     return amount;
   };
-  
+
   const updateQuantity = (itemId, quantity) => {
     setCartItems(prev => ({
       ...prev,
       [itemId]: quantity
     }));
   };
-  
-  // Context value
+
+  // Valor do contexto
   const contextValue = {
     books,
     cartItems,
@@ -80,7 +80,7 @@ const ShopContextProvider = ({ children }) => {
     currency: '$',
     delivery_charges: 5
   };
-  
+
   return (
     <ShopContext.Provider value={contextValue}>
       {children}
@@ -88,10 +88,10 @@ const ShopContextProvider = ({ children }) => {
   );
 };
 
-// Test component
+// Componente de teste
 const TestComponent = () => {
   const context = React.useContext(ShopContext);
-  
+
   return (
     <div>
       <div data-testid="currency">{context.currency}</div>
@@ -101,21 +101,21 @@ const TestComponent = () => {
         data-testid="add-btn"
         onClick={() => context.addToCart('1')}
       >
-        Add to Cart
+        Adicionar ao Carrinho
       </button>
     </div>
   );
 };
 
-// Tests
-describe('ShopContext Basic Tests', () => {
-  test('renders with context values', () => {
+// Testes
+describe('Testes Básicos do ShopContext', () => {
+  test('renderiza com valores do contexto', () => {
     render(
       <ShopContextProvider>
         <TestComponent />
       </ShopContextProvider>
     );
-    
+
     expect(screen.getByTestId('currency')).toHaveTextContent('$');
     expect(screen.getByTestId('backend-url')).toHaveTextContent('http://localhost:5000');
     expect(screen.getByTestId('cart-count')).toHaveTextContent('0');

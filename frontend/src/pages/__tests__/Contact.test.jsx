@@ -3,36 +3,36 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Contact from '../Contact';
 
-// Mock Footer component
+// Mock do componente Footer
 jest.mock('../../components/Footer', () => {
   return function MockFooter() {
-    return <div data-testid="footer-component">Footer Component</div>;
+    return <div data-testid="footer-component">Componente de Rodapé</div>;
   };
 });
 
-describe('Contact Page', () => {
-  test('renders contact page', () => {
+describe('Página de Contato', () => {
+  test('renderiza a página de contato', () => {
     render(<Contact />);
-    
-    // The page should render without crashing
+
+    // A página deve ser renderizada sem falhas
     expect(screen.getByTestId('footer-component')).toBeInTheDocument();
   });
 
-  test('renders contact page title', () => {
+  test('renderiza o título da página de contato', () => {
     render(<Contact />);
-    
-    // Look for contact-related text
+
+    // Procure por texto relacionado ao contato
     const contactElements = screen.getAllByText(/contato/i);
     expect(contactElements.length).toBeGreaterThan(0);
   });
 
-  test('renders footer component', () => {
+  test('renderiza o componente de rodapé', () => {
     render(<Contact />);
-    
+
     expect(screen.getByTestId('footer-component')).toBeInTheDocument();
   });
 
-  test('renders without crashing', () => {
+  test('renderiza sem falhas', () => {
     expect(() => render(<Contact />)).not.toThrow();
   });
 });

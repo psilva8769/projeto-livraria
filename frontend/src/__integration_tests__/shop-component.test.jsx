@@ -5,10 +5,10 @@ import userEvent from '@testing-library/user-event';
 import Shop from '../pages/Shop';
 import { ShopContext } from '../context/ShopContext';
 
-// Mock window.scrollTo
+// Mock do window.scrollTo
 window.scrollTo = jest.fn();
 
-// Mock books data
+// Mock dos dados de livros
 const mockBooks = [
   {
     _id: '1',
@@ -44,7 +44,7 @@ const mockBooks = [
   }
 ];
 
-// Mock context value
+// Mock do valor do contexto
 const mockContextValue = {
   books: mockBooks,
   currency: 'R$',
@@ -56,7 +56,7 @@ const mockContextValue = {
   navigate: jest.fn(),
 };
 
-// Custom render function with ShopContext provider
+// Função personalizada de renderização com o provedor ShopContext
 const renderWithShopContext = (ui, contextValue = mockContextValue) => {
   return render(
     <ShopContext.Provider value={contextValue}>
@@ -65,41 +65,41 @@ const renderWithShopContext = (ui, contextValue = mockContextValue) => {
   );
 };
 
-describe('Shop Component', () => {
+describe('Componente Loja', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test('should render shop page with books list', async () => {
+  test('deve renderizar a página da loja com a lista de livros', async () => {
     renderWithShopContext(<Shop />);
     
-    // Check if page title and books are rendered
+    // Verifica se o título da página e os livros são renderizados
     expect(screen.getByText('Nossa')).toBeInTheDocument();
     expect(screen.getByText('Lista de Livros')).toBeInTheDocument();
     
-    // Check if books are displayed
+    // Verifica se os livros são exibidos
     await waitFor(() => {
       expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();
       expect(screen.getByText('O Cortiço')).toBeInTheDocument();
     });
   });
 
-  test('should filter books by search input', async () => {
+  test('deve filtrar livros pelo campo de busca', async () => {
     renderWithShopContext(<Shop />);
     
-    // Get the search input
+    // Obtém o campo de busca
     const searchInput = screen.getByPlaceholderText(/pesquise por título, autor ou categoria/i);
     
-    // Type in the search field
+    // Digita no campo de busca
     await userEvent.type(searchInput, 'Dom');
     
-    // Check if only matching books are displayed
+    // Verifica se apenas os livros correspondentes são exibidos
     await waitFor(() => {
       expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();
       expect(screen.queryByText('O Cortiço')).not.toBeInTheDocument();
     });
     
-    // Clear search and check if all books are shown
+    // Limpa a busca e verifica se todos os livros são exibidos
     await userEvent.clear(searchInput);
     await waitFor(() => {
       expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();

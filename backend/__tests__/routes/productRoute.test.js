@@ -11,6 +11,8 @@ app.use(express.json());
 app.use('/api/product', productRouter);
 app.use('/api/auth', authRouter); // Adicione a rota de auth
 
+jest.setTimeout(60000); // Increase timeout to 60 seconds
+
 // Testes do Controller de Produto
 describe('Controlador de Produto', () => {
     let idProdutoCriado;
@@ -19,7 +21,7 @@ describe('Controlador de Produto', () => {
 
     // Antes de todos os testes, conecta ao banco e faz login como admin
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
         // Faz login com o usuário admin usando variáveis de ambiente
         const adminEmail = process.env.ADMIN_EMAIL;

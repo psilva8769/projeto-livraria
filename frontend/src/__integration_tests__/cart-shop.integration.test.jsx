@@ -5,11 +5,12 @@ import Shop from '../pages/Shop';
 import Cart from '../pages/Cart';
 import { renderWithProviders, mockBooks, defaultContextValue } from '../utils/testUtils';
 
-describe('Cart-Shop Integration', () => {
+describe('Integração entre Carrinho e Loja', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-    test('should add item to cart from shop page', async () => {
+
+  test('deve adicionar item ao carrinho a partir da página da loja', async () => {
     const mockAddToCart = jest.fn();
     const mockContextValue = {
       ...defaultContextValue,
@@ -22,42 +23,48 @@ describe('Cart-Shop Integration', () => {
       contextValue: mockContextValue 
     });
 
-    // Wait for the shop page to load and check for shop content
+    // Aguarda o carregamento da página da loja e verifica o conteúdo
     await waitFor(() => {
       expect(screen.getByText('Nossa')).toBeInTheDocument();
       expect(screen.getByText('Lista de Livros')).toBeInTheDocument();
     });
 
-    // Find the first book and its add to cart button
+    // Encontra o primeiro livro e seu botão de adicionar ao carrinho
     await waitFor(() => {
       expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();
-    });    // Find and click add to cart button for first book (Dom Casmurro)
+    });
+
+    // Encontra e clica no botão de adicionar ao carrinho do primeiro livro (Dom Casmurro)
     const addToCartButtons = await screen.findAllByTitle('Adicionar ao carrinho');
-    fireEvent.click(addToCartButtons[0]); // Click the first button (for Dom Casmurro)
+    fireEvent.click(addToCartButtons[0]); // Clica no primeiro botão (para Dom Casmurro)
 
     expect(mockAddToCart).toHaveBeenCalledWith('1');
-  });  test('should display cart items and total correctly', async () => {
+  });
+
+  test('deve exibir itens do carrinho e total corretamente', async () => {
     const mockContextValue = {
       ...defaultContextValue,
       cartItems: { '1': 1 },
-      getCartAmount: jest.fn(() => 25), // Price of first book
+      getCartAmount: jest.fn(() => 25), // Preço do primeiro livro
       getCartCount: jest.fn(() => 1),
     };
 
     renderWithProviders(<Cart />, { 
       contextValue: mockContextValue 
-    });    // Wait for cart page to load and check for cart content
+    });
+
+    // Aguarda o carregamento da página do carrinho e verifica o conteúdo
     await waitFor(() => {
       const carrinhoElements = screen.getAllByText(/carrinho/i);
       expect(carrinhoElements.length).toBeGreaterThan(0);
     });
 
-    // Check if the cart shows the item
+    // Verifica se o carrinho exibe o item
     await waitFor(() => {
       expect(screen.getByText('Dom Casmurro')).toBeInTheDocument();
     });
 
-    // Check for any price elements that contain R$ or $ 
+    // Verifica se há elementos de preço que contenham R$ ou $
     const priceElements = screen.getAllByText(/R\$|₪/);
     expect(priceElements.length).toBeGreaterThan(0);
   });

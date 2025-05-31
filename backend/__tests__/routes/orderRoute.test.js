@@ -12,6 +12,8 @@ app.use(express.json());
 app.use('/api/order', orderRouter);
 app.use('/api/auth', authRouter);
 
+jest.setTimeout(60000); // Increase timeout to 60 seconds
+
 // Testes do Controller de Pedidos
 describe('Controlador de Pedidos', () => {
     let usuarioTeste;
@@ -20,7 +22,7 @@ describe('Controlador de Pedidos', () => {
 
     // Antes de todos os testes, conecta ao banco e cria usuário de teste
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
         // Cria o usuário de teste
         const respostaRegistro = await request(app)

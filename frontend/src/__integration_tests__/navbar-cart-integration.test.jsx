@@ -4,15 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from '../components/Header';
 import { ShopContext } from '../context/ShopContext';
 
-// Mock cart functionality
+// Mock da funcionalidade do carrinho
 const mockCartItems = { '1': 2, '2': 1 };
 const mockGetCartCount = jest.fn().mockReturnValue(3);
 const mockNavigate = jest.fn();
 const mockSetToken = jest.fn();
 const mockSetCartItems = jest.fn();
 
-describe('Header and Cart Integration', () => {
-  test('displays correct cart count in header', () => {
+describe('Integração entre Cabeçalho e Carrinho', () => {
+  test('exibe a contagem correta do carrinho no cabeçalho', () => {
     render(
       <BrowserRouter>
         <ShopContext.Provider value={{
@@ -27,12 +27,12 @@ describe('Header and Cart Integration', () => {
       </BrowserRouter>
     );
     
-    // Check if cart icon and count are displayed correctly
+    // Verifica se o ícone do carrinho e a contagem são exibidos corretamente
     const cartCountElement = screen.getByText('3');
     expect(cartCountElement).toBeInTheDocument();
   });
 
-  test('navigates to login page when not logged in', () => {
+  test('navega para a página de login quando não está logado', () => {
     render(
       <BrowserRouter>
         <ShopContext.Provider value={{
@@ -48,11 +48,11 @@ describe('Header and Cart Integration', () => {
       </BrowserRouter>
     );
     
-    // Click on login button
+    // Clica no botão de login
     const loginButton = screen.getByText('Entrar');
     fireEvent.click(loginButton);
     
-    // Check if navigation happened
+    // Verifica se a navegação ocorreu
     expect(mockNavigate).toHaveBeenCalledWith('/login');
   });
 });

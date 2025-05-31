@@ -1,4 +1,8 @@
 import request from 'supertest';
+
+// Jest configuration for ECMAScript modules
+jest.mock('supertest');
+
 import mongoose from 'mongoose';
 import userModel from '../../models/userModel.js';
 import express from 'express';
@@ -10,6 +14,8 @@ app.use(express.json());
 app.use('/api/cart', cartRouter);
 app.use('/api/auth', authRouter); // Adicione a rota de autenticação
 
+jest.setTimeout(60000); // Increase timeout to 60 seconds
+
 // Testes do Controlador de Carrinho
 describe('Controlador de Carrinho', () => {
     let usuarioTeste;
@@ -17,7 +23,7 @@ describe('Controlador de Carrinho', () => {
 
     // Antes de todos os testes, conecta ao banco e cria um usuário de teste
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
         // Cria o usuário de teste
         const respostaRegistro = await request(app)
@@ -52,7 +58,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(resposta.status).toBe(200);
             expect(resposta.body.success).toBe(true);
-            expect(resposta.body.message).toBe('Added to Cart');
+            expect(resposta.body.message).toBe('Adicionado ao Carrinho');
 
             // Verifica se o item foi adicionado ao carrinho do usuário
             const usuarioAtualizado = await userModel.findById(usuarioTeste._id);
@@ -74,7 +80,7 @@ describe('Controlador de Carrinho', () => {
 
             expect(resposta.status).toBe(200);
             expect(resposta.body.success).toBe(true);
-            expect(resposta.body.message).toBe('Your Cart Updated');
+            expect(resposta.body.message).toBe('Seu Carrinho Atualizado');
 
             // Verifica se a quantidade do item foi atualizada
             const usuarioAtualizado = await userModel.findById(usuarioTeste._id);

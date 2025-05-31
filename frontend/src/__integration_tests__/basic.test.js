@@ -1,5 +1,6 @@
 const sum = (a, b) => a + b;
 
-test('adds 1 + 2 to equal 3', () => {
+// Testa se a soma de 1 + 2 é igual a 3
+test('soma 1 + 2 para ser igual a 3', () => {
   expect(sum(1, 2)).toBe(3);
 });

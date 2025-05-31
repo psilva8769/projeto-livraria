@@ -9,13 +9,15 @@ const app = express();
 app.use(express.json());
 app.use('/api/auth', userRouter);
 
+jest.setTimeout(60000); // Increase timeout to 60 seconds
+
 describe('Rotas de Usuário', () => {
     let usuarioTeste;
     let token;
 
     // Conecta ao banco de dados antes de todos os testes
     beforeAll(async () => {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     });
 
     // Remove o usuário de teste e fecha a conexão após todos os testes

@@ -4,21 +4,21 @@ import '@testing-library/jest-dom';
 import Shop from '../Shop';
 import { ShopContext } from '../../context/ShopContext';
 
-// Mock Footer component
+// Mock do componente Footer
 jest.mock('../../components/Footer', () => {
   return function MockFooter() {
-    return <div data-testid="footer-component">Footer Component</div>;
+    return <div data-testid="footer-component">Componente de Rodapé</div>;
   };
 });
 
-// Mock Item component
+// Mock do componente Item
 jest.mock('../../components/Item', () => {
   return function MockItem({ book }) {
     return <div data-testid={`item-${book._id}`}>{book.name}</div>;
   };
 });
 
-// Mock categories data
+// Mock dos dados de categorias
 jest.mock('../../assets/data', () => ({
   categories: [
     { name: 'Romance', image: '/romance.png' },
@@ -70,14 +70,14 @@ const renderWithContext = (contextValue = mockContextValue) => {
   );
 };
 
-describe('Shop Page', () => {
-  test('renders shop page with title', () => {
+describe('Página da Loja', () => {
+  test('renderiza a página da loja com título', () => {
     renderWithContext();
-      expect(screen.getByText('Nossa')).toBeInTheDocument();
+    expect(screen.getByText('Nossa')).toBeInTheDocument();
     expect(screen.getByText('Lista de Livros')).toBeInTheDocument();
   });
 
-  test('displays all books initially', () => {
+  test('exibe todos os livros inicialmente', () => {
     renderWithContext();
     
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
@@ -86,105 +86,107 @@ describe('Shop Page', () => {
     expect(screen.getByTestId('item-4')).toBeInTheDocument();
   });
 
-  test('filters books by search term', () => {    renderWithContext();
+  test('filtra livros pelo termo de busca', () => {
+    renderWithContext();
     
     const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
     fireEvent.change(searchInput, { target: { value: 'Dom' } });
     
-    // Should show only Dom Casmurro
+    // Deve mostrar apenas Dom Casmurro
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.queryByTestId('item-2')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-3')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-4')).not.toBeInTheDocument();
   });
 
-  test('search is case insensitive', () => {
+  test('a busca não diferencia maiúsculas de minúsculas', () => {
     renderWithContext();
-      const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
+    const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
     fireEvent.change(searchInput, { target: { value: 'dom' } });
     
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
   });
 
-  test('sorts books by price low to high', () => {
+  test('classifica livros por preço, do mais baixo para o mais alto', () => {
     renderWithContext();
-      const sortSelect = screen.getByDisplayValue('Relevância');
+    const sortSelect = screen.getByDisplayValue('Relevância');
     fireEvent.change(sortSelect, { target: { value: 'low' } });
     
-    // Should still display all books, but sorted
+    // Deve ainda exibir todos os livros, mas ordenados
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.getByTestId('item-2')).toBeInTheDocument();
     expect(screen.getByTestId('item-3')).toBeInTheDocument();
     expect(screen.getByTestId('item-4')).toBeInTheDocument();
   });
 
-  test('sorts books by price high to low', () => {
+  test('classifica livros por preço, do mais alto para o mais baixo', () => {
     renderWithContext();
-      const sortSelect = screen.getByDisplayValue('Relevância');
+    const sortSelect = screen.getByDisplayValue('Relevância');
     fireEvent.change(sortSelect, { target: { value: 'high' } });
     
-    // Should still display all books, but sorted
+    // Deve ainda exibir todos os livros, mas ordenados
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.getByTestId('item-2')).toBeInTheDocument();
     expect(screen.getByTestId('item-3')).toBeInTheDocument();
     expect(screen.getByTestId('item-4')).toBeInTheDocument();
   });
 
-  test('filters books by category', () => {
+  test('filtra livros por categoria', () => {
     renderWithContext();
     
-    // Find and click the literature category filter
+    // Encontre e clique no filtro da categoria literatura
     const literaturaFilter = screen.getByText('Literatura');
     fireEvent.click(literaturaFilter);
     
-    // Should show only literatura books
+    // Deve mostrar apenas os livros de literatura
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.getByTestId('item-2')).toBeInTheDocument();
     expect(screen.queryByTestId('item-3')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-4')).not.toBeInTheDocument();
   });
 
-  test('combines search and category filters', () => {
+  test('combina filtros de busca e categoria', () => {
     renderWithContext();
     
-    // Apply literatura filter
+    // Aplica o filtro de literatura
     const literaturaFilter = screen.getByText('Literatura');
     fireEvent.click(literaturaFilter);
-      // Apply search filter
+    
+    // Aplica o filtro de busca
     const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
     fireEvent.change(searchInput, { target: { value: 'Dom' } });
     
-    // Should show only Dom Casmurro
+    // Deve mostrar apenas Dom Casmurro
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.queryByTestId('item-2')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-3')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-4')).not.toBeInTheDocument();
   });
 
-  test('shows no results when search has no matches', () => {
+  test('não mostra resultados quando a busca não tem correspondências', () => {
     renderWithContext();
-      const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
-    fireEvent.change(searchInput, { target: { value: 'nonexistent book' } });
+    const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
+    fireEvent.change(searchInput, { target: { value: 'livro inexistente' } });
     
-    // Should show no books
+    // Não deve mostrar nenhum livro
     expect(screen.queryByTestId('item-1')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-2')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-3')).not.toBeInTheDocument();
     expect(screen.queryByTestId('item-4')).not.toBeInTheDocument();
   });
 
-  test('toggles category filter on and off', () => {
+  test('alterna o filtro de categoria liga e desliga', () => {
     renderWithContext();
     
     const literaturaFilter = screen.getByText('Literatura');
     
-    // Apply filter
+    // Aplica o filtro
     fireEvent.click(literaturaFilter);
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.getByTestId('item-2')).toBeInTheDocument();
     expect(screen.queryByTestId('item-3')).not.toBeInTheDocument();
     
-    // Remove filter
+    // Remove o filtro
     fireEvent.click(literaturaFilter);
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.getByTestId('item-2')).toBeInTheDocument();
@@ -192,53 +194,55 @@ describe('Shop Page', () => {
     expect(screen.getByTestId('item-4')).toBeInTheDocument();
   });
 
-  test('renders footer component', () => {
+  test('renderiza o componente de rodapé', () => {
     renderWithContext();
     
     expect(screen.getByTestId('footer-component')).toBeInTheDocument();
   });
 
-  test('renders search input with correct placeholder', () => {
+  test('renderiza o input de busca com o placeholder correto', () => {
     renderWithContext();
-      const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
+    const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
     expect(searchInput).toBeInTheDocument();
     expect(searchInput).toHaveAttribute('type', 'text');
   });
 
-  test('renders sort dropdown with correct options', () => {
+  test('renderiza o dropdown de classificação com as opções corretas', () => {
     renderWithContext();
-      const sortSelect = screen.getByDisplayValue('Relevância');
+    const sortSelect = screen.getByDisplayValue('Relevância');
     expect(sortSelect).toBeInTheDocument();
-      // Check if sort options exist
+    
+    // Verifica se as opções de classificação existem
     expect(screen.getByText('Relevância')).toBeInTheDocument();
     expect(screen.getByText('Menor preço')).toBeInTheDocument();
     expect(screen.getByText('Maior preço')).toBeInTheDocument();
   });
 
-  test('handles empty books array gracefully', () => {
+  test('lida graciosamente com array de livros vazio', () => {
     const emptyBooksContext = {
       books: []
     };
     
     renderWithContext(emptyBooksContext);
-      // Should render without crashing
+    
+    // Deve renderizar sem travar
     expect(screen.getByText('Nossa')).toBeInTheDocument();
     expect(screen.queryByTestId(/item-/)).not.toBeInTheDocument();
   });
 
-  test('clears search input', () => {
+  test('limpa o input de busca', () => {
     renderWithContext();
-      const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
+    const searchInput = screen.getByPlaceholderText('Pesquise por título, autor ou categoria...');
     
-    // Type in search
+    // Digita na busca
     fireEvent.change(searchInput, { target: { value: 'Dom' } });
     expect(searchInput.value).toBe('Dom');
     
-    // Clear search
+    // Limpa a busca
     fireEvent.change(searchInput, { target: { value: '' } });
     expect(searchInput.value).toBe('');
     
-    // Should show all books again
+    // Deve mostrar todos os livros novamente
     expect(screen.getByTestId('item-1')).toBeInTheDocument();
     expect(screen.getByTestId('item-2')).toBeInTheDocument();
     expect(screen.getByTestId('item-3')).toBeInTheDocument();

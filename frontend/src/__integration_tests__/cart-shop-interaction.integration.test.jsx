@@ -6,11 +6,11 @@ import Shop from '../pages/Shop';
 import Item from '../components/Item';
 import Header from '../components/Header';
 
-// Mock axios
+// Mock do axios
 jest.mock('axios');
 const axios = require('axios');
 
-// Mock react-toastify
+// Mock do react-toastify
 jest.mock('react-toastify', () => ({
   toast: {
     success: jest.fn(),
@@ -18,7 +18,7 @@ jest.mock('react-toastify', () => ({
   }
 }));
 
-// Mock sample books
+// Mock de livros de exemplo
 const mockBooks = [
   {
     _id: '1',
@@ -40,7 +40,7 @@ const mockBooks = [
   }
 ];
 
-// Custom wrapper component to provide context
+// Componente wrapper personalizado para fornecer contexto
 const TestWrapper = ({ children }) => {
   return (
     <BrowserRouter>
@@ -51,9 +51,9 @@ const TestWrapper = ({ children }) => {
   );
 };
 
-describe('Cart and Shop Integration', () => {
+describe('Integração entre Carrinho e Loja', () => {
   beforeEach(() => {
-    // Mock API responses
+    // Mock das respostas da API
     axios.get.mockResolvedValue({
       data: {
         success: true,
@@ -67,11 +67,12 @@ describe('Cart and Shop Integration', () => {
       }
     });
 
-    // Clear localStorage
+    // Limpa o localStorage
     localStorage.clear();
   });
-  test('adding item to cart updates cart count in header', async () => {
-    // Arrange: Create a component that properly manages cart state
+
+  test('adicionar item ao carrinho atualiza contagem no cabeçalho', async () => {
+    // Arrange: Cria um componente que gerencia corretamente o estado do carrinho
     const TestComponent = () => {
       const [cartItems, setCartItems] = React.useState({});
       
@@ -113,26 +114,27 @@ describe('Cart and Shop Integration', () => {
     // Act
     render(<TestComponent />);
     
-    // Initial cart should be empty (count = 0)
+    // O carrinho inicial deve estar vazio (contagem = 0)
     expect(screen.getByText('0')).toBeInTheDocument();
 
-    // Find and click the add to cart button on the first book
+    // Encontra e clica no botão de adicionar ao carrinho do primeiro livro
     const addButtons = screen.getAllByTitle('Adicionar ao carrinho');
     fireEvent.click(addButtons[0]);
 
-    // Assert: Cart count should be updated to 1
+    // Assert: A contagem do carrinho deve ser atualizada para 1
     await waitFor(() => {
       expect(screen.getByText('1')).toBeInTheDocument();
     });
   });
-  test('cart persists items between shop and cart pages', () => {
-    // For jest tests, we're mocking this behavior by verifying the ShopContext
-    // functions are called correctly
+
+  test('o carrinho mantém itens entre as páginas de loja e carrinho', () => {
+    // Para testes com jest, estamos mockando esse comportamento verificando se as funções do ShopContext
+    // são chamadas corretamente
     
     const mockNavigate = jest.fn();
     const mockCartItems = { '1': 2, '2': 1 };
     const mockGetCartCount = jest.fn().mockReturnValue(3);
-      const { container } = render(
+    const { container } = render(
       <BrowserRouter>
         <ShopContext.Provider value={{
           books: mockBooks,
@@ -147,15 +149,17 @@ describe('Cart and Shop Integration', () => {
         </ShopContext.Provider>
       </BrowserRouter>
     );
-      // Verify cart count shows 3 items
+    
+    // Verifica se a contagem do carrinho mostra 3 itens
     expect(screen.getByText('3')).toBeInTheDocument();
     
-    // Click on the cart link (find by data-discover attribute and href)
+    // Clica no link do carrinho (encontrado pelo atributo data-discover e href)
     const cartLink = container.querySelector('a[data-discover="true"][href="/cart"]');
     fireEvent.click(cartLink);
-      // Check if navigation was attempted - Since we're using BrowserRouter,
-    // the navigation happens through React Router, not our mock navigate function
-    // The test passes if we can successfully click the cart link without errors
+    
+    // Verifica se a navegação foi tentada - Como estamos usando BrowserRouter,
+    // a navegação acontece através do React Router, não da função mock navigate
+    // O teste passa se conseguimos clicar no link do carrinho sem erros
     expect(cartLink).toBeInTheDocument();
   });
 });

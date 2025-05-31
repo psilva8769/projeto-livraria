@@ -1,4 +1,6 @@
 import { jest } from '@jest/globals';
+// Jest configuration for ECMAScript modules
+jest.mock('@jest/globals');
 
 // Mock do productModel como função construtora
 const mockSave = jest.fn();
@@ -75,28 +77,12 @@ describe('Controlador de Produto', () => {
             expect(mockSave).toHaveBeenCalled();
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                message: "Product Created"
+                message: "Produto Criado"
             });
         });
     });
 
-    // Teste para deleção de produto
-    describe('deletarProduto', () => {
-        it('deve deletar um produto com sucesso', async () => {
-            mockProductModel.findByIdAndDelete.mockResolvedValue({});
-            req.body = { id: '123' };
-
-            await deletarProduto(req, res);
-
-            expect(mockProductModel.findByIdAndDelete).toHaveBeenCalledWith('123');
-            expect(res.json).toHaveBeenCalledWith({
-                success: true,
-                message: "Product Deleted"
-            });
-        });
-    });
-
-    // Teste para buscar todos os produtos
+    // Teste para listagem de produtos
     describe('buscarTodosProdutos', () => {
         it('deve retornar todos os produtos', async () => {
             const mockProdutos = [{ name: 'Livro 1' }, { name: 'Livro 2' }];
@@ -112,7 +98,7 @@ describe('Controlador de Produto', () => {
         });
     });
 
-    // Teste para buscar produto por ID
+    // Teste para busca de produto por ID
     describe('buscarProdutoPorId', () => {
         it('deve retornar um produto pelo id', async () => {
             const mockProduto = { name: 'Livro Teste' };
@@ -129,4 +115,32 @@ describe('Controlador de Produto', () => {
             });
         });
     });
+
+    // Teste para exclusão de produto
+    describe('deletarProduto', () => {
+        it('deve deletar um produto com sucesso', async () => {
+            mockProductModel.findByIdAndDelete.mockResolvedValue({});
+            req.body = { id: '123' };
+
+            await deletarProduto(req, res);
+
+            expect(mockProductModel.findByIdAndDelete).toHaveBeenCalledWith('123');
+            expect(res.json).toHaveBeenCalledWith({
+                success: true,
+                message: "Produto Deletado"
+            });
+        });
+    });
+});
+
+// Configuração do mongoose para testes
+import mongoose from 'mongoose';
+
+beforeAll(async () => {
+    mongoose.set('bufferCommands', false); // Desabilita o buffer
+    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+});
+
+afterAll(async () => {
+    await mongoose.connection.close();
 });

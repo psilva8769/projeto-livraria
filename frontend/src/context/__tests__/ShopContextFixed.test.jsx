@@ -2,17 +2,13 @@
  * @jest-environment jsdom
  */
 
-import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import axios from 'axios';
-import { BrowserRouter } from 'react-router-dom';
-import ShopContextProvider, { ShopContext } from '../ShopContext';
+import { render, screen, waitFor } from '@testing-library/react';
 
-// Mock axios
+// Mock do axios
 jest.mock('axios');
 
-// Mock localStorage
+// Mock do localStorage
 const mockLocalStorageData = {};
 
 Object.defineProperty(window, 'localStorage', {
@@ -30,7 +26,7 @@ Object.defineProperty(window, 'localStorage', {
   writable: true
 });
 
-// Mock react-router-dom
+// Mock do react-router-dom
 jest.mock('react-router-dom', () => {
   const originalModule = jest.requireActual('react-router-dom');
   return {
@@ -39,21 +35,21 @@ jest.mock('react-router-dom', () => {
   };
 });
 
-// Set up test data
+// Configuração dos dados de teste
 const mockBooks = [
-  { _id: '1', name: 'Book 1', price: 10.99 },
-  { _id: '2', name: 'Book 2', price: 15.99 }
+  { _id: '1', name: 'Livro 1', price: 10.99 },
+  { _id: '2', name: 'Livro 2', price: 15.99 }
 ];
 
-// Mock for import.meta.env
+// Mock para import.meta.env
 beforeAll(() => {
   // Define import.meta.env
   if (typeof global.import === 'undefined') {
     global.import = { meta: { env: {} } };
   }
   global.import.meta.env.VITE_BACKEND_URL = 'http://localhost:5000';
-  
-  // Mock axios responses
+
+  // Mock das respostas do axios
   axios.get.mockImplementation((url) => {
     if (url.includes('/api/product/list')) {
       return Promise.resolve({
@@ -63,9 +59,9 @@ beforeAll(() => {
         }
       });
     }
-    return Promise.resolve({ data: {} });
+    return Promise.reject(new Error('Not Found'));
   });
-  
+
   axios.post.mockImplementation((url, data, config) => {
     if (url.includes('/api/cart/get')) {
       return Promise.resolve({
@@ -86,13 +82,13 @@ beforeAll(() => {
   });
 });
 
-// Reset mocks between tests
+// Reseta os mocks entre os testes
 beforeEach(() => {
   jest.clearAllMocks();
   window.localStorage.clear();
 });
 
-// Test component that consumes the context
+// Componente de teste que consome o contexto
 const TestComponent = () => {
   return (
     <ShopContext.Consumer>
@@ -105,7 +101,7 @@ const TestComponent = () => {
             data-testid="addToCartBtn" 
             onClick={() => context.addToCart('1')}
           >
-            Add to Cart
+            Adicionar ao Carrinho
           </button>
         </div>
       )}
@@ -113,8 +109,8 @@ const TestComponent = () => {
   );
 };
 
-describe('ShopContext - Fixed Tests', () => {
-  test('renders the context provider and exposes values', async () => {
+describe('ShopContext - Testes Corrigidos', () => {
+  test('renderiza o provedor de contexto e expõe valores', async () => {
     render(
       <BrowserRouter>
         <ShopContextProvider>
@@ -122,13 +118,13 @@ describe('ShopContext - Fixed Tests', () => {
         </ShopContextProvider>
       </BrowserRouter>
     );
-    
+
     await waitFor(() => {
       expect(screen.getByTestId('currency')).toHaveTextContent('$');
     });
   });
-  
-  test('addToCart function updates cart and calls API', async () => {
+
+  test('função addToCart atualiza o carrinho e chama a API', async () => {
     window.localStorage.setItem('token', 'test-token');
     render(
       <BrowserRouter>
@@ -149,8 +145,8 @@ describe('ShopContext - Fixed Tests', () => {
       );
     });
   });
-  
-  test('updateQuantity function calls API', async () => {
+
+  test('função updateQuantity chama a API', async () => {
     window.localStorage.setItem('token', 'test-token');
     render(
       <BrowserRouter>
@@ -162,13 +158,11 @@ describe('ShopContext - Fixed Tests', () => {
     await waitFor(() => {
       expect(screen.getByTestId('currency')).toBeInTheDocument();
     });
-    // Simulate updateQuantity
-    // You may need to add a button to TestComponent for this if not present
-    // For now, just call the function directly if possible
-    // screen.getByTestId('updateQuantityBtn').click();
-    // Instead, call context.updateQuantity directly if accessible
-    // But for now, just check that the API call is made (core logic)
-    // This is a placeholder for a real UI trigger
+    // Simula updateQuantity
+    // Você pode precisar adicionar um botão ao TestComponent para isso, se não estiver presente
+    // Por enquanto, apenas chame a função diretamente se possível
+    // Mas por enquanto, apenas verifique se a chamada da API foi feita (lógica principal)
+    // Este é um placeholder para um gatilho real de UI
     // await waitFor(() => {
     //   expect(require('axios').post).toHaveBeenCalledWith(
     //     'http://localhost:5000/api/cart/update',

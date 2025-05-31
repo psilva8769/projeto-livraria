@@ -5,10 +5,10 @@ import Login from '../pages/Login';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 
-// Mock axios
+// Mock do axios
 jest.mock('axios');
 
-// Mock react-toastify
+// Mock do react-toastify
 jest.mock('react-toastify', () => ({
   toast: {
     error: jest.fn(),
@@ -17,7 +17,7 @@ jest.mock('react-toastify', () => ({
   ToastContainer: () => null,
 }));
 
-// Mock localStorage
+// Mock do localStorage
 const localStorageMock = (() => {
   let store = {};
   return {
@@ -38,24 +38,25 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
 });
 
-describe('Login Authentication Integration', () => {
+describe('Integração de Autenticação de Login', () => {
   const mockNavigate = jest.fn();
   const mockSetToken = jest.fn();
   
   beforeEach(() => {
     jest.clearAllMocks();
   });
-    test('logs in successfully with valid credentials', async () => {
-    // Mock API response
+
+  test('realiza login com sucesso usando credenciais válidas', async () => {
+    // Mock da resposta da API
     axios.post.mockResolvedValueOnce({
       data: {
         success: true,
         token: 'fake-token',
-        message: 'Login successful'
+        message: 'Login realizado com sucesso'
       }
     });
 
-    // Create a context value that properly updates token state
+    // Cria um valor de contexto que atualiza corretamente o estado do token
     let currentToken = '';
     const contextValue = {
       navigate: mockNavigate,
@@ -67,7 +68,7 @@ describe('Login Authentication Integration', () => {
       backendUrl: 'http://localhost:4000'
     };
     
-    // Render component
+    // Renderiza o componente
     render(
       <BrowserRouter>
         <ShopContext.Provider value={contextValue}>
@@ -75,17 +76,18 @@ describe('Login Authentication Integration', () => {
         </ShopContext.Provider>
       </BrowserRouter>
     );
-      // Fill login form
+
+    // Preenche o formulário de login
     const emailInput = screen.getByPlaceholderText('E-mail');
     const passwordInput = screen.getByPlaceholderText('Senha');
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
     fireEvent.change(passwordInput, { target: { value: 'password123' } });
     
-    // Submit form
+    // Envia o formulário
     const loginButton = screen.getByRole('button', { name: /entrar/i });
     fireEvent.click(loginButton);
     
-    // Verify success
+    // Verifica o sucesso
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
         'http://localhost:4000/api/user/login',
@@ -94,18 +96,19 @@ describe('Login Authentication Integration', () => {
       expect(mockSetToken).toHaveBeenCalledWith('fake-token');
     });
 
-    // Verify localStorage was called
+    // Verifica se o localStorage foi chamado
     expect(window.localStorage.setItem).toHaveBeenCalledWith('token', 'fake-token');
   });
-    test('shows error message with invalid credentials', async () => {
+
+  test('exibe mensagem de erro com credenciais inválidas', async () => {
     const { toast } = require('react-toastify');
     
-    // Mock API error response
+    // Mock da resposta de erro da API
     axios.post.mockRejectedValueOnce({
-      message: 'Invalid credentials'
+      message: 'Credenciais inválidas'
     });
 
-    // Render component
+    // Renderiza o componente
     render(
       <BrowserRouter>
         <ShopContext.Provider value={{
@@ -117,23 +120,24 @@ describe('Login Authentication Integration', () => {
         </ShopContext.Provider>
       </BrowserRouter>
     );
-      // Fill login form with invalid data
+
+    // Preenche o formulário de login com dados inválidos
     const emailInput = screen.getByPlaceholderText('E-mail');
     const passwordInput = screen.getByPlaceholderText('Senha');
     fireEvent.change(emailInput, { target: { value: 'wrong@example.com' } });
     fireEvent.change(passwordInput, { target: { value: 'wrongpassword' } });
     
-    // Submit form
+    // Envia o formulário
     const loginButton = screen.getByRole('button', { name: /entrar/i });
     fireEvent.click(loginButton);
     
-    // Verify error handling
+    // Verifica o tratamento de erro
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
         'http://localhost:4000/api/user/login',
         { email: 'wrong@example.com', password: 'wrongpassword' }
       );
-      expect(toast.error).toHaveBeenCalledWith('Invalid credentials');
+      expect(toast.error).toHaveBeenCalledWith('Credenciais inválidas');
       expect(mockSetToken).not.toHaveBeenCalled();
       expect(mockNavigate).not.toHaveBeenCalled();
     });

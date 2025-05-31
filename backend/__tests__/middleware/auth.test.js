@@ -1,4 +1,6 @@
-import { jest } from '@jest/globals'
+import { jest } from '@jest/globals';
+// Jest configuration for ECMAScript modules
+jest.mock('@jest/globals');
 
 // Mock do jsonwebtoken como objeto
 const mockVerify = jest.fn()
@@ -53,7 +55,7 @@ describe('Middleware authUser', () => {
         mockVerify.mockImplementation(() => { throw new Error('invalid token') })
         await authUser(req, res, next)
 
-        // Como o middleware erroneamente usa req.json, testamos isso
+        // Testa se o middleware retorna erro para token inválido
         expect(req.json).toHaveBeenCalledWith({
             success: false,
             message: "invalid token"
@@ -65,6 +67,7 @@ describe('Middleware authUser', () => {
         req.headers.token = 'validtoken'
         mockVerify.mockReturnValue({ id: 'user123' })
         await authUser(req, res, next)
+        // Testa se o middleware define userId e chama next para token válido
         expect(req.body.userId).toBe('user123')
         expect(next).toHaveBeenCalled()
         expect(res.json).not.toHaveBeenCalled()

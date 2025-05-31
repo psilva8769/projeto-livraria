@@ -17,10 +17,10 @@ jest.mock('react-toastify', () => ({
   ToastContainer: () => null
 }));
 
-describe('Auth-Navigation Integration', () => {
+describe('Integração de Autenticação e Navegação', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-  });  test('should show login button when not authenticated', () => {
+  });  test('deve mostrar botão de login quando não autenticado', () => {
     const mockContextValue = {
       ...defaultContextValue,
       token: null,
@@ -31,12 +31,12 @@ describe('Auth-Navigation Integration', () => {
       { contextValue: mockContextValue }
     );
 
-    // Should show "Entrar" button when not logged in
+    // Deve mostrar o botão "Entrar" quando não logado
     const loginButton = screen.getByRole('button', { name: /entrar/i });
     expect(loginButton).toBeInTheDocument();
   });
 
-  test('should show user icon when authenticated', () => {
+  test('deve mostrar ícone de usuário quando autenticado', () => {
     const mockContextValue = {
       ...defaultContextValue,
       token: 'test-token',
@@ -48,14 +48,14 @@ describe('Auth-Navigation Integration', () => {
       { contextValue: mockContextValue }
     );
 
-    // Should show user icon when logged in (using class selector since it's not a semantic element)
+    // Deve mostrar o ícone de usuário quando logado (usando seletor de classe já que não é um elemento semântico)
     const userIcon = document.querySelector('.text-\\[32px\\]');
     expect(userIcon).toBeInTheDocument();
     
-    // Should not show "Entrar" button when logged in
+    // Não deve mostrar o botão "Entrar" quando logado
     const loginButton = screen.queryByRole('button', { name: /entrar/i });
     expect(loginButton).not.toBeInTheDocument();
-  });  test('should login successfully with valid credentials', async () => {
+  });  test('deve realizar login com sucesso com credenciais válidas', async () => {
     const mockNavigate = jest.fn();
     const mockSetToken = jest.fn();
     const mockToken = 'test-token';
@@ -79,14 +79,14 @@ describe('Auth-Navigation Integration', () => {
       { contextValue: mockContextValue }
     );
 
-    // Fill login form
+    // Preenche o formulário de login
     const emailInput = screen.getByPlaceholderText(/e-mail/i);
     const passwordInput = screen.getByPlaceholderText(/senha/i);
     
     await userEvent.type(emailInput, 'test@example.com');
     await userEvent.type(passwordInput, 'password123');
 
-    // Submit form
+    // Envia o formulário
     const submitButton = screen.getByRole('button', { name: /entrar/i });
     fireEvent.click(submitButton);
 

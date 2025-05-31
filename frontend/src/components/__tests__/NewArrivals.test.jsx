@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 import NewArrivals from '../NewArrivals';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 // Mock Swiper components
 jest.mock('swiper/react', () => ({

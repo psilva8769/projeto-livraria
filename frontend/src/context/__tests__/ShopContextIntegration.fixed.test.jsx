@@ -3,8 +3,9 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import ShopContextProvider, { ShopContext } from '../ShopContext';
+import { TextEncoder, TextDecoder } from 'util';
 
-// Mock modules
+// Mock dos módulos
 jest.mock('axios');
 jest.mock('react-toastify', () => ({
   toast: {
@@ -13,7 +14,7 @@ jest.mock('react-toastify', () => ({
   }
 }));
 
-// Mock react-router-dom
+// Mock do react-router-dom
 jest.mock('react-router-dom', () => {
   const actual = jest.requireActual('react-router-dom');
   return {
@@ -22,7 +23,7 @@ jest.mock('react-router-dom', () => {
   };
 });
 
-// Mock localStorage
+// Mock do localStorage
 const localStorageMock = (() => {
   let store = {};
   return {
@@ -40,54 +41,56 @@ const localStorageMock = (() => {
 })();
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
-// Global mocking of import.meta.env
+// Mock global de import.meta.env
 global.import = { meta: { env: { VITE_BACKEND_URL: 'http://localhost:5000' } } };
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
 
-describe('ShopContext Integration Tests', () => {
-  // Component that uses the context for testing
+describe('Testes de Integração do ShopContext', () => {
+  // Componente que utiliza o contexto para testes
   const TestComponent = () => {
     const context = React.useContext(ShopContext);
-    
+
     return (
       <div>
         <div data-testid="currency">{context.currency}</div>
-        <div data-testid="backend-url">{context.backendUrl || 'No backend URL'}</div>
+        <div data-testid="backend-url">{context.backendUrl || 'Sem URL do backend'}</div>
         <div data-testid="cart-count">{context.getCartCount()}</div>
         <button 
           data-testid="add-btn"
           onClick={() => context.addToCart('1')}
         >
-          Add to Cart
+          Adicionar ao Carrinho
         </button>
         <button 
           data-testid="update-btn"
           onClick={() => context.updateQuantity('1', 5)}
         >
-          Update Quantity
+          Atualizar Quantidade
         </button>
       </div>
     );
   };
-  
+
   beforeEach(() => {
     jest.clearAllMocks();
     localStorageMock.clear();
-    
-    // Set up axios mocks
+
+    // Configura os mocks do axios
     const axios = require('axios');
-    
-    // Mock get request (for fetching books)
+
+    // Mock da requisição GET (para buscar livros)
     axios.get.mockResolvedValue({
       data: {
         success: true,
         products: [
-          { _id: '1', name: 'Book 1', price: 10.99 },
-          { _id: '2', name: 'Book 2', price: 15.99 }
+          { _id: '1', name: 'Livro 1', price: 10.99 },
+          { _id: '2', name: 'Livro 2', price: 15.99 }
         ]
       }
     });
-    
-    // Mock post request (for cart operations)
+
+    // Mock da requisição POST (para operações no carrinho)
     axios.post.mockResolvedValue({
       data: {
         success: true,
@@ -95,8 +98,8 @@ describe('ShopContext Integration Tests', () => {
       }
     });
   });
-  
-  test('context provides correct values', async () => {
+
+  test('o contexto fornece valores corretos', async () => {
     render(
       <BrowserRouter>
         <ShopContextProvider>
@@ -104,15 +107,15 @@ describe('ShopContext Integration Tests', () => {
         </ShopContextProvider>
       </BrowserRouter>
     );
-    
+
     await waitFor(() => {
       expect(screen.getByTestId('currency')).toHaveTextContent('$');
     });
-    
+
     expect(screen.getByTestId('backend-url')).toHaveTextContent('http://localhost:5000');
   });
-  
-  test('addToCart updates cart and calls API', async () => {
+
+  test('addToCart atualiza o carrinho e chama a API', async () => {
     localStorageMock.setItem('token', 'test-token');
     render(
       <BrowserRouter>
@@ -128,10 +131,10 @@ describe('ShopContext Integration Tests', () => {
     await waitFor(() => {
       expect(require('axios').post).toHaveBeenCalled();
     });
-    // Do NOT assert on context state directly
+    // NÃO faça assert diretamente no estado do contexto
   });
 
-  test('updateQuantity function works correctly', async () => {
+  test('a função updateQuantity funciona corretamente', async () => {
     localStorageMock.setItem('token', 'test-token');
     render(
       <BrowserRouter>
@@ -147,6 +150,6 @@ describe('ShopContext Integration Tests', () => {
     await waitFor(() => {
       expect(require('axios').post).toHaveBeenCalled();
     });
-    // Do NOT assert on context state directly
+    // NÃO faça assert diretamente no estado do contexto
   });
 });

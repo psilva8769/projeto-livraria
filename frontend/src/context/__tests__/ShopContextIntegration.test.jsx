@@ -5,10 +5,10 @@ import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
 import ShopContextProvider, { ShopContext } from '../ShopContext';
 
-// Mock axios
+// Mock do axios
 jest.mock('axios');
 
-// Mock localStorage
+// Mock do localStorage
 const localStorageMock = (() => {
   let store = {};
   return {
@@ -29,22 +29,22 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorageMock
 });
 
-// Setup environment
+// Configuração do ambiente
 beforeEach(() => {
   jest.clearAllMocks();
   localStorageMock.clear();
-  
-  // Mock successful API responses
+
+  // Mock de respostas bem-sucedidas da API
   axios.get.mockResolvedValue({
     data: {
       success: true,
       products: [
-        { _id: '1', name: 'Book 1', price: 10.99 },
-        { _id: '2', name: 'Book 2', price: 15.99 }
+        { _id: '1', name: 'Livro 1', price: 10.99 },
+        { _id: '2', name: 'Livro 2', price: 15.99 }
       ]
     }
   });
-  
+
   axios.post.mockResolvedValue({
     data: {
       success: true,
@@ -53,19 +53,19 @@ beforeEach(() => {
   });
 });
 
-// Test component to access context
+// Componente de teste para acessar o contexto
 const TestComponent = () => {
   const context = React.useContext(ShopContext);
-  
-  // Safely handle functions that might not exist in all context mocks
+
+  // Lida com funções que podem não existir em todos os mocks de contexto
   const getCartCount = () => {
     return context.getCartCount ? context.getCartCount() : 0;
   };
-  
+
   const getCartAmount = () => {
     return context.getCartAmount ? context.getCartAmount() : 0;
   };
-  
+
   return (
     <div>
       <div data-testid="cart-count">{getCartCount()}</div>
@@ -74,20 +74,20 @@ const TestComponent = () => {
         data-testid="add-to-cart" 
         onClick={() => context.addToCart('1')}
       >
-        Add to Cart
+        Adicionar ao Carrinho
       </button>
       <button 
         data-testid="update-quantity" 
         onClick={() => context.updateQuantity('1', 5)}
       >
-        Update Quantity
+        Atualizar Quantidade
       </button>
     </div>
   );
 };
 
-describe('ShopContext Integration', () => {
-  test('provides context values', async () => {
+describe('Integração do ShopContext', () => {
+  test('fornece valores do contexto', async () => {
     render(
       <BrowserRouter>
         <ShopContextProvider>
@@ -95,14 +95,14 @@ describe('ShopContext Integration', () => {
         </ShopContextProvider>
       </BrowserRouter>
     );
-    
-    // Verify the initial cart count is shown
+
+    // Verifica se a contagem inicial do carrinho é exibida
     await waitFor(() => {
       expect(screen.getByTestId('cart-count')).toBeInTheDocument();
     });
   });
-  
-  test('adds item to cart', async () => {
+
+  test('adiciona item ao carrinho', async () => {
     axios.post = jest.fn().mockResolvedValue({
       data: {
         success: true,
@@ -131,7 +131,7 @@ describe('ShopContext Integration', () => {
     });
   });
 
-  test('updates quantity in cart', async () => {
+  test('atualiza quantidade no carrinho', async () => {
     localStorageMock.setItem('token', 'test-token');
     render(
       <BrowserRouter>
@@ -152,17 +152,17 @@ describe('ShopContext Integration', () => {
       );
     });
   });
-  
-  test('calculates cart amount correctly', async () => {
-    // Mock the full context with preset values for this test
+
+  test('calcula valor total do carrinho corretamente', async () => {
+    // Mock do contexto completo com valores predefinidos para este teste
     const MockedShopContext = ({ children }) => {
       const [books] = React.useState([
-        { _id: '1', name: 'Book 1', price: 10.99 },
-        { _id: '2', name: 'Book 2', price: 15.99 }
+        { _id: '1', name: 'Livro 1', price: 10.99 },
+        { _id: '2', name: 'Livro 2', price: 15.99 }
       ]);
-      
+
       const [cartItems, setCartItems] = React.useState({ '1': 2, '2': 1 });
-      
+
       const getCartCount = () => {
         let count = 0;
         for (const item in cartItems) {
@@ -172,7 +172,7 @@ describe('ShopContext Integration', () => {
         }
         return count;
       };
-      
+
       const getCartAmount = () => {
         let amount = 0;
         for (const item in cartItems) {
@@ -185,7 +185,7 @@ describe('ShopContext Integration', () => {
         }
         return amount;
       };
-      
+
       return (
         <ShopContext.Provider value={{ 
           books, 
@@ -198,7 +198,7 @@ describe('ShopContext Integration', () => {
         </ShopContext.Provider>
       );
     };
-    
+
     render(
       <BrowserRouter>
         <MockedShopContext>
@@ -206,24 +206,24 @@ describe('ShopContext Integration', () => {
         </MockedShopContext>
       </BrowserRouter>
     );
-    
-    // Check cart amount calculation
+
+    // Verifica cálculo do valor total do carrinho
     await waitFor(() => {
       // 10.99 * 2 + 15.99 * 1 = 37.97
       expect(screen.getByTestId('cart-amount')).toHaveTextContent('37.97');
     });
   });
-  
-  test('handles missing book info in getCartAmount', async () => {
-    // Mock the context with a cart item that has no matching book
+
+  test('lida com informações ausentes de livros em getCartAmount', async () => {
+    // Mock do contexto com um item no carrinho que não tem livro correspondente
     const MockedShopContext = ({ children }) => {
       const [books] = React.useState([
-        { _id: '1', name: 'Book 1', price: 10.99 }
+        { _id: '1', name: 'Livro 1', price: 10.99 }
       ]);
-      
-      // Item '999' doesn't exist in books
+
+      // Item '999' não existe nos livros
       const [cartItems] = React.useState({ '999': 2 });
-      
+
       const getCartCount = () => {
         let count = 0;
         for (const item in cartItems) {
@@ -233,7 +233,7 @@ describe('ShopContext Integration', () => {
         }
         return count;
       };
-      
+
       const getCartAmount = () => {
         let amount = 0;
         for (const item in cartItems) {
@@ -246,7 +246,7 @@ describe('ShopContext Integration', () => {
         }
         return amount;
       };
-      
+
       return (
         <ShopContext.Provider value={{ 
           books, 
@@ -258,7 +258,7 @@ describe('ShopContext Integration', () => {
         </ShopContext.Provider>
       );
     };
-    
+
     render(
       <BrowserRouter>
         <MockedShopContext>
@@ -266,8 +266,8 @@ describe('ShopContext Integration', () => {
         </MockedShopContext>
       </BrowserRouter>
     );
-    
-    // Cart amount should be 0 since there's no matching book
+
+    // O valor do carrinho deve ser 0, já que não há livro correspondente
     await waitFor(() => {
       expect(screen.getByTestId('cart-amount')).toHaveTextContent('0');
     });
