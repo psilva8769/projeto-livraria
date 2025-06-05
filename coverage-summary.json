@@ -1,211 +1,80 @@
 {
-  "project": "Projeto Livraria - Library Management System",
-  "generated": "2025-05-29",
-  "summary": {
-    "totalTestSuites": 33,
-    "totalTests": 178,
-    "testSuccessRate": "100%",
-    "overallCoverageAverage": "65.78%"
+  "frontend": {
+    "lines": {
+      "total": 2394,
+      "covered": 231,
+      "skipped": 0,
+      "pct": "9.65"
+    },
+    "statements": {
+      "total": 375,
+      "covered": 231,
+      "skipped": 0,
+      "pct": "61.60"
+    },
+    "functions": {
+      "total": 119,
+      "covered": 72,
+      "skipped": 0,
+      "pct": "60.50"
+    },
+    "branches": {
+      "total": 154,
+      "covered": 64,
+      "skipped": 0,
+      "pct": "41.56"
+    }
   },
   "backend": {
-    "framework": "Jest + Node.js",
-    "testSuites": 10,
-    "totalTests": 50,
-    "coverage": {
-      "statements": {
-        "percentage": 87.77,
-        "covered": 158,
-        "total": 180
-      },
-      "branches": {
-        "percentage": 93.33,
-        "covered": 28,
-        "total": 30
-      },
-      "functions": {
-        "percentage": 94.44,
-        "covered": 17,
-        "total": 18
-      },
-      "lines": {
-        "percentage": 87.77,
-        "covered": 158,
-        "total": 180
-      }
+    "lines": {
+      "total": 180,
+      "covered": 165,
+      "skipped": 0,
+      "pct": "91.67"
     },
-    "components": {
-      "controllers": {
-        "coverage": 84.09,
-        "qualityLevel": "Excellent"
-      },
-      "middleware": {
-        "coverage": 95.83,
-        "qualityLevel": "Excellent"
-      },
-      "models": {
-        "coverage": 100,
-        "qualityLevel": "Excellent"
-      },
-      "routes": {
-        "coverage": 100,
-        "qualityLevel": "Excellent"
-      }
+    "statements": {
+      "total": 195,
+      "covered": 175,
+      "skipped": 0,
+      "pct": "89.74"
     },
-    "qualityLevel": "Excellent",
-    "recommendation": "Maintain current high standards"
-  },
-  "frontend": {
-    "framework": "Jest + React Testing Library",
-    "testSuites": 23,
-    "totalTests": 128,
-    "coverage": {
-      "statements": {
-        "percentage": 43.78,
-        "covered": 162,
-        "total": 370
-      },
-      "branches": {
-        "percentage": 36.48,
-        "covered": 54,
-        "total": 148
-      },
-      "functions": {
-        "percentage": 49.15,
-        "covered": 58,
-        "total": 118
-      },
-      "lines": {
-        "percentage": 44.31,
-        "covered": 156,
-        "total": 352
-      }
+    "functions": {
+      "total": 85,
+      "covered": 80,
+      "skipped": 0,
+      "pct": "94.12"
     },
-    "components": {
-      "app": {
-        "coverage": 100,
-        "qualityLevel": "Excellent"
-      },
-      "assets": {
-        "coverage": 100,
-        "qualityLevel": "Excellent"
-      },
-      "components": {
-        "coverage": 45.2,
-        "qualityLevel": "Needs Improvement"
-      },
-      "pages": {
-        "coverage": 25.6,
-        "qualityLevel": "Requires Attention"
-      },
-      "context": {
-        "coverage": 0,
-        "qualityLevel": "Critical"
-      },
-      "utils": {
-        "coverage": 62.5,
-        "qualityLevel": "Good"
-      }
-    },
-    "qualityLevel": "Needs Improvement",
-    "recommendation": "Focus on Context and Pages coverage improvement"
-  },
-  "e2e": {
-    "framework": "Cypress",
-    "version": "14.4.0",
-    "testSuites": 7,
-    "testFiles": [
-      "admin-flow.cy.js",
-      "auth-flow.cy.js", 
-      "cart-flow.cy.js",
-      "contact-form-integration.cy.js",
-      "product-search-integration.cy.js",
-      "user-flow.cy.js",
-      "test.cy.js"
-    ],
-    "configuration": {
-      "baseUrls": {
-        "frontend": "http://localhost:5173",
-        "admin": "http://localhost:5174",
-        "api": "http://localhost:4000/api"
-      },
-      "viewport": "1280x720",
-      "browsers": ["Chrome", "Firefox", "Edge"]
-    },    "totalTests": 41,
-    "testsStatus": "All tests passed (100%)",
-    "executionTime": "2m 33s",
-    "testBreakdown": {
-      "admin_flow": "16 tests - Admin panel functionality",
-      "auth_flow": "16 tests - Authentication & authorization", 
-      "cart_flow": "2 tests - Shopping cart operations",
-      "contact_form": "2 tests - Contact form integration",
-      "product_search": "2 tests - Product search & filtering",
-      "basic_tests": "2 tests - Basic application access",
-      "user_flow": "1 test - Complete user journey"
-    },
-    "coverage": "✅ Full User Journey Coverage",
-    "qualityLevel": "Excellent",
-    "recommendation": "Add visual regression and performance testing"
-  },
-  "testingTools": {
-    "unit": {
-      "backend": "Jest",
-      "frontend": "Jest + React Testing Library"
-    },
-    "integration": "Jest + RTL",
-    "e2e": "Cypress",
-    "coverage": "Jest Coverage + LCOV",
-    "reporting": ["HTML", "JSON", "LCOV", "Console"]
-  },
-  "coverageFiles": {
-    "backend": {
-      "html": "backend/coverage/index.html",
-      "lcov": "backend/coverage/lcov.info",
-      "json": "backend/coverage/coverage-final.json"
-    },
-    "frontend": {
-      "html": "frontend/coverage/index.html", 
-      "lcov": "frontend/coverage/lcov.info",
-      "json": "frontend/coverage/coverage-final.json"
+    "branches": {
+      "total": 95,
+      "covered": 88,
+      "skipped": 0,
+      "pct": "92.63"
     }
   },
-  "recommendations": {
-    "critical": [
-      "Implement ShopContext test suite (0% coverage)",
-      "Add frontend error boundary testing",
-      "Increase frontend branch coverage (36.48%)"
-    ],
-    "high": [
-      "Complete page component testing (Orders, PlaceOrder, Verify)",
-      "Add user interaction testing for components",
-      "Implement state management integration tests"
-    ],
-    "medium": [
-      "Add visual regression testing with Cypress",
-      "Implement API contract testing",
-      "Create performance testing suite"
-    ]
-  },
-  "improvementTargets": {
-    "phase1": {
-      "timeline": "Weeks 1-2",
-      "target": "Frontend coverage 44% → 60%",
-      "focus": "Critical areas (Context, error handling)"
+  "overall": {
+    "lines": {
+      "total": 2574,
+      "covered": 396,
+      "skipped": 0,
+      "pct": "15.38"
     },
-    "phase2": {
-      "timeline": "Weeks 3-4", 
-      "target": "Frontend coverage 60% → 75%",
-      "focus": "Component and page testing"
+    "statements": {
+      "total": 570,
+      "covered": 406,
+      "skipped": 0,
+      "pct": "71.23"
     },
-    "phase3": {
-      "timeline": "Weeks 5-6",
-      "target": "Frontend coverage 75% → 85%",
-      "focus": "Advanced testing (visual, performance)"
+    "functions": {
+      "total": 204,
+      "covered": 152,
+      "skipped": 0,
+      "pct": "74.51"
+    },
+    "branches": {
+      "total": 249,
+      "covered": 152,
+      "skipped": 0,
+      "pct": "61.04"
     }
-  },
-  "qualityScores": {
-    "backend": 5,
-    "frontend": 3,
-    "e2e": 4,
-    "overall": 4
   }
 }

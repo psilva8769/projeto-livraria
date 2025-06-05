@@ -10,7 +10,7 @@ Frontend Components,Unit,14 files,80 tests,45.2%,42.1%,52.3%,46.8%,Needs Improve
 Frontend Pages,Unit,6 files,20 tests,25.6%,18.4%,30.2%,26.1%,Requires Attention,Critical
 Frontend Context,Unit,1 file,0 tests,0%,0%,0%,0%,Critical,Critical
 Frontend Utils,Unit,1 file,16 tests,62.5%,45.8%,68.2%,64.1%,Good,Medium
-Frontend Overall,Unit,23 suites,128 tests,43.78%,36.48%,49.15%,44.31%,Needs Improvement,High
+Frontend Overall,Unit,28 suites,152 tests,61.60%,41.55%,60.50%,62.46%,Good,Medium
 E2E User Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
 E2E Admin Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium
 E2E Auth Flow,Integration,1 file,Multiple,Full Journey,Full Journey,Full Journey,Full Journey,Very Good,Medium

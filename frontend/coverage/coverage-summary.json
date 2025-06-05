@@ -1,0 +1,626 @@
+{
+  "total": {
+    "lines": {
+      "total": 2394,
+      "covered": 231,
+      "skipped": 0,
+      "pct": "9.65"
+    },
+    "statements": {
+      "total": 375,
+      "covered": 231,
+      "skipped": 0,
+      "pct": "61.60"
+    },
+    "functions": {
+      "total": 119,
+      "covered": 72,
+      "skipped": 0,
+      "pct": "60.50"
+    },
+    "branches": {
+      "total": 154,
+      "covered": 64,
+      "skipped": 0,
+      "pct": "41.56"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Navbar.jsx": {
+    "lines": {
+      "total": 42,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "11.90"
+    },
+    "statements": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 8,
+      "covered": 7,
+      "skipped": 0,
+      "pct": "87.50"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/context/ShopContext.jsx": {
+    "lines": {
+      "total": 138,
+      "covered": 67,
+      "skipped": 0,
+      "pct": "48.55"
+    },
+    "statements": {
+      "total": 73,
+      "covered": 67,
+      "skipped": 0,
+      "pct": "91.78"
+    },
+    "functions": {
+      "total": 10,
+      "covered": 10,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 26,
+      "covered": 20,
+      "skipped": 0,
+      "pct": "76.92"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Header.jsx": {
+    "lines": {
+      "total": 75,
+      "covered": 13,
+      "skipped": 0,
+      "pct": "17.33"
+    },
+    "statements": {
+      "total": 24,
+      "covered": 13,
+      "skipped": 0,
+      "pct": "54.17"
+    },
+    "functions": {
+      "total": 9,
+      "covered": 4,
+      "skipped": 0,
+      "pct": "44.44"
+    },
+    "branches": {
+      "total": 12,
+      "covered": 6,
+      "skipped": 0,
+      "pct": "50.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/assets/data.jsx": {
+    "lines": {
+      "total": 436,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "1.15"
+    },
+    "statements": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Title.jsx": {
+    "lines": {
+      "total": 15,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "13.33"
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Item.jsx": {
+    "lines": {
+      "total": 45,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "11.11"
+    },
+    "statements": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Footer.jsx": {
+    "lines": {
+      "total": 113,
+      "covered": 8,
+      "skipped": 0,
+      "pct": "7.08"
+    },
+    "statements": {
+      "total": 8,
+      "covered": 8,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Shop.jsx": {
+    "lines": {
+      "total": 156,
+      "covered": 44,
+      "skipped": 0,
+      "pct": "28.21"
+    },
+    "statements": {
+      "total": 52,
+      "covered": 44,
+      "skipped": 0,
+      "pct": "84.62"
+    },
+    "functions": {
+      "total": 24,
+      "covered": 17,
+      "skipped": 0,
+      "pct": "70.83"
+    },
+    "branches": {
+      "total": 19,
+      "covered": 12,
+      "skipped": 0,
+      "pct": "63.16"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Cart.jsx": {
+    "lines": {
+      "total": 87,
+      "covered": 9,
+      "skipped": 0,
+      "pct": "10.34"
+    },
+    "statements": {
+      "total": 11,
+      "covered": 9,
+      "skipped": 0,
+      "pct": "81.82"
+    },
+    "functions": {
+      "total": 7,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "71.43"
+    },
+    "branches": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": "100.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/utils/testUtils.js": {
+    "lines": {
+      "total": 104,
+      "covered": 13,
+      "skipped": 0,
+      "pct": "12.50"
+    },
+    "statements": {
+      "total": 24,
+      "covered": 13,
+      "skipped": 0,
+      "pct": "54.17"
+    },
+    "functions": {
+      "total": 11,
+      "covered": 3,
+      "skipped": 0,
+      "pct": "27.27"
+    },
+    "branches": {
+      "total": 10,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "10.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Hero.jsx": {
+    "lines": {
+      "total": 67,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "2.99"
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/NewArrivals.jsx": {
+    "lines": {
+      "total": 68,
+      "covered": 8,
+      "skipped": 0,
+      "pct": "11.76"
+    },
+    "statements": {
+      "total": 8,
+      "covered": 8,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/About.jsx": {
+    "lines": {
+      "total": 59,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "3.39"
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/PopularBooks.jsx": {
+    "lines": {
+      "total": 35,
+      "covered": 9,
+      "skipped": 0,
+      "pct": "25.71"
+    },
+    "statements": {
+      "total": 9,
+      "covered": 9,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/Features.jsx": {
+    "lines": {
+      "total": 57,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "3.51"
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Home.jsx": {
+    "lines": {
+      "total": 32,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "6.25"
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Contact.jsx": {
+    "lines": {
+      "total": 166,
+      "covered": 6,
+      "skipped": 0,
+      "pct": "3.61"
+    },
+    "statements": {
+      "total": 10,
+      "covered": 6,
+      "skipped": 0,
+      "pct": "60.00"
+    },
+    "functions": {
+      "total": 4,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "50.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/components/CartTotal.jsx": {
+    "lines": {
+      "total": 28,
+      "covered": 3,
+      "skipped": 0,
+      "pct": "10.71"
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": "100.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Login.jsx": {
+    "lines": {
+      "total": 142,
+      "covered": 21,
+      "skipped": 0,
+      "pct": "14.79"
+    },
+    "statements": {
+      "total": 31,
+      "covered": 21,
+      "skipped": 0,
+      "pct": "67.74"
+    },
+    "functions": {
+      "total": 8,
+      "covered": 5,
+      "skipped": 0,
+      "pct": "62.50"
+    },
+    "branches": {
+      "total": 18,
+      "covered": 8,
+      "skipped": 0,
+      "pct": "44.44"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/PlaceOrder.jsx": {
+    "lines": {
+      "total": 276,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "0.36"
+    },
+    "statements": {
+      "total": 40,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "2.50"
+    },
+    "functions": {
+      "total": 7,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "0.00"
+    },
+    "branches": {
+      "total": 27,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "0.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Orders.jsx": {
+    "lines": {
+      "total": 123,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "0.81"
+    },
+    "statements": {
+      "total": 24,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "4.17"
+    },
+    "functions": {
+      "total": 7,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "0.00"
+    },
+    "branches": {
+      "total": 14,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "0.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/pages/Verify.jsx": {
+    "lines": {
+      "total": 99,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "1.01"
+    },
+    "statements": {
+      "total": 31,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "3.23"
+    },
+    "functions": {
+      "total": 6,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "0.00"
+    },
+    "branches": {
+      "total": 10,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "0.00"
+    }
+  },
+  "/Users/admin/Documents/projeto-livraria/frontend/src/App.jsx": {
+    "lines": {
+      "total": 31,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "6.45"
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": "100.00"
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  }
+}
