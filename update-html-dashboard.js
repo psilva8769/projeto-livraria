@@ -5,7 +5,7 @@ function updateHtmlDashboards() {
     try {
         console.log('Starting HTML dashboard update...');
         
-        // Read the real coverage data
+        // Leia os dados reais de cobertura
         const coverageSummaryPath = './coverage-summary.json';
         const frontendCoveragePath = './frontend/coverage/coverage-summary.json';
         const testResultsPath = './frontend/test-results.json';
@@ -24,14 +24,14 @@ function updateHtmlDashboards() {
         const frontendCoverage = JSON.parse(fs.readFileSync(frontendCoveragePath, 'utf8'));
         const testResults = JSON.parse(fs.readFileSync(testResultsPath, 'utf8'));
         
-        // Calculate real metrics
+        // Calcule as métricas reais
         const totalTestSuites = testResults.numTotalTestSuites;
         const totalTests = testResults.numTotalTests;
         const passedTests = testResults.numPassedTests;
         const failedTests = testResults.numFailedTests;
         const testSuccessRate = ((passedTests / totalTests) * 100).toFixed(1);
         
-        // Frontend coverage metrics
+        // Métricas de cobertura do frontend
         const frontendTotal = frontendCoverage.total;
         const statementCoverage = frontendTotal.statements.pct;
         const functionCoverage = frontendTotal.functions.pct;
@@ -39,10 +39,10 @@ function updateHtmlDashboards() {
         const lineCoverage = frontendTotal.lines.pct;
         const overallCoverage = ((statementCoverage + functionCoverage + branchCoverage + lineCoverage) / 4).toFixed(1);
         
-        // Generate timestamp
+        // Gere o timestamp
         const timestamp = new Date().toISOString().split('T')[0];
         
-        // Create updated HTML dashboard
+        // Crie o dashboard HTML atualizado
         const htmlContent = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -265,7 +265,7 @@ function updateHtmlDashboards() {
     </div>
 
     <script>
-        // Coverage Chart
+        // Gráfico de Cobertura
         const coverageCtx = document.getElementById('coverageChart').getContext('2d');
         new Chart(coverageCtx, {
             type: 'doughnut',
@@ -293,7 +293,7 @@ function updateHtmlDashboards() {
             }
         });
 
-        // Tests Chart
+        // Gráfico de Testes
         const testsCtx = document.getElementById('testsChart').getContext('2d');
         new Chart(testsCtx, {
             type: 'doughnut',
@@ -322,11 +322,11 @@ function updateHtmlDashboards() {
 </body>
 </html>`;
 
-        // Write the updated HTML
+        // Escreva o HTML atualizado
         fs.writeFileSync('./testing-dashboard-real-data.html', htmlContent);
         console.log('✅ HTML dashboard updated with real test data');
         
-        // Also update the original dashboard
+        // Também atualize o dashboard original
         fs.writeFileSync('./testing-dashboard-final.html', htmlContent);
         console.log('✅ Final dashboard updated with real data');
         
@@ -335,5 +335,5 @@ function updateHtmlDashboards() {
     }
 }
 
-// Execute the update
+// Execute a atualização
 updateHtmlDashboards();

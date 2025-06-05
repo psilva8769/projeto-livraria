@@ -30,7 +30,7 @@ const PlaceOrder = () => {
   }
 
   const onSubmitHandler = async (event) => {
-    event.preventDefault() // prevents page reload
+    event.preventDefault() // previne recarregamento da página
     try {
       let orderItems = []
 
@@ -52,7 +52,7 @@ const PlaceOrder = () => {
       }
 
       switch (method) {
-        // api for COD method
+        // api para método Dinheiro na Entrega (COD)
         case 'cod':
           const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } })
           console.log(response.data)
@@ -64,7 +64,7 @@ const PlaceOrder = () => {
           }
           break;
 
-        // api for stripe method
+        // api para método Stripe
         case 'stripe':
           const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, { headers: { token } })
           if (responseStripe.data.success) {
@@ -89,7 +89,7 @@ const PlaceOrder = () => {
       {/* Container */}
       <form onSubmit={onSubmitHandler} className='max-padd-container pt-32 pb-20'>
         <div className='flex flex-col xl:flex-row gap-16 xl:gap-20'>
-          {/* Left Side */}
+          {/* Lado Esquerdo */}
           <div className='flex flex-1 flex-col gap-8'>
             <Title title1={'Informações'} title2={'de Entrega'} title1Styles={'h3'} />
             
@@ -216,11 +216,11 @@ const PlaceOrder = () => {
             </div>
           </div>
 
-          {/* Right side */}
+          {/* Lado Direito */}
           <div className='flex flex-1 flex-col gap-8'>
             <CartTotal />
             
-            {/* Payment method */}
+            {/* Método de pagamento */}
             <div className='bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300'>
               <h3 className='h3 text-navy mb-6'>Forma de <span className='bg-gradient-to-r from-secondary to-tertiary bg-clip-text text-transparent'>Pagamento</span></h3>
               <div className='space-y-4'>

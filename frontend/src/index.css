@@ -104,7 +104,7 @@
     @apply flex items-center justify-end;
   }
 
-  /* FONTS */
+  /* FONTES */
   .regular-64 {
     @apply text-[64px] font-[400] leading-[120%];
   }

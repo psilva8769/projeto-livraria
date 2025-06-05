@@ -28,16 +28,16 @@ const Header = () => {
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 0) {
-                // close the menu if opened when scrolling occurs
+                // fecha o menu se estiver aberto ao rolar a página
                 if (menuOpened) {
                     setMenuOpened(false)
                 }
             }
-            // detect scroll
+            // detecta o scroll
             setActive(window.scrollY > 30)
         }
         window.addEventListener("scroll", handleScroll)
-        // clean up the event listener when component unmounts
+        // remove o event listener quando o componente for desmontado
         return () => {
             window.removeEventListener("scroll", handleScroll)
         }
@@ -57,7 +57,7 @@ const Header = () => {
                     <Navbar menuOpened={menuOpened} toggleMenu={toggleMenu} containerStyles={`${menuOpened ? "flex flex-col gap-y-16 h-screen w-[222px] absolute left-0 top-0 bg-white z-50 px-10 py-4 shadow-xl" : "hidden xl:flex justify-center gap-x-8 xl:gap-x-14 medium-15 px-2 py-1"}`} />
                 </div>
                 
-                {/* Right side */}
+                {/* Lado direito */}
                 <div className='flex-1 flex items-center justify-end gap-x-3 sm:gap-x-10'>
                     <CgMenuLeft onClick={toggleMenu} className='text-2xl xl:hidden cursor-pointer text-secondary hover:text-navy transition-colors duration-300' />                    <Link to={'/cart'} className='flex relative group' data-discover="true">
                         <RiShoppingBag4Line className='text-[33px] bg-gradient-to-br from-secondary to-navy text-primary p-1.5 rounded-xl shadow-md group-hover:scale-110 transition-all duration-300' />

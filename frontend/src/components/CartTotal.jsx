@@ -8,7 +8,7 @@ const CartTotal = () => {
 
     return (
         <div className='w-full bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300'>
-            {/* Title */}
+            {/* Título */}
             <Title title1={'Carrinho'} title2={'Total'} title1Styles={'h3'} />
             
             <div className='space-y-4 mt-6'>

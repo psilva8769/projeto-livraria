@@ -21,9 +21,9 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission here
+    // Lidar com o envio do formulário aqui
     console.log('Form submitted:', formData)
-    // Reset form
+    // Resetar formulário
     setFormData({
       name: '',
       email: '',
@@ -35,7 +35,7 @@ const Contact = () => {
   return (
     <section className='min-h-screen bg-gradient-to-br from-cream/30 via-white to-sage/20'>
       <div className='max-padd-container pt-32 pb-20'>
-        {/* Title */}
+        {/* Título */}
         <div className='text-center mb-16'>
           <Title title1={'Entre em'} title2={'Contato'} titleStyles={'pb-4'} />
           <p className='text-tertiary leading-relaxed max-w-2xl mx-auto'>
@@ -44,7 +44,7 @@ const Contact = () => {
         </div>
 
         <div className='grid lg:grid-cols-2 gap-16 xl:gap-20'>
-          {/* Contact Information */}
+          {/* Informações de Contato */}
           <div className='space-y-12'>
             <div>
               <h3 className='h3 text-navy mb-8'>Informações de Contato</h3>
@@ -81,7 +81,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Media */}
+            {/* Redes Sociais */}
             <div>
               <h3 className='h3 text-navy mb-6'>Siga-nos</h3>
               <div className='flex gap-4'>
@@ -99,7 +99,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Formulário de Contato */}
           <div className='bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200/50 p-8 shadow-lg hover:shadow-xl transition-all duration-300'>
             <h3 className='h3 text-navy mb-6'>Envie uma Mensagem</h3>
             <form onSubmit={handleSubmit} className='space-y-6'>

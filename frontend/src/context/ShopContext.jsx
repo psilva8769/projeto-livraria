@@ -5,18 +5,18 @@ import { toast } from "react-toastify"
 
 export const ShopContext = createContext()
 
-// This function safely gets the backend URL whether we're in a browser or a test environment
+// Esta função obtém com segurança a URL do backend, seja no navegador ou em ambiente de teste
 function getBackendUrl() {
-    // In a Jest environment, this will safely return the default URL
+    // Em ambiente Jest, retorna com segurança a URL padrão
     if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
         return 'http://localhost:5000';
     }
     
-    // In a browser environment with Vite, this will use the environment variable
+    // Em ambiente de navegador com Vite, usa a variável de ambiente
     try {
         return import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     } catch (e) {
-        // Fallback for any environment where import.meta is not available
+        // Fallback para qualquer ambiente onde import.meta não está disponível
         return 'http://localhost:5000';
     }
 };
@@ -31,9 +31,9 @@ const ShopContextProvider = (props) => {
     const [token, setToken] = useState("")
     const [cartItems, setCartItems] = useState({})
 
-    // Adding items to cart
+    // Adicionando itens ao carrinho
     const addToCart = async (itemId) => {
-        const cartData = { ...cartItems } // Use shallow copy
+        const cartData = { ...cartItems } // Usa cópia superficial
 
         if (cartData[itemId]) {
             cartData[itemId] += 1
@@ -54,7 +54,7 @@ const ShopContextProvider = (props) => {
     }
 
 
-    // Getting total cart items
+    // Obtendo o total de itens no carrinho
     const getCartCount = () => {
         let totalCount = 0
         for (const item in cartItems) {
@@ -70,7 +70,7 @@ const ShopContextProvider = (props) => {
     }
 
 
-    // Getting total cart amount
+    // Obtendo o valor total do carrinho
     const getCartAmount = () => {
         let totalAmount = 0
         for (const item in cartItems) {
@@ -85,7 +85,7 @@ const ShopContextProvider = (props) => {
     }
 
 
-    // Updating the Quantity
+    // Atualizando a quantidade
     const updateQuantity = async (itemId, quantity) => {
         const cartData = { ...cartItems }
         cartData[itemId] = quantity
@@ -102,7 +102,7 @@ const ShopContextProvider = (props) => {
     }
 
 
-    // Getting all products data
+    // Obtendo todos os dados dos produtos
     const getProductsData = async () => {
         try {
             const response = await axios.get(backendUrl + '/api/product/list')
@@ -117,7 +117,7 @@ const ShopContextProvider = (props) => {
         }
     }
 
-    // Getting useCart data 
+    // Obtendo dados do carrinho do usuário
     const getUserCart = async (token) => {
         try {
             const response = await axios.post(backendUrl + '/api/cart/get', {}, { headers: { token } })
@@ -133,7 +133,7 @@ const ShopContextProvider = (props) => {
 
     useEffect(() => {
         if (!token && localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'))  // prevent logout upon reload the page if logged in
+            setToken(localStorage.getItem('token'))  // previne logout ao recarregar a página se estiver logado
             getUserCart(localStorage.getItem('token'))
 
         }

@@ -6,7 +6,7 @@ import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from '../assets/data'
 const Footer = () => {
   return (
     <footer className='mb-4 relative'>
-      {/* Background gradients */}
+      {/* Gradientes de fundo */}
       <div className='absolute inset-0 bg-gradient-to-br from-secondary/5 via-navy/5 to-tertiary/5 rounded-tr-3xl rounded-tl-3xl'></div>
       
       <div className='relative rounded-tr-3xl rounded-tl-3xl pt-12 xl:pt-20 pb-8 border-t border-gray-20/20'>
@@ -47,7 +47,7 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Newsletter benefits */}
+            {/* Benefícios da newsletter */}
             <div className='flex flex-col gap-2 text-sm text-gray-50'>
               <div className='flex items-center gap-2'>
                 <span className='w-2 h-2 bg-secondaryOne rounded-full'></span>
@@ -58,7 +58,8 @@ const Footer = () => {
                 <span>Ofertas exclusivas para assinantes</span>
               </div>
             </div>
-          </div>          <div className='flex justify-between flex-wrap gap-8'>
+          </div>          
+          <div className='flex justify-between flex-wrap gap-8'>
             {FOOTER_LINKS.map((col) => (
               <FooterColumn key={col.title} title={col.title}>
                 <ul className='flex flex-col gap-4 regular-14 text-gray-50'>
@@ -94,7 +95,7 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Bottom section */}
+        {/* Seção inferior */}
         <div className='mt-12 pt-8 border-t border-gray-20/20'>
           <div className='flexBetween flex-wrap gap-4'>
             <div className='flex gap-6 text-sm text-gray-50'>

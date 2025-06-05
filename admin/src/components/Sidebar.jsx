@@ -28,7 +28,7 @@ const Sidebar = ({setToken}) => {
                         <MdFactCheck />
                         <div className='hidden lg:flex'>Orders</div>
                     </NavLink>
-                    {/* Logout button */}
+                    {/* Botão de logout */}
                     <div className='max-sm:ml-5 sm:mt-72'>
                         <button className='flexStart gap-x-2 sm:pl-12 p-5 medium-15 cursor-pointer h-10 rounded-xl'>
                             <BiLogOut onClick={()=> setToken('')} className='text-lg'/>

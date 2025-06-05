@@ -12,7 +12,7 @@ app.use(express.json());
 app.use('/api/product', productRouter);
 app.use('/api/auth', authRouter); // Adicione a rota de auth
 
-jest.setTimeout(60000); // Increase timeout to 60 seconds
+jest.setTimeout(60000); // Aumenta o tempo limite para 60 segundos
 
 // Testes do Controller de Produto
 describe('Controlador de Produto', () => {

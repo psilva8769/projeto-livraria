@@ -3,14 +3,14 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read the test results file to get real coverage data
+// Lê o arquivo de resultados dos testes para obter os dados reais de cobertura
 const testResultsPath = '/Users/admin/Documents/projeto-livraria/frontend/test-results.json';
 const testResults = JSON.parse(fs.readFileSync(testResultsPath, 'utf8'));
 
-// Extract the coverage map from test results
+// Extrai o mapa de cobertura dos resultados dos testes
 const coverageMap = testResults.coverageMap;
 
-// Calculate summary statistics
+// Calcula estatísticas resumidas
 function calculateSummary(coverageMap) {
     let totalStatements = 0, coveredStatements = 0;
     let totalFunctions = 0, coveredFunctions = 0;
@@ -24,17 +24,17 @@ function calculateSummary(coverageMap) {
         const functions = fileCov.f || {};
         const branches = fileCov.b || {};
 
-        // Calculate statements
+        // Calcula statements
         const stmtValues = Object.values(statements);
         const stmtTotal = stmtValues.length;
         const stmtCovered = stmtValues.filter(count => count > 0).length;
 
-        // Calculate functions
+        // Calcula functions
         const funcValues = Object.values(functions);
         const funcTotal = funcValues.length;
         const funcCovered = funcValues.filter(count => count > 0).length;
 
-        // Calculate branches
+        // Calcula branches
         let branchTotal = 0;
         let branchCovered = 0;
         for (const branchData of Object.values(branches)) {
@@ -42,7 +42,7 @@ function calculateSummary(coverageMap) {
             branchCovered += branchData.filter(count => count > 0).length;
         }
 
-        // Calculate lines (estimate from statement map)
+        // Calcula linhas (estima a partir do statement map)
         const statementMap = fileCov.statementMap || {};
         const lineNumbers = new Set();
         for (const stmt of Object.values(statementMap)) {
@@ -55,7 +55,7 @@ function calculateSummary(coverageMap) {
         const lineTotal = lineNumbers.size;
         const lineCovered = stmtValues.filter(count => count > 0).length;
 
-        // Store file-level coverage
+        // Armazena cobertura a nível de arquivo
         fileCoverage[filePath] = {
             lines: { total: lineTotal, covered: lineCovered, skipped: 0, pct: lineTotal ? (lineCovered / lineTotal * 100).toFixed(2) : 100 },
             statements: { total: stmtTotal, covered: stmtCovered, skipped: 0, pct: stmtTotal ? (stmtCovered / stmtTotal * 100).toFixed(2) : 100 },
@@ -63,7 +63,7 @@ function calculateSummary(coverageMap) {
             branches: { total: branchTotal, covered: branchCovered, skipped: 0, pct: branchTotal ? (branchCovered / branchTotal * 100).toFixed(2) : 100 }
         };
 
-        // Accumulate totals
+        // Acumula totais
         totalStatements += stmtTotal;
         coveredStatements += stmtCovered;
         totalFunctions += funcTotal;
@@ -88,21 +88,21 @@ function calculateSummary(coverageMap) {
 
 const { summary, fileCoverage } = calculateSummary(coverageMap);
 
-// Create updated coverage summary
+// Cria o resumo de cobertura atualizado
 const updatedCoverageSummary = {
     ...summary,
     ...fileCoverage
 };
 
-// Write updated coverage summary
+// Escreve o resumo de cobertura atualizado
 const coverageSummaryPath = '/Users/admin/Documents/projeto-livraria/frontend/coverage/coverage-summary.json';
 fs.writeFileSync(coverageSummaryPath, JSON.stringify(updatedCoverageSummary, null, 2));
 
-// Update coverage-final.json as well
+// Atualiza coverage-final.json também
 const coverageFinalPath = '/Users/admin/Documents/projeto-livraria/frontend/coverage/coverage-final.json';
 fs.writeFileSync(coverageFinalPath, JSON.stringify(coverageMap, null, 2));
 
-// Update project-level coverage summary
+// Atualiza o resumo de cobertura a nível de projeto
 const projectCoveragePath = '/Users/admin/Documents/projeto-livraria/coverage-summary.json';
 const projectCoverage = {
     frontend: summary.total,
@@ -142,7 +142,7 @@ const projectCoverage = {
 
 fs.writeFileSync(projectCoveragePath, JSON.stringify(projectCoverage, null, 2));
 
-// Generate real test results summary
+// Gera resumo real dos resultados dos testes
 const testSummary = {
     timestamp: new Date().toISOString(),
     testRun: {

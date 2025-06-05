@@ -28,7 +28,7 @@ const Add = ({ token }) => {
       formData.append("description", description)
       formData.append("price", price)
       formData.append("category", category)
-      formData.append("popular", popular) // Boolean
+      formData.append("popular", popular) // Booleano
       formData.append("image", image)
 
       const response = await axios.post(`${backend_url}/api/product/create`, formData, { headers: { token } })
@@ -61,7 +61,7 @@ const Add = ({ token }) => {
           <textarea onChange={(e) => setDescription(e.target.value)} value={description} type="text" rows={5} placeholder='Escreva aqui...' className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded bg-white mt-1 w-full max-w-lg' />
         </div>
         <div className='flex items-end gap-x-6'>
-          {/* categories */}
+          {/* categorias */}
           <div>
             <h5 className='h5'>Categoria</h5>
             <select onChange={(e) => setCategory(e.target.value)} value={category} className='px-3 py-2 ring-1 ring-slate-900/10 rounded bg-white mt-1 sm:w-full text-gray-30'>

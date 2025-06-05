@@ -11,23 +11,23 @@
   font-family: "Inter", system-ui;
 }
 
-/* width */
+/* largura */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
+/* Trilho */
 ::-webkit-scrollbar-track {
   background: white;
   border: 1px solid #8080802f;
 }
 
-/* Handle */
+/* Alça */
 ::-webkit-scrollbar-thumb {
   background: #e6e6e6;
 }
 
-/* Handle on hover */
+/* Alça ao passar o mouse */
 ::-webkit-scrollbar-thumb:hover {
   background: #ccc;
 }

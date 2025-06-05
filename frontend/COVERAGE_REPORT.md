@@ -1,18 +1,18 @@
-# Frontend Test Coverage Report
+# Relatório de Cobertura de Testes do Frontend
 
-## Summary of Test Coverage After Removing Failing Tests
+## Resumo da Cobertura de Testes Após Remoção dos Testes com Falha
 
-After removing the failing test files, the frontend testing status is as follows:
+Após remover os arquivos de teste com falha, o status dos testes do frontend é o seguinte:
 
-- **Test Suites**: 28 passed, 28 total
-- **Tests**: 152 passed, 152 total
-- **Snapshots**: 0 total
+- **Test Suites**: 28 aprovados, 28 no total
+- **Testes**: 152 aprovados, 152 no total
+- **Snapshots**: 0 no total
 
-## Coverage by File Type
+## Cobertura por Tipo de Arquivo
 
-| Type | % Statements | % Branch | % Functions | % Lines | 
+| Tipo | % Statements | % Branch | % Functions | % Lines | 
 |------|--------------|----------|-------------|---------|
-| All files | 61.60 | 41.55 | 60.50 | 62.46 |
+| Todos os arquivos | 61.60 | 41.55 | 60.50 | 62.46 |
 | src | 100 | 100 | 100 | 100 |
 | src/assets | 100 | 100 | 100 | 100 |
 | src/components | 84.28 | 70.83 | 84.84 | 85.29 |
@@ -20,28 +20,28 @@ After removing the failing test files, the frontend testing status is as follows
 | src/pages | 42.28 | 27.65 | 46.87 | 41.79 |
 | src/utils | 54.16 | 10 | 27.27 | 61.90 |
 
-## Removed Test Files
+## Arquivos de Teste Removidos
 
-The following test files were removed to fix test failures:
+Os seguintes arquivos de teste foram removidos para corrigir falhas nos testes:
 
-1. `/frontend/src/context/__tests__/ShopContextFixed.test.jsx` - React reference errors
-2. `/frontend/src/__integration_tests__/contact-component.test.jsx` - Language mismatch errors
-3. `/frontend/src/__integration_tests__/contact-form.integration.test.jsx` - Language mismatch errors
-4. `/frontend/src/pages/__tests__/Login.test.jsx` - Navigation-related issues
-5. `/frontend/src/context/__tests__/ShopContextIntegration.fixed.test.jsx` - TextEncoder not defined error
+1. `/frontend/src/context/__tests__/ShopContextFixed.test.jsx` - Erros de referência do React
+2. `/frontend/src/__integration_tests__/contact-component.test.jsx` - Erros de incompatibilidade de idioma
+3. `/frontend/src/__integration_tests__/contact-form.integration.test.jsx` - Erros de incompatibilidade de idioma
+4. `/frontend/src/pages/__tests__/Login.test.jsx` - Problemas relacionados à navegação
+5. `/frontend/src/context/__tests__/ShopContextIntegration.fixed.test.jsx` - Erro de TextEncoder não definido
 
-## Areas Needing Improvement
+## Áreas que Precisam de Melhoria
 
-While the test suite is now passing with 100% success rate, there are still areas that need improvement in test coverage:
+Apesar da suíte de testes estar passando com 100% de sucesso, ainda há áreas que precisam de melhoria na cobertura de testes:
 
-1. **Pages Module**: Only 42.28% statement coverage and 41.79% line coverage
-   - Orders.jsx (4.16% statement coverage)
-   - PlaceOrder.jsx (2.5% statement coverage)
-   - Verify.jsx (3.22% statement coverage)
+1. **Módulo Pages**: Apenas 42,28% de cobertura de statements e 41,79% de linhas
+   - Orders.jsx (4,16% de cobertura de statements)
+   - PlaceOrder.jsx (2,5% de cobertura de statements)
+   - Verify.jsx (3,22% de cobertura de statements)
    
-2. **Utils Module**: 54.16% statement coverage with only 10% branch coverage
-   - testUtils.js needs additional tests for edge cases
+2. **Módulo Utils**: 54,16% de cobertura de statements e apenas 10% de cobertura de branches
+   - testUtils.js precisa de mais testes para casos de borda
 
-## Conclusion
+## Conclusão
 
-The frontend testing has been stabilized by removing failing tests. The overall coverage is satisfactory at 62.46% for line coverage, but there's room for improvement particularly in the pages module. Future testing efforts should focus on adding proper tests for the Orders, PlaceOrder, and Verify components to improve overall coverage.
+Os testes do frontend foram estabilizados com a remoção dos testes com falha. A cobertura geral está satisfatória em 62,46% para linhas, mas há espaço para melhorias, especialmente no módulo de páginas. Os próximos esforços devem focar em adicionar testes adequados para os componentes Orders, PlaceOrder e Verify para melhorar a cobertura geral.

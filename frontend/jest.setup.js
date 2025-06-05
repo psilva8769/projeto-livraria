@@ -1,4 +1,4 @@
-// Setup global para import.meta - ensure this is properly defined
+// Setup global para import.meta - garanta que isso esteja devidamente definido
 global.import = {
   meta: {
     env: {
@@ -7,7 +7,7 @@ global.import = {
   }
 };
 
-// Add import.meta.env directly to the global scope with proper value definition
+// Adiciona import.meta.env diretamente ao escopo global com definição de valor adequada
 Object.defineProperty(global, 'import', {
   value: global.import,
   writable: true
@@ -28,22 +28,22 @@ Object.defineProperty(global.import.meta.env, 'VITE_BACKEND_URL', {
   writable: true
 });
 
-// Mock do window.matchMedia
+// Mock de window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
+    addListener: jest.fn(), // obsoleto
+    removeListener: jest.fn(), // obsoleto
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
 });
 
-// Mock do IntersectionObserver
+// Mock de IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
   disconnect() {}

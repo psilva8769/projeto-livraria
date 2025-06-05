@@ -11,23 +11,23 @@
   font-family: "Inter", system-ui;
 }
 
-/* width */
+/* largura */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
+/* Trilha */
 ::-webkit-scrollbar-track {
   background: white;
   border: 1px solid #8080802f;
 }
 
-/* Handle */
+/* Manipulador */
 ::-webkit-scrollbar-thumb {
   background: #e6e6e6;
 }
 
-/* Handle on hover */
+/* Manipulador ao passar o mouse */
 ::-webkit-scrollbar-thumb:hover {
   background: #ccc;
 }
@@ -106,7 +106,7 @@
     @apply flex items-center justify-end;
   }
 
-  /* FONTS */
+  /* FONTES */
   .regular-64 {
     @apply text-[64px] font-[400] leading-[120%];
   }

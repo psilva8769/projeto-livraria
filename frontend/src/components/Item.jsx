@@ -12,7 +12,7 @@ const Item = ({book}) => {
             <div className='absolute inset-0 bg-gradient-to-br from-secondaryOne/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
             <img src={book.image} alt="Imagem do livro" className='w-full h-48 object-cover shadow-xl shadow-slate-900/20 rounded-xl relative z-10 group-hover:shadow-2xl transition-shadow duration-300' />
             
-            {/* Floating add to cart button */}
+            {/* Botão flutuante de adicionar ao carrinho */}
             <div className='absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0'>
                 <span onClick={()=> addToCart(book._id)} className='flexCenter h-10 w-10 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer shadow-lg hover:bg-secondaryOne hover:text-white transition-all duration-200' title="Adicionar ao carrinho">
                     <TbShoppingBagPlus className='text-lg'/>
@@ -36,7 +36,7 @@ const Item = ({book}) => {
             
             <p className='line-clamp-2 text-gray-50 text-sm leading-relaxed'>{book.description}</p>
             
-            {/* Rating stars placeholder */}
+            {/* Espaço reservado para estrelas de avaliação */}
             <div className='flex items-center gap-1 mt-3 opacity-60'>
                 {[...Array(5)].map((_, i) => (
                     <span key={i} className='text-gold text-xs'>⭐</span>

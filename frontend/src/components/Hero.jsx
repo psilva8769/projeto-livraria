@@ -6,11 +6,11 @@ import pencil from "../assets/pencil.png"
 const Hero = () => {
     return (
         <section className='max-padd-container py-20 xl:py-36 relative overflow-hidden'>
-            {/* Background gradient */}
+            {/* Gradiente de fundo */}
             <div className='absolute inset-0 bg-gradient-to-br from-primary via-muted to-cream opacity-60'></div>
             
             <div className='flexCenter gap-12 flex-col xl:flex-row relative z-10'>
-                {/* left side */}
+                {/* lado esquerdo */}
                 <div className='flex flex-1 flex-col pt-12 xl:pt-32'>
                     <div className='inline-flex items-center gap-2 bg-secondaryOne/10 text-secondary px-4 py-2 rounded-full mb-6'>
                         <span className='w-2 h-2 bg-secondaryOne rounded-full animate-pulse'></span>
@@ -46,10 +46,10 @@ const Hero = () => {
                             <span className='text-sm'>+1000 leitores satisfeitos</span>
                         </div>
                     </div>
-                </div>                {/* Right side */}
+                </div>                {/* lado direito */}
                 <div className='flex flex-1 relative z-10 top-12'>
                     <div className='relative'>
-                        {/* Decorative elements */}
+                        {/* Elementos decorativos */}
                         <div className='absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-secondaryOne/20 to-sage/20 rounded-full blur-xl'></div>
                         <div className='absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-secondary/20 to-navy/20 rounded-full blur-xl'></div>
                         
@@ -57,7 +57,7 @@ const Hero = () => {
                             <img src={bg} alt="" height={588} width={588} className='rounded-2xl shadow-lg' />
                         </div>
                         
-                        {/* Floating badges */}
+                        {/* Selos flutuantes */}
                         <div className='absolute top-8 -left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg'>
                             <span className='text-sm font-medium text-secondary'>📚 Novos Títulos</span>
                         </div>

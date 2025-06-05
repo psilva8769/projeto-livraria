@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-// Jest configuration for ECMAScript modules
+// Configuração do Jest para módulos ECMAScript
 
 // Mock da função save do modelo de usuário
 const mockSave = jest.fn();

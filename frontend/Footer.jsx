@@ -10,7 +10,7 @@ const Footer = () => {
         <h3 className='h3'>Discover books that ignite your imagination</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, ducimus iste?</p>
         <hr className='my-8 bg-slate-900/30 h-[2px]' />
-        {/* container */}
+        {/* Container */}
         <div className='flex justify-between flex-wrap gap-2
                 '>
           <div className='max-w-sm'>

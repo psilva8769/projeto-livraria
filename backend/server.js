@@ -7,7 +7,7 @@ import productRouter from "./routes/productRoute.js"
 import cartRouter from "./routes/cartRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 
-// App configuration
+// Configuração do app
 const app = express()
 const port = process.env.PORT || 4000
 
@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(cors())
 connectDB()
 
-// API endpoints
+// Endpoints da API
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)

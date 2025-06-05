@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use('/api/auth', userRouter);
 
-jest.setTimeout(60000); // Increase timeout to 60 seconds
+jest.setTimeout(60000); // Aumenta o tempo limite para 60 segundos
 
 describe('Rotas de Usuário', () => {
     let usuarioTeste;

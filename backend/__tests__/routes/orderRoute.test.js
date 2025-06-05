@@ -13,7 +13,7 @@ app.use(express.json());
 app.use('/api/order', orderRouter);
 app.use('/api/auth', authRouter);
 
-jest.setTimeout(60000); // Increase timeout to 60 seconds
+jest.setTimeout(60000); // Aumenta o tempo limite para 60 segundos
 
 // Testes do Controller de Pedidos
 describe('Controlador de Pedidos', () => {

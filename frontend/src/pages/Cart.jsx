@@ -13,10 +13,10 @@ const Cart = () => {
     return (
         <section className='min-h-screen bg-gradient-to-br from-cream/20 via-white to-primary/10'>
             <div className='max-padd-container pt-32 pb-20'>
-                {/* Title */}
+                {/* Título */}
                 <Title title1={'Carrinho'} title2={'Lista'} title1Styles={'h3'} />
                 
-                {/* Cart Items */}
+                {/* Itens do Carrinho */}
                 <div className='mt-12 space-y-6'>
                     {books.map((item) => {
                         if (cartItems[item._id] > 0) {
@@ -59,7 +59,7 @@ const Cart = () => {
                         return null;
                     })}
                     
-                    {/* Empty cart message */}
+                    {/* Mensagem de carrinho vazio */}
                     {getCartAmount() === 0 && (
                         <div className='flexCenter flex-col gap-6 py-20'>
                             <div className='w-32 h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flexCenter'>
@@ -76,7 +76,7 @@ const Cart = () => {
                     )}
                 </div>
 
-                {/* Cart Summary */}
+                {/* Resumo do Carrinho */}
                 {getCartAmount() > 0 && (
                     <div className='flex justify-center mt-20'>
                         <div className='w-full sm:w-[500px]'>

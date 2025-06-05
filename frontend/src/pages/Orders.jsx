@@ -39,7 +39,7 @@ const Orders = () => {
   return (
     <section className='min-h-screen bg-gradient-to-br from-cream/20 via-white to-primary/10'>
       <div className='max-padd-container pt-32 pb-20'>
-        {/* Title */}
+        {/* Título */}
         <Title title1={'Lista de'} title2={'Pedidos'} title1Styles={'h3'} />
         
         {/* Container */}
@@ -48,7 +48,7 @@ const Orders = () => {
             orderData.map((item, i) => (
               <div key={i} className='bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 p-6 rounded-2xl group'>
                 <div className='flex gap-x-6'>
-                  {/* Image */}
+                  {/* Imagem */}
                   <div className='flex-shrink-0'>
                     <div className='relative overflow-hidden rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300'>
                       <img src={item.image} alt="orderItemImg" width={80} height={100} className='object-cover aspect-[4/5] rounded-xl group-hover:scale-105 transition-transform duration-300' />
@@ -56,12 +56,12 @@ const Orders = () => {
                     </div>
                   </div>
                   
-                  {/* Order info */}
+                  {/* Informações do pedido */}
                   <div className='flex-1 min-w-0'>
                     <h5 className='h5 capitalize line-clamp-1 text-navy group-hover:text-secondary transition-colors duration-300 mb-4'>{item.name}</h5>
                     
                     <div className='space-y-4'>
-                      {/* Price and Quantity Info */}
+                      {/* Preço e quantidade */}
                       <div className='flex flex-wrap gap-4'>
                         <div className='bg-gradient-to-r from-primary/10 to-secondary/10 px-4 py-2 rounded-xl border border-gray-200/50'>
                           <span className='text-sm font-medium text-tertiary'>Preço: </span>
@@ -77,7 +77,7 @@ const Orders = () => {
                         </div>
                       </div>
                       
-                      {/* Date */}
+                      {/* Data */}
                       <div className='flex items-center gap-2'>
                         <span className='text-sm font-medium text-tertiary'>Data do Pedido: </span>
                         <span className='text-tertiary'>{new Date(item.date).toLocaleDateString('pt-BR')}</span>
@@ -85,7 +85,7 @@ const Orders = () => {
                     </div>
                   </div>
                   
-                  {/* Status & button */}
+                  {/* Status e botão */}
                   <div className='flex flex-col gap-4 items-end'>
                     <div className='flex items-center gap-3 bg-white/80 backdrop-blur-sm px-4 py-3 rounded-xl border border-gray-200/50 shadow-sm'>
                       <div className={`w-3 h-3 rounded-full ${

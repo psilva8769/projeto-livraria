@@ -11,7 +11,7 @@ const Login = ({setToken}) => {
 
   const onSubmitHandler = async (e)=>{
     try {
-      e.preventDefault() // prevent reload the page
+      e.preventDefault() // previne recarregar a página
       const response = await axios.post(backend_url + '/api/user/admin', {email, password})
       if(response.data.success){
         setToken(response.data.token)
@@ -28,11 +28,11 @@ const Login = ({setToken}) => {
     <section className='absolute top-0 left-0 h-full w-full z-50 bg-white'>
       {/* container */}
       <div className='flex h-full w-full'>
-        {/* image right side */}
+        {/* imagem lado direito */}
         <div className='w-1/2 hidden sm:block'>
           <img src={loginImg} alt="" className='object-cover h-full w-full'/>
         </div>
-        {/* Form side */}
+        {/* lado do formulário */}
         <div className='flexCenter w-full sm:w-1/2'>
           <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-md m-auto gap-y-5 text-gray-800'>
             <div className='w-full mb-4'>

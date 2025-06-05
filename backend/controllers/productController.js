@@ -1,12 +1,11 @@
 import productModel from "../models/productModel.js";
 
-
-// Controller function to create product
+// Função controladora para criar produto
 const createProduct = async (req, res) => {
     try {
         const { name, description, category, price, popular } = req.body
 
-        const imageUrl = "https://via.placeholder.com/150" // Default image URL
+        const imageUrl = "https://via.placeholder.com/150" // URL de imagem padrão
 
         const productData = {
             name,
@@ -29,7 +28,7 @@ const createProduct = async (req, res) => {
     }
 }
 
-// Controller function to delete a product
+// Função controladora para deletar um produto
 const deleteProduct = async (req, res) => {
     try {
         await productModel.findByIdAndDelete(req.body.id)
@@ -40,7 +39,7 @@ const deleteProduct = async (req, res) => {
     }
 }
 
-// Controller function to list all products
+// Função controladora para listar todos os produtos
 const getAllProducts = async (req, res) => {
     try {
         const products = await productModel.find({})
@@ -51,7 +50,7 @@ const getAllProducts = async (req, res) => {
     }
 }
 
-// Controller function to fetch a single product's details
+// Função controladora para buscar detalhes de um único produto
 const getProductById = async (req, res) => {
     try {
         const { productId } = req.body

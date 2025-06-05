@@ -9,7 +9,7 @@ import Footer from '../components/Footer'
 const Home = () => {
   return (
     <div className='relative'>
-      {/* Background effects */}
+      {/* Efeitos de fundo */}
       <div className='absolute inset-0 bg-gradient-to-br from-primary via-muted to-cream opacity-50'></div>
       
       <div className='relative'>

@@ -1,6 +1,6 @@
 import request from 'supertest';
 
-// Jest configuration for ECMAScript modules
+// Configuração do Jest para módulos ECMAScript
 import { jest } from '@jest/globals';
 
 import mongoose from 'mongoose';
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api/cart', cartRouter);
 app.use('/api/auth', authRouter); // Adicione a rota de autenticação
 
-jest.setTimeout(60000); // Increase timeout to 60 seconds
+jest.setTimeout(60000); // Aumenta o timeout para 60 segundos
 
 // Testes do Controlador de Carrinho
 describe('Controlador de Carrinho', () => {

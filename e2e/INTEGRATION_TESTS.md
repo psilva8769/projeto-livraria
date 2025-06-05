@@ -1,70 +1,70 @@
-# Frontend Integration Tests Implementation
+# Implementação de Testes de Integração do Frontend
 
-## Overview
+## Visão Geral
 
-This document provides an overview of the integration tests implemented for the bookstore e-commerce application frontend.
+Este documento apresenta uma visão geral dos testes de integração implementados para o frontend da aplicação de e-commerce de livraria.
 
-## Tests Implemented
+## Testes Implementados
 
-We have implemented two main integration tests using Cypress:
+Foram implementados dois principais testes de integração utilizando Cypress:
 
-### 1. Product Search Integration Test
+### 1. Teste de Integração da Busca de Produtos
 
-**File:** `cypress/e2e/product-search-integration.cy.js`
+**Arquivo:** `cypress/e2e/product-search-integration.cy.js`
 
-**Description:** Tests the search and filtering functionality in the shop page.
+**Descrição:** Testa a funcionalidade de busca e filtragem na página da loja.
 
-**Test Cases:**
-- **should filter products by search input**: Verifies that the product search functionality works correctly:
-  - Tests searching for a generic term that should return results
-  - Tests searching for a non-existent term to verify "no results" message appears
-  - Verifies the grid display updates appropriately based on search terms
+**Casos de Teste:**
+- **deve filtrar produtos pelo campo de busca**: Verifica se a busca de produtos funciona corretamente:
+  - Testa a busca por um termo genérico que deve retornar resultados
+  - Testa a busca por um termo inexistente para verificar se a mensagem de "nenhum resultado" aparece
+  - Verifica se a grade de produtos é atualizada corretamente conforme o termo pesquisado
 
-- **should sort products by price**: Tests the product sorting functionality:
-  - Verifies that products can be sorted by price (both low to high and high to low)
-  - Confirms that the product grid is properly displayed after sorting
+- **deve ordenar produtos por preço**: Testa a funcionalidade de ordenação de produtos:
+  - Verifica se os produtos podem ser ordenados por preço (do menor para o maior e vice-versa)
+  - Confirma se a grade de produtos é exibida corretamente após a ordenação
 
-### 2. Contact Form Integration Test
+### 2. Teste de Integração do Formulário de Contato
 
-**File:** `cypress/e2e/contact-form-integration.cy.js`
+**Arquivo:** `cypress/e2e/contact-form-integration.cy.js`
 
-**Description:** Tests the contact form submission and validation functionality.
+**Descrição:** Testa o envio e a validação do formulário de contato.
 
-**Test Cases:**
-- **should submit contact form with valid data**: Verifies that:
-  - The form accepts valid input data
-  - The form submission is processed correctly
-  - The form is reset after successful submission
+**Casos de Teste:**
+- **deve enviar o formulário de contato com dados válidos**: Verifica que:
+  - O formulário aceita dados válidos
+  - O envio do formulário é processado corretamente
+  - O formulário é resetado após o envio bem-sucedido
 
-- **should validate required fields in form**: Tests the form validation:
-  - Verifies that empty form submission is prevented
-  - Tests partial form completion (missing different required fields)
-  - Ensures proper validation behavior for each required field
+- **deve validar campos obrigatórios no formulário**: Testa a validação do formulário:
+  - Verifica que o envio do formulário vazio é impedido
+  - Testa o preenchimento parcial do formulário (faltando diferentes campos obrigatórios)
+  - Garante o comportamento correto da validação para cada campo obrigatório
 
-## Running the Tests
+## Como Executar os Testes
 
-To run these integration tests:
+Para executar estes testes de integração:
 
 ```bash
-# Navigate to the e2e directory
+# Navegue até o diretório e2e
 cd e2e
 
-# Run all integration tests
+# Execute todos os testes de integração
 npx cypress run --spec "cypress/e2e/contact-form-integration.cy.js,cypress/e2e/product-search-integration.cy.js"
 
-# Run a specific test
+# Execute um teste específico
 npx cypress run --spec "cypress/e2e/product-search-integration.cy.js"
 ```
 
-## Test Coverage
+## Cobertura dos Testes
 
-These integration tests provide coverage for two critical user flows in the application:
+Estes testes de integração cobrem dois fluxos críticos de usuário na aplicação:
 
-1. **Product Search and Filtering**: Essential e-commerce functionality that allows users to find products
-2. **Contact Form Submission**: Important user interaction for customer support and feedback
+1. **Busca e Filtragem de Produtos**: Funcionalidade essencial de e-commerce que permite aos usuários encontrar produtos
+2. **Envio do Formulário de Contato**: Interação importante para suporte ao cliente e feedback
 
-## Notes
+## Observações
 
-- These tests are designed to work in conjunction with the existing unit tests
-- Both tests use realistic user interactions (clicking, typing) to simulate actual user behavior
-- The tests are written to be resilient to minor UI changes by using flexible selectors
+- Estes testes foram desenvolvidos para funcionar em conjunto com os testes unitários existentes
+- Ambos os testes utilizam interações realistas de usuário (cliques, digitação) para simular o comportamento real
+- Os testes foram escritos para serem resilientes a pequenas mudanças na interface, utilizando seletores flexíveis

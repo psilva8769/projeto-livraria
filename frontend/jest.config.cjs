@@ -3,7 +3,7 @@ module.exports = {
   extensionsToTreatAsEsm: ['.jsx'],
   setupFilesAfterEnv: [
     '@testing-library/jest-dom',
-    // Only include one setup file reference to avoid duplicate execution
+    // Inclua apenas uma referência de arquivo de configuração para evitar execução duplicada
     '<rootDir>/jest.setup.js'
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'mjs'],
@@ -25,7 +25,7 @@ module.exports = {
     '^swiper/css$': '<rootDir>/__mocks__/swiperMock.js',
     '^swiper/css/pagination$': '<rootDir>/__mocks__/swiperMock.js'
   },
-  // Define globals for Jest to handle import.meta
+  // Defina globais para o Jest lidar com import.meta
   globals: {
     'import.meta': {
       env: {

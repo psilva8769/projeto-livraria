@@ -13,7 +13,7 @@ const Navbar = ({ containerStyles, toggleMenu, menuOpened }) => {
 
     return (
         <nav className={containerStyles}>
-            {/* close button inside navbar */}
+            {/* botão de fechar dentro da navbar */}
             {menuOpened && (
                 <>
                     <FaRegWindowClose onClick={toggleMenu} className='text-xl self-end cursor-pointer relative left-8 text-secondary hover:text-accent transition-colors' />
@@ -25,7 +25,7 @@ const Navbar = ({ containerStyles, toggleMenu, menuOpened }) => {
             )}
             {navItems.map(({ to, label, icon }) => (
                 <div key={label} className='inline-flex relative top-1'>
-                    {/* For "Contato" item use <a> tag instead of NavLink to ensure it works properly */}
+                    {/* Para o item "Contato" use a tag <a> ao invés de NavLink para garantir que funcione corretamente */}
                     {to.startsWith('mailto') ? (
                         <a onClick={menuOpened ? toggleMenu : undefined} href={to} className='flexCenter gap-x-2 text-tertiary hover:text-secondary transition-all duration-300 px-3 py-2 rounded-lg hover:bg-muted'>
                             <span className='text-xl'>{icon}</span>
@@ -48,3 +48,4 @@ const Navbar = ({ containerStyles, toggleMenu, menuOpened }) => {
 }
 
 export default Navbar
+

@@ -1,29 +1,29 @@
 describe('Contact Form Integration', () => {
   beforeEach(() => {
-    // Visit the contact page
+    // Visita a página de contato
     cy.visit('/contact')
     cy.url().should('include', '/contact')
     
-    // Mock console.log to track form submission
+    // Faz mock do console.log para rastrear o envio do formulário
     cy.window().then(win => {
       cy.spy(win.console, 'log').as('consoleLog')
     })
   })
 
   it('should submit contact form with valid data', () => {
-    // Fill out the form with valid data
+    // Preenche o formulário com dados válidos
     cy.get('input[name="name"]').type('Test User')
     cy.get('input[name="email"]').type('test@example.com')
     cy.get('input[name="subject"]').type('Test Subject')
     cy.get('textarea[name="message"]').type('This is a test message.')
     
-    // Submit the form
+    // Envia o formulário
     cy.get('button[type="submit"]').contains('Enviar Mensagem').click()
     
-    // Verify form was submitted (console.log was called)
+    // Verifica se o formulário foi enviado (console.log foi chamado)
     cy.get('@consoleLog').should('be.calledWithMatch', 'Form submitted:')
     
-    // Verify form was reset after submission
+    // Verifica se o formulário foi resetado após o envio
     cy.get('input[name="name"]').should('have.value', '')
     cy.get('input[name="email"]').should('have.value', '')
     cy.get('input[name="subject"]').should('have.value', '')
@@ -31,23 +31,23 @@ describe('Contact Form Integration', () => {
   })
 
   it('should validate required fields in form', () => {
-    // Try to submit without filling in required fields
+    // Tenta enviar sem preencher os campos obrigatórios
     cy.get('button[type="submit"]').contains('Enviar Mensagem').click()
     
-    // Form should not be submitted (HTML5 validation prevents it)
+    // O formulário não deve ser enviado (validação HTML5 impede)
     cy.get('@consoleLog').should('not.be.calledWithMatch', 'Form submitted:')
     
-    // Fill out only name field
+    // Preenche apenas o campo nome
     cy.get('input[name="name"]').type('Test User')
     cy.get('button[type="submit"]').contains('Enviar Mensagem').click()
     cy.get('@consoleLog').should('not.be.calledWithMatch', 'Form submitted:')
     
-    // Fill out only name and email fields
+    // Preenche apenas os campos nome e email
     cy.get('input[name="email"]').type('test@example.com')
     cy.get('button[type="submit"]').contains('Enviar Mensagem').click()
     cy.get('@consoleLog').should('not.be.calledWithMatch', 'Form submitted:')
     
-    // Fill out all required fields except message
+    // Preenche todos os campos obrigatórios exceto mensagem
     cy.get('input[name="subject"]').type('Test Subject')
     cy.get('button[type="submit"]').contains('Enviar Mensagem').click()
     cy.get('@consoleLog').should('not.be.calledWithMatch', 'Form submitted:')

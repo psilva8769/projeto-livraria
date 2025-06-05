@@ -10,7 +10,7 @@ const About = () => {
       
       {/* container */}
       <div className='flexCenter flex-col gap-16 xl:gap-12 xl:flex-row relative z-10'>
-        {/* Left side */}
+        {/* Lado esquerdo */}
         <div className='flex-1'>
           <Title title1={"Descubra as "} title2={"principais vantagens da nossa loja!"} titleStyles={'pb-12'} paraStyles={'!block'}/>
           <div className='flex flex-col items-start gap-y-8'>
@@ -46,13 +46,13 @@ const About = () => {
           </div>
         </div>
         
-        {/* Right side */}
+        {/* Lado direito */}
         <div className='flex-1 flexCenter'>
           <div className='relative bg-gradient-to-br from-primary/20 via-secondary/10 to-tertiary/20 flexCenter p-20 max-h-[35rem] max-w-[35rem] rounded-3xl backdrop-blur-sm border border-white/30 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105'>
             <div className='absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-3xl'></div>
             <img src={about} alt="aboutImg" height={244} width={244} className='relative z-10 shadow-2xl shadow-navy/30 rounded-2xl hover:rotate-2 transition-transform duration-500' />
             
-            {/* Floating elements */}
+            {/* Elementos flutuantes */}
             <div className='absolute top-4 right-4 w-8 h-8 bg-secondary/30 rounded-full animate-float'></div>
             <div className='absolute bottom-8 left-6 w-6 h-6 bg-tertiary/30 rounded-full animate-float' style={{animationDelay: '1s'}}></div>
             <div className='absolute top-1/2 left-4 w-4 h-4 bg-accent/30 rounded-full animate-float' style={{animationDelay: '2s'}}></div>

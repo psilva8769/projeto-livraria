@@ -5,14 +5,14 @@ import authUser from "../middleware/auth.js"
 
 const orderRouter = express.Router()
 
-// For Admin
+// Para Admin
 orderRouter.post('/list', adminAuth, allOrders)
 orderRouter.post('/status', adminAuth, UpdateStatus)
 
-// For Order
+// Para Pedido
 orderRouter.post('/place', authUser, placeOrder)
 
-// For User
+// Para Usuário
 orderRouter.post('/userorders', authUser, userOrders)
 
 export default orderRouter

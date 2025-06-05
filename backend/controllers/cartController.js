@@ -1,7 +1,7 @@
 import userModel from "../models/userModel.js"
 
 
-// Controller function for adding a product to the user's cart
+// Função controladora para adicionar um produto ao carrinho do usuário
 const addToCart = async (req, res) => {
     try {
         const { userId, itemId } = req.body
@@ -25,7 +25,7 @@ const addToCart = async (req, res) => {
 }
 
 
-// Controller function for updating the user's cart
+// Função controladora para atualizar o carrinho do usuário
 const updateCart = async (req, res) => {
     try {
         const { userId, itemId, quantity } = req.body
@@ -45,7 +45,7 @@ const updateCart = async (req, res) => {
 }
 
 
-// Controller function for retrieving the user's cart details
+// Função controladora para recuperar os detalhes do carrinho do usuário
 const getUserCart = async (req, res) => {
     try {
         const { userId } = req.body

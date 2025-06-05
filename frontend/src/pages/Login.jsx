@@ -49,7 +49,7 @@ const Login = () => {
     <section className='absolute top-0 left-0 h-full w-full z-50 bg-gradient-to-br from-primary via-muted to-cream'>
       {/* Container */}
       <div className='flex h-full w-full'>
-        {/* Image Side */}
+        {/* Lado da Imagem */}
         <div className='w-1/2 hidden sm:block relative'>
           <div className='absolute inset-0 bg-gradient-to-br from-secondary/20 to-navy/20'></div>
           <img src={loginImg} alt="" className='object-cover aspect-square h-full w-full' />
@@ -61,7 +61,7 @@ const Login = () => {
           </div>
         </div>
         
-        {/* Form Side */}
+        {/* Lado do Formulário */}
         <div className='flexCenter w-full sm:w-1/2 p-8'>
           <div className='bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 w-full max-w-md border border-gray-20/20'>
             <form onSubmit={onSubmitHandler} className='flex flex-col w-full gap-y-6'>

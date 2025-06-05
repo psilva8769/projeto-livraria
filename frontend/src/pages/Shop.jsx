@@ -14,8 +14,8 @@ const Shop = () => {
   const [sortType, setSortType] = useState("relevant")
   const [filteredBooks, setFilteredBooks] = useState([])
   const [search, setSearch] = useState("")
-  const [currentPage, setCurrentPage] = useState(1) // Active page
-  const itemsPerPage = 10 // Number of books per page
+  const [currentPage, setCurrentPage] = useState(1) // Página ativa
+  const itemsPerPage = 10 // Número de livros por página
 
   const toggleFilter = (value, setState) => {
     setState((prev) => prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value])
@@ -40,7 +40,7 @@ const Shop = () => {
       case "high":
         return booksList.sort((a, b) => b.price - a.price)
       default:
-        return booksList // Default that is 'relevant'
+        return booksList // Padrão que é 'relevante'
     }
   }
 
@@ -48,22 +48,22 @@ const Shop = () => {
     let filtered = applyFilters()
     let sorted = applySorting(filtered)
     setFilteredBooks(sorted)
-    setCurrentPage(1) // Reset to the first page when filters change
+    setCurrentPage(1) // Voltar para a primeira página quando filtros mudam
   }, [category, sortType, books, search])
 
-  // Get books for the current page
+  // Pega os livros para a página atual
   const getPaginatedBooks = () => {
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     return filteredBooks.slice(startIndex, endIndex)
   }
 
-  // Total number of pages
+  // Número total de páginas
   const totalPages = Math.ceil(filteredBooks.length / itemsPerPage)
   return (
     <section className='min-h-screen bg-gradient-to-br from-cream/30 via-white to-sage/20'>
       <div className='max-padd-container pt-32 pb-20'>
-        {/* Search box */}
+        {/* Caixa de pesquisa */}
         <div className='w-full max-w-3xl mx-auto mb-16'>
           <div className='inline-flex items-center justify-center bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden w-full rounded-2xl p-5 px-6'>
             <div className='text-xl cursor-pointer text-secondary hover:text-navy transition-colors'><RiSearch2Line /></div>
@@ -72,7 +72,7 @@ const Shop = () => {
           </div>
         </div>
 
-        {/* Categories filter */}
+        {/* Filtro de categorias */}
         <div className='mb-20'>
           <h4 className='h4 mb-8 text-navy bg-gradient-to-r from-secondary to-tertiary bg-clip-text text-transparent hidden sm:flex'>Categorias:</h4>
           <div className='flexCenter sm:flexStart flex-wrap gap-x-8 gap-y-6'>
@@ -90,9 +90,9 @@ const Shop = () => {
           </div>
         </div>
         
-        {/* Books container */}
+        {/* Container de livros */}
         <div className='mt-12'>
-          {/* title and sort */}
+          {/* título e ordenação */}
           <div className='flexBetween !items-start gap-7 flex-wrap pb-16 max-sm:flexCenter text-center'>
             <Title title1={'Nossa'} title2={'Lista de Livros'} titleStyles={'pb-0 text-start'} paraStyles={'!block'} />
             <div className='flexCenter gap-x-4 bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-gray-200/50'>
@@ -105,7 +105,7 @@ const Shop = () => {
             </div>
           </div>
           
-          {/* Books */}
+          {/* Livros */}
           <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
             {getPaginatedBooks().length > 0 ? (
               getPaginatedBooks().map((book, index) => (
@@ -125,17 +125,17 @@ const Shop = () => {
           </div>
         </div>
 
-        {/* Pagination */}
+        {/* Paginação */}
         {totalPages > 1 && (
           <div className='flexCenter mt-16 mb-10 gap-3'>
-            {/* Previous button */}
+            {/* Botão anterior */}
             <button disabled={currentPage === 1} 
             onClick={() => setCurrentPage((prev) => prev - 1)} 
             className={`px-6 py-3 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200/50 text-tertiary hover:bg-secondary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg ${currentPage === 1 && "opacity-50 cursor-not-allowed hover:bg-white/80 hover:text-tertiary"}`}>
               Anterior
             </button>
             
-            {/* Page numbers */}
+            {/* Números das páginas */}
             <div className='flex gap-2'>
               {Array.from({ length: totalPages }, (_, index) => (
                 <button key={index + 1} onClick={()=>setCurrentPage(index + 1)} 
@@ -149,7 +149,7 @@ const Shop = () => {
               ))}
             </div>
             
-            {/* Next button */}
+            {/* Botão próxima */}
             <button disabled={currentPage === totalPages} 
             onClick={() => setCurrentPage((prev) => prev + 1)} 
             className={`px-6 py-3 rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200/50 text-tertiary hover:bg-secondary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg ${currentPage === totalPages && "opacity-50 cursor-not-allowed hover:bg-white/80 hover:text-tertiary"}`}>

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 
-// Sample data for testing
+// Dados de exemplo para testes
 export const mockBooks = [
   {
     _id: '1',
@@ -37,7 +37,7 @@ export const mockUser = {
   email: 'test@example.com'
 };
 
-// Default context values for testing
+// Valores padrão do contexto para testes
 export const defaultContextValue = {
   books: mockBooks,
   currency: 'R$',
@@ -56,7 +56,7 @@ export const defaultContextValue = {
   setUserData: jest.fn()
 };
 
-// Custom render function that includes all necessary providers
+// Função de renderização customizada que inclui todos os providers necessários
 export const renderWithProviders = (
   component,
   {
@@ -76,7 +76,7 @@ export const renderWithProviders = (
   return render(component, { wrapper: Wrapper, ...renderOptions });
 };
 
-// Helper function to create context with cart items
+// Função auxiliar para criar contexto com itens no carrinho
 export const createContextWithCart = (cartItems = {}) => ({
   ...defaultContextValue,
   cartItems,
@@ -89,14 +89,14 @@ export const createContextWithCart = (cartItems = {}) => ({
   })
 });
 
-// Helper function to create context with logged-in user
+// Função auxiliar para criar contexto com usuário logado
 export const createContextWithUser = (token = 'fake-token', userData = mockUser) => ({
   ...defaultContextValue,
   token,
   userData
 });
 
-// Mock implementations for common functions
+// Implementações mock para funções comuns
 export const mockFunctions = {
   navigate: jest.fn(),
   addToCart: jest.fn(),
@@ -106,7 +106,7 @@ export const mockFunctions = {
   setUserData: jest.fn()
 };
 
-// Reset all mocks
+// Reseta todos os mocks
 export const resetMocks = () => {
   Object.values(mockFunctions).forEach(mock => {
     if (mock.mockReset) {
@@ -115,7 +115,7 @@ export const resetMocks = () => {
   });
 };
 
-// Common test data
+// Dados de teste comuns
 export const testData = {
   validEmail: 'test@example.com',
   validPassword: 'password123',

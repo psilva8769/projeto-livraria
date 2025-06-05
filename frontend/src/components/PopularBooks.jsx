@@ -20,7 +20,7 @@ const PopularBooks = () => {
       <div className='relative z-10'>
         <Title title1={'Livros'} title2={'Populares'} titleStyles={'pb-16'} paraStyles={'!block'}/>
         
-        {/* container */}
+        {/* Container */}
         <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 xl:gap-10'>
           {popularBooks.map((book, index)=>(
             <div key={book._id} className='group'>
@@ -31,7 +31,7 @@ const PopularBooks = () => {
           ))}
         </div>
         
-        {/* Decorative elements */}
+        {/* Elementos decorativos */}
         <div className='absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-secondary/20 to-tertiary/20 rounded-full blur-xl'></div>
         <div className='absolute bottom-10 -left-6 w-16 h-16 bg-gradient-to-br from-accent/20 to-sage/20 rounded-full blur-lg'></div>
       </div>

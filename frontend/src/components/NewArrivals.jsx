@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Title from './Title'
-// Import Swiper React components
+// Importa Swiper React
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
+// Importa estilos do Swiper
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from "swiper/modules"
@@ -27,7 +27,7 @@ const NewArrivals = () => {
             <div className='relative z-10'>
                 <Title title1={'Novos'} title2={'Lançamentos'} titleStyles={'pb-16'} paraStyles={'!block'} />
                 
-                {/* Swiper container */}
+                {/* Container do Swiper */}
                 <div className='relative'>
                     <Swiper
                         autoplay={{
@@ -56,7 +56,7 @@ const NewArrivals = () => {
                                 spaceBetween: 30
                             },
                         }}
-                        // Add swiper modules
+                        // Adiciona módulos do Swiper
                         modules={[Pagination, Autoplay]}
                         className='h-[455px] sm:h-[488px] xl:h-[499px] mt-8 pb-12'
                     >
@@ -69,7 +69,7 @@ const NewArrivals = () => {
                         ))}
                     </Swiper>
                     
-                    {/* Decorative gradient overlay */}
+                    {/* Sobreposição decorativa de gradiente */}
                     <div className='absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-secondary/20 to-transparent rounded-full blur-2xl'></div>
                     <div className='absolute bottom-0 -left-8 w-20 h-20 bg-gradient-to-br from-tertiary/20 to-transparent rounded-full blur-xl'></div>
                 </div>

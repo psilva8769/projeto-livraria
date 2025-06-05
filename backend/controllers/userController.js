@@ -4,12 +4,12 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 
-// Function for creating a token
+// Função para criar um token
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET)
 }
 
-// Controller function to handle user login
+// Função controladora para lidar com o login do usuário
 const handleUserLogin = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -31,27 +31,27 @@ const handleUserLogin = async (req, res) => {
 }
 
 
-// Controller function to handle user register
+// Função controladora para lidar com o registro do usuário
 const handleUserRegister = async (req, res) => {
     try {
         const { name, email, password } = req.body
-        // Check if user already exist or not
+        // Verifica se o usuário já existe ou não
         const exists = await userModel.findOne({ email })
         if (exists) {
             return res.json({ success: false, message: "User already exist" })
         }
-        //Checking email format and password strength
+        // Verificando formato do email e força da senha
         if (!validator.isEmail(email)) {
             return res.json({ success: false, message: "Please enter valid email address" })
         }
         if (password.length < 8) {
             return res.json({ success: false, message: "Please enter strong password" })
         }
-        // Hashing user password with bcrypt package
+        // Hash da senha do usuário com o pacote bcrypt
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        // Creating a new user using hashed password
+        // Criando um novo usuário usando a senha criptografada
         const newUser = new userModel({
             name,
             email,
@@ -69,7 +69,7 @@ const handleUserRegister = async (req, res) => {
 }
 
 
-// Controller function to handle admin login
+// Função controladora para lidar com o login do admin
 const handleAdminLogin = async (req, res) => {
     try {
     const {email,password} = req.body

@@ -1,5 +1,4 @@
 
-// Custom commands - moved outside describe block
 Cypress.Commands.add('register', (user) => {
   cy.visit('/login')
   
