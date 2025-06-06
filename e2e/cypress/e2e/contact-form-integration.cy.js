@@ -1,4 +1,4 @@
-describe('Contact Form Integration', () => {
+describe('Integração do Formulário de Contato', () => {
   beforeEach(() => {
     // Visita a página de contato
     cy.visit('/contact')
@@ -10,7 +10,7 @@ describe('Contact Form Integration', () => {
     })
   })
 
-  it('should submit contact form with valid data', () => {
+  it('deve enviar o formulário de contato com dados válidos', () => {
     // Preenche o formulário com dados válidos
     cy.get('input[name="name"]').type('Test User')
     cy.get('input[name="email"]').type('test@example.com')
@@ -30,7 +30,7 @@ describe('Contact Form Integration', () => {
     cy.get('textarea[name="message"]').should('have.value', '')
   })
 
-  it('should validate required fields in form', () => {
+  it('deve validar os campos obrigatórios do formulário', () => {
     // Tenta enviar sem preencher os campos obrigatórios
     cy.get('button[type="submit"]').contains('Enviar Mensagem').click()
     
