@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Sistema completo de livraria com frontend, admin e backend",
   "scripts": {
-    "install-all": "cd backend && npm install && cd ../frontend && npm install && cd ../admin && npm install && cd ../e2e && npm install",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../admin && npm install && cd ../e2e && npm install",
     "start:frontend": "cd frontend && npm run dev",
     "start:backend": "cd backend && npm start",
     "start:admin": "cd admin && npm run build && npm run dev",
